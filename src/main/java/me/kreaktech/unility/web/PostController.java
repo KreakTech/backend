@@ -65,7 +65,7 @@ public class PostController {
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
-	@Operation(summary = "Delete a post given its ID")
+	@Operation(summary = "Gets all posts")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Posts retrieved successfully"),
 	})
