@@ -22,6 +22,12 @@ public class PostRepositoryTest {
 	@Autowired
 	private PostRepository postRepository;
 
+	// This test will deliberately fail
+	@Test
+	public void PostRepository_WillFail() {
+		Assertions.assertThat(1).isEqualTo(2);
+	}
+
 	@Test
 	public void PostRepository_SaveAll_ReturnSavedPost() {
 		// Arrange
