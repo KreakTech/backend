@@ -4,12 +4,12 @@ import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.CrudRepository;
 
 import me.kreaktech.unility.entity.Post;
 
-public interface PostRepository extends CrudRepository<Post, Long> {
+public interface PostRepository extends JpaRepository<Post, Long> {
 	default List<Post> findByDateBetween(Timestamp from, Timestamp to) {
 		return this.findByDateBetweenAndDateLessThanEqual(from, to);
 	}
