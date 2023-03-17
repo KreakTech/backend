@@ -1,6 +1,6 @@
 package me.kreaktech.unility.entity;
 
-import java.time.LocalDate;
+import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -11,14 +11,14 @@ import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
 
-import com.fasterxml.jackson.annotation.JsonFormat;
-
 import lombok.*;
 
 @Getter
 @Setter
+@AllArgsConstructor
 @RequiredArgsConstructor
 @NoArgsConstructor
+@Builder
 @Entity
 @Table(name = "post")
 public class Post {
@@ -33,11 +33,10 @@ public class Post {
 	@Column(name = "title", nullable = false)
 	private String title;
 
-	@JsonFormat(pattern = "yyyy-MM-dd")
 	@Past(message = "The post date must be in the past")
 	@NonNull
 	@Column(name = "date", nullable = false)
-	private LocalDate date;
+	private Timestamp date;
 
 	@NotBlank(message = "Content cannot be blank")
 	@NonNull
