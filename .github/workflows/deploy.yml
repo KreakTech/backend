@@ -48,6 +48,7 @@ jobs:
             echo "MYSQL_USER=${{ secrets.MYSQL_USER }}" > secrets.env
             echo "MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}" >> secrets.env
             echo "MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}" >> secrets.env
+            echo "MYSQL_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}" >> secrets.env
             sudo docker-compose -f docker-compose-prod.yml pull
             sudo docker-compose -f docker-compose-prod.yml up -d --no-deps --build backend
             docker ps -a
