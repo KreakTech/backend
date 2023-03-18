@@ -1,8 +1,10 @@
 package me.kreaktech.unility.service;
 
-import java.util.List;
 import java.util.Optional;
 
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 import me.kreaktech.unility.entity.Post;
@@ -34,8 +36,9 @@ public class PostServiceImpl implements PostService {
 	}
 
 	@Override
-	public List<Post> getPosts() {
-		return (List<Post>) postRepository.findAll();
+	public Page<Post> getPosts(int pageNumber, int pageSize) {
+		Pageable pageable = PageRequest.of(pageNumber, pageSize);
+		return postRepository.findAll(pageable);
 	}
 
 	static Post unwrapPost(Optional<Post> entity, Long id) {

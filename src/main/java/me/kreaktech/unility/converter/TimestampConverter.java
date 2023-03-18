@@ -1,0 +1,26 @@
+package me.kreaktech.unility.converter;
+
+import java.sql.Timestamp;
+import java.time.LocalDateTime;
+
+import javax.persistence.AttributeConverter;
+import javax.persistence.Converter;
+
+@Converter(autoApply = true)
+public class TimestampConverter implements AttributeConverter<LocalDateTime, Timestamp> {
+
+	@Override
+	public Timestamp convertToDatabaseColumn(LocalDateTime attribute) {
+		if (attribute == null) {
+			return null;
+		}
+
+		attribute = attribute.withNano(0);
+		return Timestamp.valueOf(attribute);
+	}
+
+	@Override
+	public LocalDateTime convertToEntityAttribute(Timestamp dbData) {
+		return dbData != null ? dbData.toLocalDateTime() : null;
+	}
+}
