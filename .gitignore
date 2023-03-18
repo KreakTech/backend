@@ -36,3 +36,9 @@ replay_pid*
 
 #Exports
 target/*
+.mvn/*
+.m2/*
+.m2/*/**
+
+#Hide environment variables
+.env
