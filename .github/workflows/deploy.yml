@@ -41,7 +41,8 @@ jobs:
           username: ${{ secrets.SSH_USER }}
           key: ${{ secrets.SSH_KEY }}
           script: |
-            cd /backend
+            cd ~/backend
+            git fetch
             git pull
             docker-compose -f docker-compose-prod.yml pull
             docker-compose -f docker-compose-prod.yml up -d --no-deps --build backend
