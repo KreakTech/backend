@@ -37,10 +37,10 @@ jobs:
 
       - name: Export secrets to env file
         run: |
-          echo "MYSQL_USER=${{ secrets.MYSQL_USER }}" >> ~/secrets.env
-          echo "MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}" >> ~/secrets.env
-          echo "MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}" >> ~/secrets.env
-          echo "MYSQL_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}" >> ~/secrets.env
+          echo "MYSQL_USER=${{ secrets.MYSQL_USER }}" >> /home/alhassanraad15/backend/secrets.env
+          echo "MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}" >> /home/alhassanraad15/backend/secrets.env
+          echo "MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}" >> /home/alhassanraad15/backend/secrets.env
+          echo "MYSQL_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}" >> /home/alhassanraad15/backend/secrets.env
 
 
       - name: Connect with SSH and Deploy
@@ -53,6 +53,6 @@ jobs:
             cd ~/backend
             git fetch
             git pull
-            docker-compose -f docker-compose-prod.yml pull
-            docker-compose -f docker-compose-prod.yml up -d --no-deps --build backend
+            sudo docker-compose -f docker-compose-prod.yml pull
+            sudo docker-compose -f docker-compose-prod.yml up -d --no-deps --build backend
             docker ps -a
