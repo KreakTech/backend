@@ -18,17 +18,18 @@ services:
   backend:
     depends_on:
       - mariadb
-    build: 
+    build:
       context: .
-      dockerfile: Dockerfile
+      dockerfile: Dockerfile.dev
     restart: on-failure
     env_file:
-      - .env
+      .env
     ports:
       - "${SPRING_LOCAL_PORT}:${SPRING_DOCKER_PORT}"
     stdin_open: true
     tty: true
     volumes:
+      - ./:/backend
       - ~/.m2:/root/.m2
 
 volumes:
