@@ -34,6 +34,15 @@ jobs:
     needs: build_and_push_docker_image
     name: Deploy to Server
     steps:
+
+      - name: Export secrets to env file
+        run: |
+          echo "MYSQL_USER=${{ secrets.MYSQL_USER }}" >> ~/secrets.env
+          echo "MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}" >> ~/secrets.env
+          echo "MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}" >> ~/secrets.env
+          echo "MYSQL_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}" >> ~/secrets.env
+
+
       - name: Connect with SSH and Deploy
         uses: appleboy/ssh-action@master
         with:

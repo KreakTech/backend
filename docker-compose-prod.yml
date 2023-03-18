@@ -4,11 +4,8 @@ services:
   mariadb:
     image: mariadb:latest
     restart: unless-stopped
-    environment:
-      MYSQL_USER: ${{ secrets.MYSQL_USER }}
-      MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
-      MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
-      MYSQL_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+    env_file:
+      - ./secrets.env
     ports:
       - "3306:3306"
     volumes:
@@ -19,10 +16,8 @@ services:
       - mariadb
     image: alhassanraad/unility:latest
     restart: on-failure
-    environment:
-      MYSQL_DATABASE: ${{ secrets.MYSQL_DATABASE }}
-      MYSQL_USER: ${{ secrets.MYSQL_USER }}
-      MYSQL_ROOT_PASSWORD: ${{ secrets.MYSQL_ROOT_PASSWORD }}
+    env_file:
+      - ./secrets.env
     ports:
       - "8080:8080"
     stdin_open: true
