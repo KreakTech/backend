@@ -45,7 +45,7 @@ jobs:
             cd ~/backend
             git fetch
             git pull
-            echo "MYSQL_USER=${{ secrets.MYSQL_USER }}" >> secrets.env
+            echo "MYSQL_USER=${{ secrets.MYSQL_USER }}" > secrets.env
             echo "MYSQL_DATABASE=${{ secrets.MYSQL_DATABASE }}" >> secrets.env
             echo "MYSQL_ROOT_PASSWORD=${{ secrets.MYSQL_ROOT_PASSWORD }}" >> secrets.env
             sudo docker-compose -f docker-compose-prod.yml pull
