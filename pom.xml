@@ -11,7 +11,7 @@
 	</parent>
 	<groupId>me.kreaktech</groupId>
 	<artifactId>unility</artifactId>
-	<version>0.0.1-SNAPSHOT</version>
+	<version>0.0.2-SNAPSHOT</version>
 	<name>unility</name>
 	<description>The backend of a</description>
 	<properties>
