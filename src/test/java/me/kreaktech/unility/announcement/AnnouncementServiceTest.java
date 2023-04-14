@@ -1,6 +1,5 @@
 package me.kreaktech.unility.announcement;
 
-import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.sql.Timestamp;
