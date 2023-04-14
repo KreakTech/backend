@@ -1,6 +1,6 @@
 package me.kreaktech.unility.exception;
 
-import java.time.LocalDateTime;
+import java.sql.Timestamp;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
@@ -8,19 +8,19 @@ import com.fasterxml.jackson.annotation.JsonFormat;
 public class ErrorResponse {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
-    private LocalDateTime timestamp;
+    private Timestamp timestamp;
     private List<String> message;
 
     public ErrorResponse(List<String> message) {
-        this.timestamp = LocalDateTime.now();
+        this.timestamp = new Timestamp(System.currentTimeMillis());
         this.message = message;
     }
 
-    public LocalDateTime getTimestamp() {
+    public Timestamp getTimestamp() {
         return this.timestamp;
     }
 
-    public void setTimestamp(LocalDateTime timestamp) {
+    public void setTimestamp(Timestamp timestamp) {
         this.timestamp = timestamp;
     }
 
