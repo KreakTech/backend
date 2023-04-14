@@ -1,13 +1,9 @@
 package me.kreaktech.unility.exception;
 
-public class EntityNotFoundException extends RuntimeException { 
+public class EntityNotFoundException extends RuntimeException {
 
-    public EntityNotFoundException(Long id, Class<?> entity) {
-            super("The " + entity.getSimpleName().toLowerCase() + " with id '" + id + "' does not exist in our records");
-    }
-
-	public EntityNotFoundException(String username, Class<?> entity) {
-		super("The " + entity.getSimpleName().toLowerCase() + " with username '" + username + "' does not exist in our records");
-}
+	public <T> EntityNotFoundException(T identifier, Class<?> entity) {
+		super("The " + entity.getSimpleName().toLowerCase() + " with identifier '" + identifier + "' does not exist in our records");
+	}
 
 }
