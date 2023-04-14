@@ -20,20 +20,20 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "post")
-public class Post {
+@Table(name = "announcement")
+public class Announcement {
 
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private Long id;
+	private Integer id;
 
 	@NotBlank(message = "Title cannot be blank")
 	@NonNull
 	@Column(name = "title", nullable = false)
 	private String title;
 
-	@Past(message = "The post date must be in the past")
+	@Past(message = "The announcement date must be in the past")
 	@NonNull
 	@Column(name = "date", nullable = false)
 	private Timestamp date;
