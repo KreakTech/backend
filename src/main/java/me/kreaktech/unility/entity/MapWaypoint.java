@@ -8,6 +8,7 @@ import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
 import javax.persistence.Table;
+import javax.persistence.UniqueConstraint;
 import javax.validation.constraints.NotBlank;
 
 import lombok.AllArgsConstructor;
@@ -26,7 +27,8 @@ import me.kreaktech.unility.constants.Enum.MapWaypointType;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "map_waypoint")
+@Table(name = "map_waypoint", uniqueConstraints = @UniqueConstraint
+(columnNames = { "coordinates", "menu_type","language" }))
 public class MapWaypoint {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)

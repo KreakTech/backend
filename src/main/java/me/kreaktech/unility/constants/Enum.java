@@ -12,4 +12,9 @@ public class Enum {
 	public enum MealType {
 		BREAKFAST, LUNCH, DINNER 
 	}
+
+	public enum PhysicalStatus {
+		ONLINE, FACETOFACE
+	}
+	
 }

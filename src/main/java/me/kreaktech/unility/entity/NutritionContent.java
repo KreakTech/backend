@@ -5,11 +5,8 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToOne;
 import javax.persistence.Table;
 
-import com.fasterxml.jackson.annotation.JsonIgnore;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;
@@ -41,10 +38,4 @@ public class NutritionContent {
 
 	@Column(name = "fat_percentage", nullable = true)
 	private int fatPercentage;
-
-	@JsonIgnore
-	@OneToOne(optional = false)
-	@JoinColumn(name = "cafeteria_menu_id", referencedColumnName = "id")
-	private CafeteriaMenu cafeteriaMenu;
-
 }
