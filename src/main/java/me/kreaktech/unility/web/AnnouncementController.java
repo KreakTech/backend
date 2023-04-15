@@ -24,7 +24,7 @@ import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.AllArgsConstructor;
 import me.kreaktech.unility.entity.Announcement;
 import me.kreaktech.unility.exception.ErrorResponse;
-import me.kreaktech.unility.service.AnnouncementService;
+import me.kreaktech.unility.service.AnnouncementServiceImpl;
 
 @AllArgsConstructor
 @RestController
@@ -32,7 +32,7 @@ import me.kreaktech.unility.service.AnnouncementService;
 public class AnnouncementController {
 
 	@Autowired
-	AnnouncementService announcementService;
+	AnnouncementServiceImpl announcementService;
 
 	@Operation(summary = "Gets a announcement")
 	@ApiResponses(value = {
@@ -40,7 +40,7 @@ public class AnnouncementController {
 			@ApiResponse(responseCode = "404", description = "announcement not found", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Announcement> getAnnouncement(@PathVariable int id) {
+	public ResponseEntity<Announcement> getAnnouncement(@PathVariable Integer id) {
 		return new ResponseEntity<>(announcementService.getAnnouncementById(id), HttpStatus.OK);
 	}
 
@@ -60,16 +60,16 @@ public class AnnouncementController {
 			@ApiResponse(responseCode = "400", description = "Announcement failed to be deleted", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
 	@DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<HttpStatus> deleteAnnouncement(@PathVariable int id) {
+	public ResponseEntity<HttpStatus> deleteAnnouncement(@PathVariable Integer id) {
 		announcementService.deleteAnnouncementById(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
 	@Operation(summary = "Gets all announcements in a list")
 	@ApiResponses(value = {
-		@ApiResponse(responseCode = "200", description = "announcements list retrieved successfully"),
-		@ApiResponse(responseCode = "404", description = "announcements list not found", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
-	})	
+			@ApiResponse(responseCode = "200", description = "announcements list retrieved successfully"),
+			@ApiResponse(responseCode = "404", description = "announcements list not found", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+	})
 	@GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Announcement>> getAnnouncements() {
 		List<Announcement> announcements = announcementService.getAllAnnouncements();

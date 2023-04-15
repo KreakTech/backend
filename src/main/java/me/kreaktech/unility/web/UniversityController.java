@@ -40,7 +40,7 @@ public class UniversityController {
 			@ApiResponse(responseCode = "404", description = "University not found", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<University> getUniversity(@PathVariable int id) {
+	public ResponseEntity<University> getUniversity(@PathVariable Integer id) {
 		return new ResponseEntity<>(universityService.getUniversity(id), HttpStatus.OK);
 	}
 
@@ -60,7 +60,7 @@ public class UniversityController {
 			@ApiResponse(responseCode = "400", description = "University failed to be deleted", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
 	@DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<HttpStatus> deleteUniversity(@PathVariable int id) {
+	public ResponseEntity<HttpStatus> deleteUniversity(@PathVariable Integer id) {
 		universityService.deleteUniversity(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}

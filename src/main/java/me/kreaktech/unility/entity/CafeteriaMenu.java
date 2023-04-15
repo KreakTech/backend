@@ -37,7 +37,7 @@ public class CafeteriaMenu {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
-	private int id;
+	private Integer id;
 
 	@NotBlank(message = "mealContent cannot be blank")
 	@NonNull

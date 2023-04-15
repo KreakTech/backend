@@ -6,8 +6,8 @@ import me.kreaktech.unility.entity.University;
 
 public interface UniversityService {
 
-	University getUniversity(int id);
+	University getUniversity(Integer id);
 	University createUniversity(University university);
-	void deleteUniversity(int id);
+	void deleteUniversity(Integer id);
 	List<University> getUniversities();
 }

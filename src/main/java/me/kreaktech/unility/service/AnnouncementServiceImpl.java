@@ -5,9 +5,8 @@ import java.util.Optional;
 import org.springframework.stereotype.Service;
 
 import me.kreaktech.unility.entity.Announcement;
-import me.kreaktech.unility.exception.EntityNotFoundException;
 import me.kreaktech.unility.repository.AnnouncementRepository;
-
+import me.kreaktech.unility.utils.Utils;
 import lombok.AllArgsConstructor;
 
 @AllArgsConstructor
@@ -19,7 +18,7 @@ public class AnnouncementServiceImpl implements AnnouncementService {
 	@Override
 	public Announcement getAnnouncementById(Integer id) {
 		Optional<Announcement> announcement = announcementRepository.findById(id);
-		return unwrapAnnouncement(announcement, id);
+		return Utils.unwrap(announcement, id);
 	}
 
 	@Override
@@ -36,13 +35,5 @@ public class AnnouncementServiceImpl implements AnnouncementService {
 	public List<Announcement> getAllAnnouncements() {
 		return announcementRepository.findAll();
 	}
-
-	static Announcement unwrapAnnouncement(Optional<Announcement> entity, Integer id) {
-		if (entity.isPresent())
-			return entity.get();
-		else
-			throw new EntityNotFoundException(id, Announcement.class);
-	}
-
 
 }

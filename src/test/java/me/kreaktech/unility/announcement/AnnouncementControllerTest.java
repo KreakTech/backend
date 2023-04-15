@@ -29,7 +29,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import me.kreaktech.unility.entity.Announcement;
-import me.kreaktech.unility.service.AnnouncementService;
+import me.kreaktech.unility.service.AnnouncementServiceImpl;
 import me.kreaktech.unility.web.AnnouncementController;
 
 @WebMvcTest(controllers = AnnouncementController.class)
@@ -41,7 +41,7 @@ public class AnnouncementControllerTest {
 	private MockMvc mockmvc;
 
 	@MockBean
-	private AnnouncementService announcementService;
+	private AnnouncementServiceImpl announcementService;
 
 	@Autowired
 	private ObjectMapper objectMapper;
@@ -63,7 +63,8 @@ public class AnnouncementControllerTest {
 	@Test
 	public void AnnouncementController_CreateAnnouncement_ReturnCreated() throws Exception {
 		// Arrange
-		given(announcementService.saveAnnouncement(ArgumentMatchers.any())).willAnswer((invocation -> invocation.getArgument(0)));
+		given(announcementService.saveAnnouncement(ArgumentMatchers.any()))
+				.willAnswer((invocation -> invocation.getArgument(0)));
 
 		// Act
 		ResultActions response = mockmvc.perform(post("/announcements")

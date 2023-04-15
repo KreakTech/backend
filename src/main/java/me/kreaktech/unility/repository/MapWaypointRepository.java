@@ -7,5 +7,5 @@ import org.springframework.data.jpa.repository.JpaRepository;
 import me.kreaktech.unility.entity.MapWaypoint;
 
 public interface MapWaypointRepository extends JpaRepository<MapWaypoint, Integer> {
-	List<MapWaypoint> findByUniversityId(int universityId);
+	List<MapWaypoint> findByUniversityId(Integer universityId);
 }
