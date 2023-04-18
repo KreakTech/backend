@@ -4,7 +4,10 @@ import me.kreaktech.unility.entity.ActivityContent;
 
 public interface ActivityContentService {
     ActivityContent getActivityContentById(Integer id);
+
     ActivityContent saveActivityContent(ActivityContent activityContent);
+
     void deleteActivityContentById(Integer id);
-    ActivityContent getByTitle(String title);
+
+    ActivityContent getActivityContentByTitle(String title);
 }

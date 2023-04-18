@@ -8,7 +8,7 @@ import me.kreaktech.unility.entity.ActivityContent;
 import me.kreaktech.unility.repository.ActivityContentRepository;
 import me.kreaktech.unility.utils.Utils;
 
-public class ActivityContentServiceImpl implements ActivityContentService{
+public class ActivityContentServiceImpl implements ActivityContentService {
 
     @Autowired
     ActivityContentRepository activityContentRepository;
@@ -16,7 +16,7 @@ public class ActivityContentServiceImpl implements ActivityContentService{
     @Override
     public ActivityContent getActivityContentById(Integer id) {
         Optional<ActivityContent> activityContent = activityContentRepository.findById(id);
-        return Utils.unwrap(activityContent,id);
+        return Utils.unwrap(activityContent, id);
     }
 
     @Override
@@ -30,7 +30,7 @@ public class ActivityContentServiceImpl implements ActivityContentService{
     }
 
     @Override
-    public ActivityContent getByTitle(String title) {
+    public ActivityContent getActivityContentByTitle(String title) {
         Optional<ActivityContent> activityContent = activityContentRepository.findByTitle(title);
         return Utils.unwrap(activityContent, title);
     }
