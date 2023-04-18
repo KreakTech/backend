@@ -28,11 +28,11 @@ import me.kreaktech.unility.service.ActivityContentServiceImpl;
 @AllArgsConstructor
 @RequestMapping("/activity-contents")
 public class ActivityContentController {
-    
-    @Autowired
-    ActivityContentServiceImpl activityContentServiceImpl;
 
-    @Operation(summary = "Gets an activity content")
+	@Autowired
+	ActivityContentServiceImpl activityContentServiceImpl;
+
+	@Operation(summary = "Gets an activity content")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Activity content retrieved successfully"),
 			@ApiResponse(responseCode = "404", description = "Activity content not found", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
@@ -49,20 +49,21 @@ public class ActivityContentController {
 	})
 	@GetMapping(value = "/{title}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ActivityContent> getActivityContentByTitle(@PathVariable String title) {
-		return new ResponseEntity<>(activityContentServiceImpl.getByTitle(title), HttpStatus.OK);
+		return new ResponseEntity<>(activityContentServiceImpl.getActivityContentByTitle(title), HttpStatus.OK);
 	}
 
-    @Operation(summary = "Create an activity content")
+	@Operation(summary = "Create an activity content")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "201", description = "Activity content created successfully"),
 			@ApiResponse(responseCode = "400", description = "Activity content failed to be created", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
 	@PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ActivityContent> saveActivityContent(@Valid @RequestBody ActivityContent activityContent) {
-		return new ResponseEntity<>(activityContentServiceImpl.saveActivityContent(activityContent), HttpStatus.CREATED);
+		return new ResponseEntity<>(activityContentServiceImpl.saveActivityContent(activityContent),
+				HttpStatus.CREATED);
 	}
-    
-    @Operation(summary = "Delete an activity content given its ID")
+
+	@Operation(summary = "Delete an activity content given its ID")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "204", description = "Activity content deleted successfully"),
 			@ApiResponse(responseCode = "400", description = "Activity content failed to be deleted", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))

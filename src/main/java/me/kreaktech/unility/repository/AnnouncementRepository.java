@@ -13,5 +13,6 @@ import me.kreaktech.unility.entity.Announcement;
 public interface AnnouncementRepository extends JpaRepository<Announcement, Integer> {
 	@Query("SELECT a FROM Announcement a WHERE a.date >= :from AND a.date <= :to")
 	List<Announcement> findByDateBetweenAndDateLessThanEqual(@Param("from") Timestamp from, @Param("to") Timestamp to);
+
 	Optional<Announcement> findByTitle(String title);
 }

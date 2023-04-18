@@ -53,7 +53,7 @@ public class AnnouncementController {
 			@ApiResponse(responseCode = "404", description = "Announcement not found", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Announcement> getAnnouncementByTitle(@RequestParam(value="title") String title) {
+	public ResponseEntity<Announcement> getAnnouncementByTitle(@RequestParam(value = "title") String title) {
 		return new ResponseEntity<>(announcementService.getByTitle(title), HttpStatus.OK);
 	}
 
@@ -95,8 +95,10 @@ public class AnnouncementController {
 			@ApiResponse(responseCode = "404", description = "Announcements list not found", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
 	@GetMapping(value = "/allByDate", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<Announcement>> getAnnouncementsByDate(@RequestParam(value = "from") String from, @RequestParam(value = "to") String to) throws ParseException {
-		List<Announcement> announcements = announcementService.getByDateBetweenAndDateLessThanEqual(Utils.stringToTimestamp(from), Utils.stringToTimestamp(to));
+	public ResponseEntity<List<Announcement>> getAnnouncementsByDate(@RequestParam(value = "from") String from,
+			@RequestParam(value = "to") String to) throws ParseException {
+		List<Announcement> announcements = announcementService
+				.getByDateBetweenAndDateLessThanEqual(Utils.stringToTimestamp(from), Utils.stringToTimestamp(to));
 		return new ResponseEntity<>(announcements, HttpStatus.OK);
 	}
 

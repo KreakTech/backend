@@ -29,13 +29,13 @@ import me.kreaktech.unility.service.ActivityServiceImpl;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/activities")
-//UPDATE METHOD IS MISSING SHOULD WE IMPLEMENT IT?
+// UPDATE METHOD IS MISSING SHOULD WE IMPLEMENT IT?
 public class ActivityController {
-    
-    @Autowired
-    ActivityServiceImpl activityServiceImpl;
 
-    @Operation(summary = "Gets an activity")
+	@Autowired
+	ActivityServiceImpl activityServiceImpl;
+
+	@Operation(summary = "Gets an activity")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "activity retrieved successfully"),
 			@ApiResponse(responseCode = "404", description = "activity not found", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
@@ -45,7 +45,7 @@ public class ActivityController {
 		return new ResponseEntity<>(activityServiceImpl.getActivityById(id), HttpStatus.OK);
 	}
 
-    @Operation(summary = "Create an activity")
+	@Operation(summary = "Create an activity")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "201", description = "activity created successfully"),
 			@ApiResponse(responseCode = "400", description = "activity failed to be created", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
@@ -55,7 +55,7 @@ public class ActivityController {
 		return new ResponseEntity<>(activityServiceImpl.saveActivity(activity), HttpStatus.CREATED);
 	}
 
-    @Operation(summary = "Delete an activity given its ID")
+	@Operation(summary = "Delete an activity given its ID")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "204", description = "Activity deleted successfully"),
 			@ApiResponse(responseCode = "400", description = "Activity failed to be deleted", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
@@ -66,7 +66,7 @@ public class ActivityController {
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
-    @Operation(summary = "Gets all activities in a list")
+	@Operation(summary = "Gets all activities in a list")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Activities list retrieved successfully"),
 			@ApiResponse(responseCode = "404", description = "Activities list not found", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))

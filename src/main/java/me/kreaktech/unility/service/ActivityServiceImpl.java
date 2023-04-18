@@ -13,7 +13,7 @@ import me.kreaktech.unility.utils.Utils;
 
 @AllArgsConstructor
 @Service
-public class ActivityServiceImpl implements ActivityService{
+public class ActivityServiceImpl implements ActivityService {
 
     @Autowired
     private ActivityRepository activityRepository;
@@ -21,7 +21,7 @@ public class ActivityServiceImpl implements ActivityService{
     @Override
     public Activity getActivityById(Integer id) {
         Optional<Activity> activity = activityRepository.findById(id);
-        return Utils.unwrap(activity,id);
+        return Utils.unwrap(activity, id);
     }
 
     @Override
@@ -32,10 +32,10 @@ public class ActivityServiceImpl implements ActivityService{
     @Override
     public void deleteActivityById(Integer id) {
         activityRepository.deleteById(id);
-    }    
+    }
 
     @Override
-    public List<Activity> getAllActivities(){
+    public List<Activity> getAllActivities() {
         return activityRepository.findAll();
     }
 }
