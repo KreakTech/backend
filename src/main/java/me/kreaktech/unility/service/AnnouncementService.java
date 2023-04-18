@@ -1,7 +1,7 @@
 package me.kreaktech.unility.service;
 
-
 import java.util.List;
+
 import me.kreaktech.unility.entity.Announcement;
 
 public interface AnnouncementService {
