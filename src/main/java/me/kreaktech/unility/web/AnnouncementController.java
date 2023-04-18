@@ -1,5 +1,6 @@
 package me.kreaktech.unility.web;
 
+import java.text.ParseException;
 import java.util.List;
 
 import javax.validation.Valid;
@@ -25,6 +26,7 @@ import lombok.AllArgsConstructor;
 import me.kreaktech.unility.entity.Announcement;
 import me.kreaktech.unility.exception.ErrorResponse;
 import me.kreaktech.unility.service.AnnouncementServiceImpl;
+import me.kreaktech.unility.utils.Utils;
 
 @AllArgsConstructor
 @RestController
@@ -34,27 +36,37 @@ public class AnnouncementController {
 	@Autowired
 	AnnouncementServiceImpl announcementService;
 
-	@Operation(summary = "Gets a announcement")
+	@Operation(summary = "Gets an announcement by id")
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "announcement retrieved successfully"),
-			@ApiResponse(responseCode = "404", description = "announcement not found", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+			@ApiResponse(responseCode = "200", description = "Announcement retrieved successfully"),
+			@ApiResponse(responseCode = "404", description = "Announcement not found", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Announcement> getAnnouncement(@PathVariable Integer id) {
 		return new ResponseEntity<>(announcementService.getAnnouncementById(id), HttpStatus.OK);
 	}
 
-	@Operation(summary = "Create a announcement")
+	@Operation(summary = "Gets an announcement by its title")
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "201", description = "announcement created successfully"),
-			@ApiResponse(responseCode = "400", description = "announcement failed to be created", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+			@ApiResponse(responseCode = "200", description = "Announcement retrieved successfully"),
+			@ApiResponse(responseCode = "404", description = "Announcement not found", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+	})
+	@GetMapping(value = "/{title}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Announcement> getAnnouncementByTitle(@PathVariable String title) {
+		return new ResponseEntity<>(announcementService.getByTitle(title), HttpStatus.OK);
+	}
+
+	@Operation(summary = "Creates an announcement")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "201", description = "Announcement created successfully"),
+			@ApiResponse(responseCode = "400", description = "Announcement failed to be created", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
 	@PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Announcement> saveAnnouncement(@Valid @RequestBody Announcement announcement) {
 		return new ResponseEntity<>(announcementService.saveAnnouncement(announcement), HttpStatus.CREATED);
 	}
 
-	@Operation(summary = "Delete a announcement given its ID")
+	@Operation(summary = "Deletes an announcement by its ID")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "204", description = "Announcement deleted successfully"),
 			@ApiResponse(responseCode = "400", description = "Announcement failed to be deleted", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
@@ -67,12 +79,23 @@ public class AnnouncementController {
 
 	@Operation(summary = "Gets all announcements in a list")
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "announcements list retrieved successfully"),
-			@ApiResponse(responseCode = "404", description = "announcements list not found", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+			@ApiResponse(responseCode = "200", description = "Announcements list retrieved successfully"),
+			@ApiResponse(responseCode = "404", description = "Announcements list not found", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
 	@GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Announcement>> getAnnouncements() {
 		List<Announcement> announcements = announcementService.getAllAnnouncements();
+		return new ResponseEntity<>(announcements, HttpStatus.OK);
+	}
+
+	@Operation(summary = "Gets all announcements in a list by the help of dates")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Announcements list retrieved successfully"),
+			@ApiResponse(responseCode = "404", description = "Announcements list not found", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+	})
+	@GetMapping(value = "/all/{from}&{to}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Announcement>> getAnnouncementsByDate(@PathVariable String from, @PathVariable String to) throws ParseException {
+		List<Announcement> announcements = announcementService.getByDateBetweenAndDateLessThanEqual(Utils.stringToTimestamp(from), Utils.stringToTimestamp(to));
 		return new ResponseEntity<>(announcements, HttpStatus.OK);
 	}
 
