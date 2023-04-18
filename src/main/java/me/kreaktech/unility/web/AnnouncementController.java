@@ -15,6 +15,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -51,8 +52,8 @@ public class AnnouncementController {
 			@ApiResponse(responseCode = "200", description = "Announcement retrieved successfully"),
 			@ApiResponse(responseCode = "404", description = "Announcement not found", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
-	@GetMapping(value = "/{title}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<Announcement> getAnnouncementByTitle(@PathVariable String title) {
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<Announcement> getAnnouncementByTitle(@RequestParam(value="title") String title) {
 		return new ResponseEntity<>(announcementService.getByTitle(title), HttpStatus.OK);
 	}
 
