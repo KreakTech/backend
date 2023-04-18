@@ -29,7 +29,7 @@ import me.kreaktech.unility.service.ActivityServiceImpl;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/activities")
-// UPDATE METHOD IS MISSING SHOULD WE IMPLEMENT IT?
+//TO DO: UPDATE METHOD IS MISSING SHOULD WE IMPLEMENT IT?
 public class ActivityController {
 
 	@Autowired
