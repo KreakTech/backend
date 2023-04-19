@@ -10,11 +10,15 @@ public class Enum {
 	}
 
 	public enum MealType {
-		BREAKFAST, LUNCH, DINNER 
+		BREAKFAST, LUNCH, DINNER
 	}
 
 	public enum PhysicalStatus {
 		ONLINE, FACETOFACE
 	}
-	
+
+	public enum EventType {
+		DAILY_MEALS, ANNOUNCEMENT
+	}
+
 }

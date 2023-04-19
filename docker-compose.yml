@@ -14,10 +14,24 @@ services:
     volumes:
       - db:/var/lib/mysql
 
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq  
+    restart: always
+    environment:
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USERNAME}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+    ports:
+      - "5672:5672" # JMS Port
+      - "15672:15672" # Management Port - default user:pass = guest:guest
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+
 
   backend:
     depends_on:
       - mariadb
+      - rabbitmq
     build:
       context: .
       dockerfile: Dockerfile.dev
@@ -34,3 +48,4 @@ services:
 
 volumes:
   db:
+  rabbitmq_data:
