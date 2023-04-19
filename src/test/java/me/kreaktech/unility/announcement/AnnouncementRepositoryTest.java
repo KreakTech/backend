@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import me.kreaktech.unility.entity.University;
+import me.kreaktech.unility.repository.UniversityRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,24 +24,37 @@ public class AnnouncementRepositoryTest {
 
 	@Autowired
 	private AnnouncementRepository announcementRepository;
+	@Autowired
+	private UniversityRepository universityRepository;
 
 	Announcement announcement;
 	LocalDateTime announcementDateTime;
 	Announcement savedAnnouncement;
+	University university;
 
 	@BeforeEach
 	void setUpRepository(){
 		// Arrange
+
+		university = University.builder()
+				.name("Some University")
+				.announcementsLastFetchDate(new Timestamp(0))
+				.build();
+		university = universityRepository.save(university);
+
+
 		announcementDateTime = LocalDateTime.now().minusHours(1);
 
 		announcement = Announcement.builder()
 				.title("Some Title")
 				.link("https://someurl.com")
 				.date(Timestamp.valueOf(announcementDateTime))
+				.university(university)
 				.build();
 
 		announcementRepository.save(announcement);
 		savedAnnouncement = announcementRepository.save(announcement);
+
 	}
 
 	@Test
@@ -50,6 +65,7 @@ public class AnnouncementRepositoryTest {
 		Assertions.assertThat(savedAnnouncement.getId()).isGreaterThan(0);
 		Assertions.assertThat(savedAnnouncement.getTitle()).isEqualTo(announcement.getTitle());
 		Assertions.assertThat(savedAnnouncement.getLink()).isEqualTo(announcement.getLink());
+		Assertions.assertThat(savedAnnouncement.getUniversity()).isEqualTo(university);
 	}
 
 	@Test
@@ -62,6 +78,7 @@ public class AnnouncementRepositoryTest {
 		Assertions.assertThat(fetchedAnnouncement.getId()).isEqualTo(savedAnnouncement.getId());
 		Assertions.assertThat(fetchedAnnouncement.getTitle()).isEqualTo(savedAnnouncement.getTitle());
 		Assertions.assertThat(fetchedAnnouncement.getLink()).isEqualTo(savedAnnouncement.getLink());
+		Assertions.assertThat(savedAnnouncement.getUniversity()).isEqualTo(university);
 	}
 
 	@Test
@@ -74,12 +91,14 @@ public class AnnouncementRepositoryTest {
 				.title("Some Title")
 				.link("https://someurl.com")
 				.date(Timestamp.valueOf(firstAnnouncementDateTime))
+				.university(university)
 				.build();
 
 		Announcement secondAnnouncement = Announcement.builder()
 				.title("Some Title")
 				.link("https://someurl.com")
 				.date(Timestamp.valueOf(secondAnnouncementDateTime))
+				.university(university)
 				.build();
 
 		announcementRepository.save(firstAnnouncement);
@@ -105,6 +124,7 @@ public class AnnouncementRepositoryTest {
 		Assertions.assertThat(fetchedAnnouncement.getId()).isEqualTo(savedAnnouncement.getId());
 		Assertions.assertThat(fetchedAnnouncement.getTitle()).isEqualTo(savedAnnouncement.getTitle());
 		Assertions.assertThat(fetchedAnnouncement.getLink()).isEqualTo(savedAnnouncement.getLink());
+		Assertions.assertThat(fetchedAnnouncement.getUniversity()).isEqualTo(savedAnnouncement.getUniversity());
 	}
 
 	@Test
@@ -122,6 +142,7 @@ public class AnnouncementRepositoryTest {
 		Assertions.assertThat(updatedAnnouncement.getId()).isEqualTo(fetchedAnnouncement.getId());
 		Assertions.assertThat(updatedAnnouncement.getTitle()).isEqualTo(fetchedAnnouncement.getTitle());
 		Assertions.assertThat(updatedAnnouncement.getLink()).isEqualTo(fetchedAnnouncement.getLink());
+		Assertions.assertThat(updatedAnnouncement.getUniversity()).isEqualTo(fetchedAnnouncement.getUniversity());
 	}
 
 	@Test

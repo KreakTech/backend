@@ -11,6 +11,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import me.kreaktech.unility.entity.University;
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -47,6 +48,7 @@ public class AnnouncementControllerTest {
 	private ObjectMapper objectMapper;
 
 	private Announcement announcement;
+	private University university;
 
 	@BeforeEach
 	public void init() {
@@ -58,6 +60,13 @@ public class AnnouncementControllerTest {
 				.link("https://someurl.com")
 				.date(Timestamp.valueOf(announcementDateTime))
 				.build();
+
+		university = University.builder()
+				.id(1)
+				.name("Some University")
+				.announcementsLastFetchDate(new Timestamp(0))
+				.build();
+
 	}
 
 	@Test
