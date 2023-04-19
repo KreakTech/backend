@@ -55,7 +55,7 @@ public class AnnouncementControllerTest {
 		announcement = Announcement.builder()
 				.id(1)
 				.title("Some Title")
-				.content("Some Content")
+				.link("https://someurl.com")
 				.date(Timestamp.valueOf(announcementDateTime))
 				.build();
 	}
@@ -75,7 +75,7 @@ public class AnnouncementControllerTest {
 		response.andExpect(MockMvcResultMatchers.status().isCreated())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.id", CoreMatchers.is(1)))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.title", CoreMatchers.is(announcement.getTitle())))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.content", CoreMatchers.is(announcement.getContent())));
+				.andExpect(MockMvcResultMatchers.jsonPath("$.link", CoreMatchers.is(announcement.getLink())));
 	}
 
 	@Test
@@ -109,7 +109,7 @@ public class AnnouncementControllerTest {
 		response.andExpect(MockMvcResultMatchers.status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.id", CoreMatchers.is(1)))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.title", CoreMatchers.is(announcement.getTitle())))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.content", CoreMatchers.is(announcement.getContent())));
+				.andExpect(MockMvcResultMatchers.jsonPath("$.link", CoreMatchers.is(announcement.getLink())));
 		}
 
 	@Test
