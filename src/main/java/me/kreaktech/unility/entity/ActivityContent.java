@@ -23,7 +23,7 @@ import me.kreaktech.unility.constants.Enum.PhysicalStatus;
 @Setter
 @AllArgsConstructor
 @RequiredArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(force = true)
 @Builder
 @Entity
 @Table(name = "activity_content")
