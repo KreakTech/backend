@@ -1,20 +1,17 @@
 package me.kreaktech.unility.utils;
 
+import me.kreaktech.unility.entity.*;
+import me.kreaktech.unility.service.*;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import lombok.AllArgsConstructor;
 import lombok.NoArgsConstructor;
-import me.kreaktech.unility.entity.Announcement;
-import me.kreaktech.unility.entity.CafeteriaMenu;
-import me.kreaktech.unility.entity.NutritionContent;
-import me.kreaktech.unility.entity.University;
 import me.kreaktech.unility.entity.events.EventBody;
 import me.kreaktech.unility.entity.events.BilkentUniversity.BilkentAnnouncementData;
 import me.kreaktech.unility.entity.events.BilkentUniversity.BilkentMealData;
-import me.kreaktech.unility.service.AnnouncementServiceImpl;
-import me.kreaktech.unility.service.CafeteriaMenuServiceImpl;
-import me.kreaktech.unility.service.NutritionContentServiceImpl;
+
+import java.sql.Timestamp;
 
 @Component
 @AllArgsConstructor
@@ -26,6 +23,8 @@ public class BilkentUniversityUtils {
 	NutritionContentServiceImpl nutritionContentService;
 	@Autowired
 	AnnouncementServiceImpl announcementService;
+	@Autowired
+	UniversityFetchServiceImpl universityFetchService;
 
 	public void handleWeeklyMealsEvent(EventBody eventBody, University university) {
 		BilkentMealData mealData = Utils.parseObjectToEntity(eventBody.getData(),
@@ -47,6 +46,10 @@ public class BilkentUniversityUtils {
 		cafeteriaMenu.setMealType(mealData.getMealType());
 		cafeteriaMenu.setUniversity(university);
 
+		UniversityFetch getUniversityFetch = universityFetchService.getUniversityFetch(university.getId());
+		getUniversityFetch.setCafeteriaLastFetchDate(cafeteriaMenu.getDateServed());
+		universityFetchService.saveUniversityFetch(getUniversityFetch);
+
 		cafeteriaMenuService.saveCafeteriaMenu(cafeteriaMenu);
 	}
 
@@ -59,6 +62,11 @@ public class BilkentUniversityUtils {
 		announcement.setLink(announcementData.getLink());
 		announcement.setDate(eventBody.getDate());
 		announcement.setUniversity(university);
+
+
+		UniversityFetch getUniversityFetch = universityFetchService.getUniversityFetch(university.getId());
+		getUniversityFetch.setAnnouncementsLastFetchMD5(announcementData.getMd5());
+		universityFetchService.saveUniversityFetch(getUniversityFetch);
 
 		announcementService.saveAnnouncement(announcement);
 	}
