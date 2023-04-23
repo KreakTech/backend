@@ -38,7 +38,6 @@ public class AnnouncementRepositoryTest {
 
 		university = University.builder()
 				.name("Some University")
-				.announcementsLastFetchDate(new Timestamp(0))
 				.build();
 		university = universityRepository.save(university);
 

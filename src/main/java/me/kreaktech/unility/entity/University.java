@@ -22,7 +22,6 @@ import lombok.Setter;
 @Getter
 @Setter
 @AllArgsConstructor
-@RequiredArgsConstructor
 @NoArgsConstructor(force = true)
 @Builder
 @Entity
@@ -37,8 +36,4 @@ public class University {
 	@NotNull
 	@Column(name = "name", unique = true)
 	private String name;
-
-	@NonNull
-	@Column(name = "announcements_last_fetch_date", nullable = false)
-	private Timestamp announcementsLastFetchDate;
 }

@@ -64,7 +64,6 @@ public class AnnouncementControllerTest {
 		university = University.builder()
 				.id(1)
 				.name("Some University")
-				.announcementsLastFetchDate(new Timestamp(0))
 				.build();
 
 	}
