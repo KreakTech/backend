@@ -48,7 +48,6 @@ public class AnnouncementControllerTest {
 	private ObjectMapper objectMapper;
 
 	private Announcement announcement;
-	private University university;
 
 	@BeforeEach
 	public void init() {
@@ -59,11 +58,6 @@ public class AnnouncementControllerTest {
 				.title("Some Title")
 				.link("https://someurl.com")
 				.date(Timestamp.valueOf(announcementDateTime))
-				.build();
-
-		university = University.builder()
-				.id(1)
-				.name("Some University")
 				.build();
 
 	}
