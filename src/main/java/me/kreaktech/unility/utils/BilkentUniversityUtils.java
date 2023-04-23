@@ -11,8 +11,6 @@ import me.kreaktech.unility.entity.events.EventBody;
 import me.kreaktech.unility.entity.events.BilkentUniversity.BilkentAnnouncementData;
 import me.kreaktech.unility.entity.events.BilkentUniversity.BilkentMealData;
 
-import java.sql.Timestamp;
-
 @Component
 @AllArgsConstructor
 @NoArgsConstructor
