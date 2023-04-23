@@ -12,4 +12,5 @@ import lombok.Setter;
 public abstract class DefaultAnnouncementData {
 	private String title;
 	private String link;
+	private String md5;
 }
