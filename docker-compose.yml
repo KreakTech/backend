@@ -18,9 +18,11 @@ services:
     image: rabbitmq:management
     container_name: rabbitmq  
     restart: always
+    env_file:
+      .env
     environment:
-      RABBITMQ_DEFAULT_USER: ${RABBITMQ_USERNAME}
-      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_PASSWORD}
+      RABBITMQ_DEFAULT_USER: ${RABBITMQ_DEFAULT_USER}
+      RABBITMQ_DEFAULT_PASS: ${RABBITMQ_DEFAULT_PASS}
     ports:
       - "5672:5672" # JMS Port
       - "15672:15672" # Management Port - default user:pass = guest:guest
