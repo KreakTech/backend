@@ -15,6 +15,10 @@ public class UniversityFetchServiceImpl implements UniversityFetchService {
 	@Autowired
 	private UniversityFetchRepository universityFetchRepository;
 
+	@Override
+	public UniversityFetch getUniversityFetch(Integer id) {
+		return Utils.unwrap(universityFetchRepository.findById(id), id);
+	}
 
 	@Override
 	public UniversityFetch saveUniversityFetch(UniversityFetch universityFetch) {
@@ -26,6 +30,5 @@ public class UniversityFetchServiceImpl implements UniversityFetchService {
 		Optional<UniversityFetch> optional = universityFetchRepository.findByUniversityNameAndLanguage(name, language);
 		return Utils.unwrap(optional, name + " and language " + language);
 	}
-
 
 }
