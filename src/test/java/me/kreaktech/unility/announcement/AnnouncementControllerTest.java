@@ -28,9 +28,9 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import me.kreaktech.unility.controller.AnnouncementController;
 import me.kreaktech.unility.entity.Announcement;
 import me.kreaktech.unility.service.AnnouncementServiceImpl;
-import me.kreaktech.unility.web.AnnouncementController;
 
 @WebMvcTest(controllers = AnnouncementController.class)
 @AutoConfigureMockMvc(addFilters = false)
