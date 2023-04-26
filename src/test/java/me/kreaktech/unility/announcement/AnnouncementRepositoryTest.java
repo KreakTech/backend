@@ -43,7 +43,7 @@ public class AnnouncementRepositoryTest {
 	}
 
 	@Test
-	public void AnnouncementRepository_SaveAll_ReturnSavedAnnouncement() {
+	public void AnnouncementRepository_Save_ReturnSavedAnnouncement() {
 
 		//Assert
 		Assertions.assertThat(savedAnnouncement).isNotNull();
