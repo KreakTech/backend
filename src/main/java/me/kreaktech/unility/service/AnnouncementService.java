@@ -10,6 +10,6 @@ public interface AnnouncementService {
     Announcement saveAnnouncement(Announcement announcement);
     void deleteAnnouncementById(Integer id);
     List<Announcement> getAllAnnouncements();
-    Announcement getByTitle(String title);
-    List<Announcement> getByDateBetweenAndDateLessThanEqual(Timestamp from, Timestamp to);
+    Announcement getAnnouncementByTitle(String title);
+    List<Announcement> getAnnouncementByDateBetweenAndDateLessThanEqual(Timestamp from, Timestamp to);
 }

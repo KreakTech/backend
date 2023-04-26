@@ -38,13 +38,13 @@ public class AnnouncementServiceImpl implements AnnouncementService {
 	}
 
 	@Override
-	public Announcement getByTitle(String title) {
+	public Announcement getAnnouncementByTitle(String title) {
 		Optional<Announcement> announcement = announcementRepository.findByTitle(title);
 		return Utils.unwrap(announcement, title);
 	}
 
 	@Override
-	public List<Announcement> getByDateBetweenAndDateLessThanEqual(Timestamp from, Timestamp to) {
+	public List<Announcement> getAnnouncementByDateBetweenAndDateLessThanEqual(Timestamp from, Timestamp to) {
 		return announcementRepository.findByDateBetweenAndDateLessThanEqual(from, to);
 	}
 

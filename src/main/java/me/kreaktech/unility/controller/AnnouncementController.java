@@ -54,7 +54,7 @@ public class AnnouncementController {
 	})
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Announcement> getAnnouncementByTitle(@RequestParam(value = "title") String title) {
-		return new ResponseEntity<>(announcementService.getByTitle(title), HttpStatus.OK);
+		return new ResponseEntity<>(announcementService.getAnnouncementByTitle(title), HttpStatus.OK);
 	}
 
 	@Operation(summary = "Creates an announcement")
@@ -98,7 +98,7 @@ public class AnnouncementController {
 	public ResponseEntity<List<Announcement>> getAnnouncementsByDate(@RequestParam(value = "from") String from,
 			@RequestParam(value = "to") String to) throws ParseException {
 		List<Announcement> announcements = announcementService
-				.getByDateBetweenAndDateLessThanEqual(Utils.stringToTimestamp(from), Utils.stringToTimestamp(to));
+				.getAnnouncementByDateBetweenAndDateLessThanEqual(Utils.stringToTimestamp(from), Utils.stringToTimestamp(to));
 		return new ResponseEntity<>(announcements, HttpStatus.OK);
 	}
 

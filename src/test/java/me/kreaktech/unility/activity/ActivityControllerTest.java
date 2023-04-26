@@ -54,30 +54,30 @@ public class ActivityControllerTest {
     private Activity activity;
 
     @BeforeEach
-	void setUpControllerTest() throws JsonProcessingException, Exception{
+    void setUpControllerTest() throws JsonProcessingException, Exception {
         LocalDateTime activityDateTime = LocalDateTime.now().minusHours(1);
-        //Arrange
+        // Arrange
         University university = University.builder()
-            .name("some university")
-            .announcementsLastFetchDate(Timestamp.valueOf(activityDateTime))
-            .build();
+                .name("some university")
+                .announcementsLastFetchDate(Timestamp.valueOf(activityDateTime))
+                .build();
 
         ActivityContent activityContent = ActivityContent.builder()
-            .details("some details")
-            .title("some title")
-            .organizer("some organizer")
-            .activityLanguage(Language.EN)
-            .activityDuration(Timestamp.valueOf(activityDateTime))
-            .physicalStatus(PhysicalStatus.FACETOFACE)
-            .build();
-	
-		activity = Activity.builder()
-				.university(university)
+                .details("some details")
+                .title("some title")
+                .organizer("some organizer")
+                .activityLanguage(Language.EN)
+                .activityDuration(Timestamp.valueOf(activityDateTime))
+                .physicalStatus(PhysicalStatus.FACETOFACE)
+                .build();
+
+        activity = Activity.builder()
+                .university(university)
                 .activityContent(activityContent)
                 .date(Timestamp.valueOf(activityDateTime))
                 .id(1)
                 .build();
-	}
+    }
 
     @Test
     public void ActivityController_CreateActivity_ReturnCreated() throws Exception {
