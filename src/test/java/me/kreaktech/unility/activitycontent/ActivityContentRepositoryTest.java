@@ -45,11 +45,6 @@ public class ActivityContentRepositoryTest {
         savedActivityContent = activityContentRepository.save(activityContent);
     }
 
-    @AfterEach
-    void flushRepository() {
-        activityContentRepository.deleteAll();
-    }
-
     @Test
     public void ActivityContentRepository_Save_ReturnActivityContent() {
         // Assert
@@ -71,9 +66,9 @@ public class ActivityContentRepositoryTest {
     }
 
     @Test
-    public void ActivityContentRepository_FindByTitle_ReturnActivityContent() {
+    public void ActivityContentRepository_FindActivityContentByTitle_ReturnActivityContent() {
         // Act
-        ActivityContent fetchedActivityContent = activityContentRepository.findByTitle(savedActivityContent.getTitle())
+        ActivityContent fetchedActivityContent = activityContentRepository.findActivityContentByTitle(savedActivityContent.getTitle())
                 .get();
 
         // Assert
@@ -84,7 +79,7 @@ public class ActivityContentRepositoryTest {
     }
 
     @Test
-    public void ActivityContentRepository_UpdateActivity_ReturnActivityContent() {
+    public void ActivityContentRepository_UpdateActivityContent_ReturnActivityContent() {
         // Act
         ActivityContent fetchedActivityContent = activityContentRepository.findById(savedActivityContent.getId()).get();
 
@@ -101,7 +96,7 @@ public class ActivityContentRepositoryTest {
     }
 
     @Test
-    public void ActivityContentRepository_DeleteActivity_ReturnActivityContentIsNotPresent() {
+    public void ActivityContentRepository_DeleteActivityContent_ReturnActivityContentIsNotPresent() {
         // Act
         activityContentRepository.deleteById(savedActivityContent.getId());
         Optional<ActivityContent> fetchedActivityContent = activityContentRepository

@@ -81,7 +81,7 @@ public class ActivityRepositoryTest {
 	}
 
 	@Test
-	public void ActivityRepository_Save_ReturnsavedActivity1() {
+	public void ActivityRepository_Save_ReturnActivity() {
 
 		// Assert
 		Assertions.assertThat(savedActivity1).isNotNull();

@@ -100,7 +100,7 @@ public class AnnouncementServiceTest {
 	}
 
 	@Test
-	public void ActivityContentService_DeleteActivityContentById_ReturnsVoid() {
+	public void AnnouncementService_DeleteAnnouncementById_ReturnsVoid() {
 		doAnswer(invocation -> {
 			Object arg0 = invocation.getArgument(0);
 			if (arg0 instanceof Integer) {
