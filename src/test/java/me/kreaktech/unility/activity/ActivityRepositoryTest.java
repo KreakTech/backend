@@ -28,6 +28,8 @@ public class ActivityRepositoryTest {
 
 	Activity savedActivity1;
 	Activity savedActivity2;
+	Activity activity1;
+	Activity activity2;
 
 	@BeforeEach
 	void setUpRepository() {
@@ -61,13 +63,13 @@ public class ActivityRepositoryTest {
 				.physicalStatus(PhysicalStatus.FACETOFACE)
 				.build();
 
-		Activity activity1 = Activity.builder()
+		activity1 = Activity.builder()
 				.university(university1)
 				.activityContent(activityContent1)
 				.date(Timestamp.valueOf(activityDateTime))
 				.build();
 
-		Activity activity2 = Activity.builder()
+		activity2 = Activity.builder()
 				.university(university2)
 				.activityContent(activityContent2)
 				.date(Timestamp.valueOf(activityDateTime))
@@ -84,7 +86,7 @@ public class ActivityRepositoryTest {
 		// Assert
 		Assertions.assertThat(savedActivity1).isNotNull();
 		Assertions.assertThat(savedActivity1.getId()).isGreaterThan(0);
-		Assertions.assertThat(savedActivity1.getId()).isEqualTo(1);
+		Assertions.assertThat(savedActivity1.getId()).isEqualTo(activity1.getId());
 	}
 
 	@Test
