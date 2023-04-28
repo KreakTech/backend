@@ -1,5 +1,8 @@
 package me.kreaktech.unility.activity;
 
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.sql.Timestamp;
@@ -40,7 +43,8 @@ public class ActivityServiceTest {
 
     @BeforeEach
     void setUpRepository() {
-        LocalDateTime activityDateTime = LocalDateTime.now().minusHours(1);
+
+        activityDateTime = LocalDateTime.now().minusHours(1);
         // Arrange
         University university1 = University.builder()
                 .name("some university1")
@@ -70,29 +74,34 @@ public class ActivityServiceTest {
                 .physicalStatus(PhysicalStatus.FACETOFACE)
                 .build();
 
-        savedActivity1 = Activity.builder()
+        Activity activity1 = Activity.builder()
                 .university(university1)
                 .activityContent(activityContent1)
                 .date(Timestamp.valueOf(activityDateTime))
+                .id(1)
                 .build();
 
-        savedActivity2 = Activity.builder()
+        Activity activity2 = Activity.builder()
                 .university(university2)
                 .activityContent(activityContent2)
                 .date(Timestamp.valueOf(activityDateTime))
+                .id(1)
                 .build();
+
+        // Act
+        when(activityRepository.save(Mockito.any(Activity.class))).thenReturn(activity1);
+        savedActivity1 = activityServiceImpl.saveActivity(activity1);
+        when(activityRepository.save(Mockito.any(Activity.class))).thenReturn(activity2);
+        savedActivity2 = activityServiceImpl.saveActivity(activity2);
+
     }
 
     @Test
-	public void ActivityService_CreateActivity_ReturnsActivity() {
-		// Act
-		when(activityRepository.save(Mockito.any(Activity.class))).thenReturn(savedActivity1);
-		Activity savedActivityInTest = activityServiceImpl.saveActivity(savedActivity1);
-
-		// Assert
-		Assertions.assertThat(savedActivityInTest).isNotNull();
-		Assertions.assertThat(savedActivityInTest.getDate()).isEqualTo(savedActivity1.getDate());
-	}
+    public void ActivityService_CreateActivity_ReturnsActivity() {
+        // Assert
+        Assertions.assertThat(savedActivity1).isNotNull();
+        Assertions.assertThat(savedActivity1.getDate()).isEqualTo(savedActivity1.getDate());
+    }
 
     @Test
     public void ActivityService_GetAllActivities_ReturnsActivities() {
@@ -127,9 +136,22 @@ public class ActivityServiceTest {
 
     @Test
     public void ActivityService_DeleteActivityById_ReturnsVoid() {
-        activityRepository.deleteById(savedActivity1.getId());
-        Activity deletedActivity = activityRepository.findById(savedActivity1.getId()).orElse(null);
-        Assertions.assertThat(deletedActivity).isNull();
+        // When
+        doAnswer(invocation -> {
+            Object arg0 = invocation.getArgument(0);
+            if (arg0 instanceof Integer) {
+                Integer id = (Integer) arg0;
+                if (id == savedActivity1.getId()) {
+                    return null;
+                }
+            }
+            throw new IllegalArgumentException("Invalid argument(s) passed to deleteById method");
+        }).when(activityRepository).deleteById(savedActivity1.getId());
+
+        activityServiceImpl.deleteActivityById(savedActivity1.getId());
+
+        // Then
+        verify(activityRepository, times(1)).deleteById(savedActivity1.getId());
     }
 
 }
