@@ -6,11 +6,9 @@ import java.util.Optional;
 
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.AfterEach;
-import org.junit.jupiter.api.BeforeAll;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
-import org.junit.jupiter.api.TestInstance;
-import org.junit.jupiter.api.TestInstance.Lifecycle;
+
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -28,6 +26,7 @@ public class ActivityContentRepositoryTest {
     @Autowired
     private ActivityContentRepository activityContentRepository;
 
+    ActivityContent savedActivityContent;
     ActivityContent activityContent;
 
     @BeforeEach
@@ -43,51 +42,51 @@ public class ActivityContentRepositoryTest {
                 .physicalStatus(PhysicalStatus.FACETOFACE)
                 .build();
 
-        activityContentRepository.save(activityContent);
+        savedActivityContent = activityContentRepository.save(activityContent);
     }
 
     @AfterEach
     void flushRepository() {
-        activityContentRepository.delete(activityContent);
+        activityContentRepository.deleteAll();
     }
 
     @Test
     public void ActivityContentRepository_Save_ReturnActivityContent() {
         // Assert
-        Assertions.assertThat(activityContent).isNotNull();
-        Assertions.assertThat(activityContent.getId()).isGreaterThan(0);
-        Assertions.assertThat(activityContent.getId()).isEqualTo(1);
+        Assertions.assertThat(savedActivityContent).isNotNull();
+        Assertions.assertThat(savedActivityContent.getId()).isGreaterThan(0);
+        Assertions.assertThat(savedActivityContent.getDetails()).isEqualTo(activityContent.getDetails());
     }
 
     @Test
     public void ActivityContentRepository_FindById_ReturnActivityContent() {
         // Act
-        ActivityContent fetchedActivityContent = activityContentRepository.findById(activityContent.getId()).get();
+        ActivityContent fetchedActivityContent = activityContentRepository.findById(savedActivityContent.getId()).get();
 
         // Assert
         Assertions.assertThat(fetchedActivityContent).isNotNull();
-        Assertions.assertThat(fetchedActivityContent.getId()).isEqualTo(activityContent.getId());
-        Assertions.assertThat(fetchedActivityContent.getTitle()).isEqualTo(activityContent.getTitle());
-        Assertions.assertThat(fetchedActivityContent.getOrganizer()).isEqualTo(activityContent.getOrganizer());
+        Assertions.assertThat(fetchedActivityContent.getId()).isEqualTo(savedActivityContent.getId());
+        Assertions.assertThat(fetchedActivityContent.getTitle()).isEqualTo(savedActivityContent.getTitle());
+        Assertions.assertThat(fetchedActivityContent.getOrganizer()).isEqualTo(savedActivityContent.getOrganizer());
     }
 
     @Test
     public void ActivityContentRepository_FindByTitle_ReturnActivityContent() {
         // Act
-        ActivityContent fetchedActivityContent = activityContentRepository.findByTitle(activityContent.getTitle())
+        ActivityContent fetchedActivityContent = activityContentRepository.findByTitle(savedActivityContent.getTitle())
                 .get();
 
         // Assert
         Assertions.assertThat(fetchedActivityContent).isNotNull();
-        Assertions.assertThat(fetchedActivityContent.getId()).isEqualTo(activityContent.getId());
-        Assertions.assertThat(fetchedActivityContent.getTitle()).isEqualTo(activityContent.getTitle());
-        Assertions.assertThat(fetchedActivityContent.getOrganizer()).isEqualTo(activityContent.getOrganizer());
+        Assertions.assertThat(fetchedActivityContent.getId()).isEqualTo(savedActivityContent.getId());
+        Assertions.assertThat(fetchedActivityContent.getTitle()).isEqualTo(savedActivityContent.getTitle());
+        Assertions.assertThat(fetchedActivityContent.getOrganizer()).isEqualTo(savedActivityContent.getOrganizer());
     }
 
     @Test
     public void ActivityContentRepository_UpdateActivity_ReturnActivityContent() {
         // Act
-        ActivityContent fetchedActivityContent = activityContentRepository.findById(activityContent.getId()).get();
+        ActivityContent fetchedActivityContent = activityContentRepository.findById(savedActivityContent.getId()).get();
 
         // Modifications
         fetchedActivityContent.setOrganizer("some new organizer");
@@ -104,8 +103,9 @@ public class ActivityContentRepositoryTest {
     @Test
     public void ActivityContentRepository_DeleteActivity_ReturnActivityContentIsNotPresent() {
         // Act
-        activityContentRepository.deleteById(activityContent.getId());
-        Optional<ActivityContent> fetchedActivityContent = activityContentRepository.findById(activityContent.getId());
+        activityContentRepository.deleteById(savedActivityContent.getId());
+        Optional<ActivityContent> fetchedActivityContent = activityContentRepository
+                .findById(savedActivityContent.getId());
 
         // Assert
         Assertions.assertThat(fetchedActivityContent).isNotPresent();
