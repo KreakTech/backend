@@ -73,10 +73,7 @@ public class ActivityRepositoryTest {
 				.date(Timestamp.valueOf(activityDateTime))
 				.build();
 
-		activityRepository.save(activity1);
 		savedActivity1 = activityRepository.save(activity1);
-
-		activityRepository.save(activity2);
 		savedActivity2 = activityRepository.save(activity2);
 
 	}
@@ -87,6 +84,7 @@ public class ActivityRepositoryTest {
 		// Assert
 		Assertions.assertThat(savedActivity1).isNotNull();
 		Assertions.assertThat(savedActivity1.getId()).isGreaterThan(0);
+		Assertions.assertThat(savedActivity1.getId()).isEqualTo(1);
 	}
 
 	@Test

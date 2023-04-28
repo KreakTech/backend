@@ -1,5 +1,8 @@
 package me.kreaktech.unility.announcement;
 
+import static org.mockito.Mockito.doAnswer;
+import static org.mockito.Mockito.times;
+import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
 import java.sql.Timestamp;
@@ -28,78 +31,90 @@ public class AnnouncementServiceTest {
 	private AnnouncementRepository announcementRepository;
 
 	@InjectMocks
-	private AnnouncementServiceImpl announcementService;
+	private AnnouncementServiceImpl announcementServiceImpl;
 
-	Announcement announcement;
+	Announcement savedAnnouncement;
 	LocalDateTime announcementDateTime;
 
 	@BeforeEach
-	void setUpService(){
+	void setUpService() {
 		// Arrange
 		announcementDateTime = LocalDateTime.now().minusHours(1);
 
-		announcement = Announcement.builder()
+		Announcement announcement = Announcement.builder()
 				.title("Some Title")
 				.content("Some Content")
 				.date(Timestamp.valueOf(announcementDateTime))
+				.id(1)
 				.build();
+
+		// Act
+		when(announcementRepository.save(Mockito.any(Announcement.class))).thenReturn(announcement);
+		savedAnnouncement = announcementServiceImpl.saveAnnouncement(announcement);
 	}
 
 	@Test
 	public void AnnouncementService_CreateAnnouncement_ReturnsAnnouncement() {
-		// Act
-		when(announcementRepository.save(Mockito.any(Announcement.class))).thenReturn(announcement);
-		Announcement savedAnnouncement = announcementService.saveAnnouncement(announcement);
-
 		// Assert
 		Assertions.assertThat(savedAnnouncement).isNotNull();
-		Assertions.assertThat(savedAnnouncement.getTitle()).isEqualTo(announcement.getTitle());
-		Assertions.assertThat(savedAnnouncement.getContent()).isEqualTo(announcement.getContent());
-		Assertions.assertThat(savedAnnouncement.getDate()).isEqualTo(announcement.getDate());
+		Assertions.assertThat(savedAnnouncement.getTitle()).isEqualTo(savedAnnouncement.getTitle());
+		Assertions.assertThat(savedAnnouncement.getContent()).isEqualTo(savedAnnouncement.getContent());
+		Assertions.assertThat(savedAnnouncement.getDate()).isEqualTo(savedAnnouncement.getDate());
 	}
 
 	@Test
 	public void AnnouncementService_GetAllAnnouncements_ReturnsAnnouncements() {
 		// Given
-        List<Announcement> announcements = new ArrayList<>();
-        Announcement announcement1 = new Announcement();
-        announcement1.setId(1);
-        announcement1.setTitle("Announcement 1");
-        Announcement announcement2 = new Announcement();
-        announcement2.setId(2);
-        announcement2.setTitle("Announcement 2");
-        announcements.add(announcement1);
-        announcements.add(announcement2);
+		List<Announcement> announcements = new ArrayList<>();
+		Announcement announcement1 = new Announcement();
+		announcement1.setId(1);
+		announcement1.setTitle("Announcement 1");
+		Announcement announcement2 = new Announcement();
+		announcement2.setId(2);
+		announcement2.setTitle("Announcement 2");
+		announcements.add(announcement1);
+		announcements.add(announcement2);
 
-        // When
-        when(announcementRepository.findAll()).thenReturn(announcements);
-        List<Announcement> result = announcementService.getAllAnnouncements();
+		// When
+		when(announcementRepository.findAll()).thenReturn(announcements);
+		List<Announcement> result = announcementServiceImpl.getAllAnnouncements();
 
-        // Then
-        Assertions.assertThat(result).isNotNull();
-        Assertions.assertThat(result.size()).isEqualTo(2);
-        Assertions.assertThat(result.get(0).getTitle()).isEqualTo("Announcement 1");
-        Assertions.assertThat(result.get(1).getTitle()).isEqualTo("Announcement 2");
+		// Then
+		Assertions.assertThat(result).isNotNull();
+		Assertions.assertThat(result.size()).isEqualTo(2);
+		Assertions.assertThat(result.get(0).getTitle()).isEqualTo("Announcement 1");
+		Assertions.assertThat(result.get(1).getTitle()).isEqualTo("Announcement 2");
 	}
 
 	@Test
 	public void AnnouncementService_GetAnnouncementById_ReturnsAnnouncement() {
 		// Act
-		when(announcementRepository.findById(1)).thenReturn(Optional.ofNullable(announcement));
-		Announcement fetchedAnnouncement = announcementService.getAnnouncementById(1);
+		when(announcementRepository.findById(1)).thenReturn(Optional.ofNullable(savedAnnouncement));
+		Announcement fetchedAnnouncement = announcementServiceImpl.getAnnouncementById(1);
 
 		// Assert
 		Assertions.assertThat(fetchedAnnouncement).isNotNull();
-		Assertions.assertThat(fetchedAnnouncement.getTitle()).isEqualTo(announcement.getTitle());
-		Assertions.assertThat(fetchedAnnouncement.getContent()).isEqualTo(announcement.getContent());
-		Assertions.assertThat(fetchedAnnouncement.getDate()).isEqualTo(announcement.getDate());
+		Assertions.assertThat(fetchedAnnouncement.getTitle()).isEqualTo(savedAnnouncement.getTitle());
+		Assertions.assertThat(fetchedAnnouncement.getContent()).isEqualTo(savedAnnouncement.getContent());
+		Assertions.assertThat(fetchedAnnouncement.getDate()).isEqualTo(savedAnnouncement.getDate());
 	}
 
 	@Test
-	public void AnnouncementService_DeleteAnnouncementById_ReturnsVoid() {
-        announcementRepository.deleteById(announcement.getId());
-        Announcement deletedAnnouncement = announcementRepository.findById(announcement.getId()).orElse(null);
-        Assertions.assertThat(deletedAnnouncement).isNull();
+	public void ActivityContentService_DeleteActivityContentById_ReturnsVoid() {
+		doAnswer(invocation -> {
+			Object arg0 = invocation.getArgument(0);
+			if (arg0 instanceof Integer) {
+				Integer id = (Integer) arg0;
+				if (id == savedAnnouncement.getId()) {
+					return null;
+				}
+			}
+			throw new IllegalArgumentException("Invalid argument(s) passed to deleteById method");
+		}).when(announcementRepository).deleteById(savedAnnouncement.getId());
+
+		announcementServiceImpl.deleteAnnouncementById(savedAnnouncement.getId());
+
+		verify(announcementRepository, times(1)).deleteById(savedAnnouncement.getId());
 	}
 
 }
