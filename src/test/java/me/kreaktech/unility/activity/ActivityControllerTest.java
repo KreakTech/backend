@@ -42,78 +42,81 @@ import me.kreaktech.unility.service.ActivityServiceImpl;
 @ExtendWith(MockitoExtension.class)
 public class ActivityControllerTest {
 
-    @Autowired
-    private MockMvc mockmvc;
+        @Autowired
+        private MockMvc mockmvc;
 
-    @MockBean
-    private ActivityServiceImpl activityServiceImpl;
+        @MockBean
+        private ActivityServiceImpl activityServiceImpl;
 
-    @Autowired
-    private ObjectMapper objectMapper;
+        @Autowired
+        private ObjectMapper objectMapper;
 
-    private Activity activity;
+        private Activity activity;
 
-    @BeforeEach
-    void setUpControllerTest() throws JsonProcessingException, Exception {
-        LocalDateTime activityDateTime = LocalDateTime.now().minusHours(1);
-        // Arrange
-        University university = University.builder()
-                .name("some university")
-                .announcementsLastFetchDate(Timestamp.valueOf(activityDateTime))
-                .build();
+        @BeforeEach
+        void setUpControllerTest() throws JsonProcessingException, Exception {
+                LocalDateTime activityDateTime = LocalDateTime.now().minusHours(1);
+                // Arrange
+                University university = University.builder()
+                                .name("some university")
+                                .announcementsLastFetchDate(Timestamp.valueOf(activityDateTime))
+                                .build();
 
-        ActivityContent activityContent = ActivityContent.builder()
-                .details("some details")
-                .title("some title")
-                .organizer("some organizer")
-                .activityLanguage(Language.EN)
-                .activityDuration(Timestamp.valueOf(activityDateTime))
-                .physicalStatus(PhysicalStatus.FACETOFACE)
-                .build();
+                ActivityContent activityContent = ActivityContent.builder()
+                                .details("some details")
+                                .title("some title")
+                                .organizer("some organizer")
+                                .activityLanguage(Language.EN)
+                                .activityDuration(Timestamp.valueOf(activityDateTime))
+                                .physicalStatus(PhysicalStatus.FACETOFACE)
+                                .build();
 
-        activity = Activity.builder()
-                .university(university)
-                .activityContent(activityContent)
-                .date(Timestamp.valueOf(activityDateTime))
-                .id(1)
-                .build();
-    }
+                activity = Activity.builder()
+                                .university(university)
+                                .activityContent(activityContent)
+                                .date(Timestamp.valueOf(activityDateTime))
+                                .id(1)
+                                .build();
+        }
 
-    @Test
-    public void ActivityController_CreateActivity_ReturnCreated() throws Exception {
-        // Arrange
-        given(activityServiceImpl.saveActivity(ArgumentMatchers.any()))
-                .willAnswer((invocation -> invocation.getArgument(0)));
+        @Test
+        public void ActivityController_CreateActivity_ReturnCreated() throws Exception {
+                // Arrange
+                given(activityServiceImpl.saveActivity(ArgumentMatchers.any()))
+                                .willAnswer((invocation -> invocation.getArgument(0)));
 
-        // Act
-        ResultActions response = mockmvc.perform(post("/activities")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(this.activity)));
+                // Act
+                ResultActions response = mockmvc.perform(post("/activities")
+                                .contentType(MediaType.APPLICATION_JSON)
+                                .content(objectMapper.writeValueAsString(this.activity)));
 
-        // Assert
-        response.andExpect(MockMvcResultMatchers.status().isCreated())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.id", CoreMatchers.is(1)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.university.name").value("some university"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.activityContent.details").value("some details"));
-    }
+                // Assert
+                response.andExpect(MockMvcResultMatchers.status().isCreated())
+                                .andExpect(MockMvcResultMatchers.jsonPath("$.id", CoreMatchers.is(1)))
+                                .andExpect(MockMvcResultMatchers.jsonPath("$.university.name").value("some university"))
+                                .andExpect(MockMvcResultMatchers.jsonPath("$.activityContent.details")
+                                                .value("some details"));
+        }
 
-    @Test
-    public void ActivityController_GetAllActivities_ReturnsActivities() throws Exception {
-        // Arrange
-        List<Activity> activities = List.of(activity);
-        when(activityServiceImpl.getAllActivities()).thenReturn(activities);
+        @Test
+        public void ActivityController_GetAllActivities_ReturnsActivities() throws Exception {
+                // Arrange
+                List<Activity> activities = List.of(activity);
+                when(activityServiceImpl.getAllActivities()).thenReturn(activities);
 
-        // Act
-        ResultActions response = mockmvc.perform(get("/activities/all")
-                .contentType(MediaType.APPLICATION_JSON));
+                // Act
+                ResultActions response = mockmvc.perform(get("/activities/all")
+                                .contentType(MediaType.APPLICATION_JSON));
 
-        // Assert
-        response.andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.[0].id").value(activity.getId()))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.[0].university.name").value("some university"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.[0].activityContent.details").value("some details"));
-    }
+                // Assert
+                response.andExpect(MockMvcResultMatchers.status().isOk())
+                                .andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
+                                .andExpect(MockMvcResultMatchers.jsonPath("$.[0].id").value(activity.getId()))
+                                .andExpect(MockMvcResultMatchers.jsonPath("$.[0].university.name")
+                                                .value("some university"))
+                                .andExpect(MockMvcResultMatchers.jsonPath("$.[0].activityContent.details")
+                                                .value("some details"));
+        }
 
     @Test
 	public void ActivityController_GetActivityById_ReturnActivity() throws Exception {
@@ -132,16 +135,16 @@ public class ActivityControllerTest {
                 .andExpect(MockMvcResultMatchers.jsonPath("$.activityContent.details").value("some details"));
 		}
 
-    @Test
-    public void ActivityController_DeleteActivity_ReturnsVoid() throws Exception {
-        // Arrange
-        doNothing().when(activityServiceImpl).deleteActivityById(ArgumentMatchers.any());
+        @Test
+        public void ActivityController_DeleteActivity_ReturnsVoid() throws Exception {
+                // Arrange
+                doNothing().when(activityServiceImpl).deleteActivityById(ArgumentMatchers.any());
 
-        // Act
-        ResultActions response = mockmvc.perform(delete("/activities/1")
-                .contentType(MediaType.APPLICATION_JSON));
+                // Act
+                ResultActions response = mockmvc.perform(delete("/activities/1")
+                                .contentType(MediaType.APPLICATION_JSON));
 
-        // Assert
-        response.andExpect(MockMvcResultMatchers.status().isNoContent());
-    }
+                // Assert
+                response.andExpect(MockMvcResultMatchers.status().isNoContent());
+        }
 }
