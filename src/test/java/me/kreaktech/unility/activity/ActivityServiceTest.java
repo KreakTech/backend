@@ -42,7 +42,7 @@ public class ActivityServiceTest {
     LocalDateTime activityDateTime;
 
     @BeforeEach
-    void setUpRepository() {
+    void setUpService() {
 
         activityDateTime = LocalDateTime.now().minusHours(1);
         // Arrange

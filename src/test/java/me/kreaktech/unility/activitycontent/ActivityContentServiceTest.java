@@ -81,7 +81,7 @@ public class ActivityContentServiceTest {
 	@Test
 	public void ActivityContentService_GetActivityContentByTitle_ReturnsActivityContent(){
 		// Act
-		when(activityContentRepository.findByTitle("some title")).thenReturn(Optional.ofNullable(savedActivityContent));
+		when(activityContentRepository.findActivityContentByTitle("some title")).thenReturn(Optional.ofNullable(savedActivityContent));
 		ActivityContent fetchedActivityContent = activityContentServiceImpl.getActivityContentByTitle(savedActivityContent.getTitle());
 
 		// Assert
