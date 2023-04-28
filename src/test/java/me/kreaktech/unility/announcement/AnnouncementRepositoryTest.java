@@ -24,8 +24,8 @@ public class AnnouncementRepositoryTest {
 	private AnnouncementRepository announcementRepository;
 
 	Announcement announcement;
-	LocalDateTime announcementDateTime;
 	Announcement savedAnnouncement;
+	LocalDateTime announcementDateTime;
 
 	@BeforeEach
 	void setUpRepository() {
