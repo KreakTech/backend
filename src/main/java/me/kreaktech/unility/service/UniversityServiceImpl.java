@@ -39,4 +39,9 @@ public class UniversityServiceImpl implements UniversityService {
 		return universityRepository.findAll();
 	}
 
+	@Override
+	public University getUniversityByName(String name) {
+		Optional<University> university = universityRepository.findByName(name);
+		return Utils.unwrap(university, name);
+	}
 }
