@@ -36,4 +36,8 @@ public class MapWaypointServiceImpl implements MapWaypointService {
 		return mapWaypointRepository.findAll();
 	}
 
+	@Override
+	public List<MapWaypoint> getAllMapWaypointsByUniversityId(Integer id) {
+		return mapWaypointRepository.findByUniversityId(id);
+	}
 }
