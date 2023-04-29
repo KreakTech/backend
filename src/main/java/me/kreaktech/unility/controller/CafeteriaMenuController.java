@@ -82,8 +82,8 @@ public class CafeteriaMenuController {
 			@ApiResponse(responseCode = "200", description = "Cafeteria menu list retrieved successfully"),
 			@ApiResponse(responseCode = "404", description = "Cafeteria menu list not found", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
-	@GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<CafeteriaMenu>> getCafeteriaMenuByUniversityId(@RequestParam(value = "universityId") Integer universityId) {
+	@GetMapping(value = "/all/{universityId}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<CafeteriaMenu>> getCafeteriaMenuByUniversityId(@PathVariable Integer universityId) {
 		List<CafeteriaMenu> cafeteriaMenu = cafeteriaMenuService.getAllCafeteriaMenuByUniversityId(universityId);
 		return new ResponseEntity<>(cafeteriaMenu, HttpStatus.OK);
 	}

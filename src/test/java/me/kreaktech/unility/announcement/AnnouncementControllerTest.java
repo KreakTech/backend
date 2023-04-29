@@ -26,6 +26,7 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import me.kreaktech.unility.controller.AnnouncementController;
@@ -49,7 +50,7 @@ public class AnnouncementControllerTest {
 	private Announcement announcement;
 
 	@BeforeEach
-	public void init() {
+	void setUpControllerTest() throws JsonProcessingException, Exception {
 		LocalDateTime announcementDateTime = LocalDateTime.now().minusHours(1);
 
 		announcement = Announcement.builder()
