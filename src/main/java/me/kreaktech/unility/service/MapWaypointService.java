@@ -10,4 +10,5 @@ public interface MapWaypointService {
     MapWaypoint saveMapWaypointStop(MapWaypoint mapWaypoint);
     void deleteMapwaypointById(Integer id);
     List<MapWaypoint> getAllMapWaypoints();
+    List<MapWaypoint> getAllMapWaypointsByUniversityId(Integer id);
 }
