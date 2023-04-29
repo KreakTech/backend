@@ -33,5 +33,10 @@ public class CafeteriaMenuServiceImpl implements CafeteriaMenuService {
 	@Override
 	public List<CafeteriaMenu> getAllCafeteriaMenu() {
 		return cafeteriaMenuRepository.findAll();
+	}
+
+	@Override
+	public List<CafeteriaMenu> getAllCafeteriaMenuByUniversityId(Integer id) {
+		return cafeteriaMenuRepository.findByUniversityId(id);
 	};
 }

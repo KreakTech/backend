@@ -9,4 +9,5 @@ public interface CafeteriaMenuService {
     CafeteriaMenu saveCafeteriaMenu(CafeteriaMenu cafeteriaMenu);
     void deleteCafeteriaMenuById(Integer id);
     List<CafeteriaMenu> getAllCafeteriaMenu();
+    List<CafeteriaMenu> getAllCafeteriaMenuByUniversityId(Integer id);
 }
