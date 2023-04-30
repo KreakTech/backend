@@ -51,7 +51,7 @@ public class MapWaypointController {
 	})
 	@PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<MapWaypoint> saveMapwaypoint(@Valid @RequestBody MapWaypoint mapWaypoint) {
-		return new ResponseEntity<>(mapWaypointService.saveMapWaypointStop(mapWaypoint), HttpStatus.CREATED);
+		return new ResponseEntity<>(mapWaypointService.saveMapWaypoint(mapWaypoint), HttpStatus.CREATED);
 	}
 
 	@Operation(summary = "Delete a waypoint given its ID")
@@ -61,7 +61,7 @@ public class MapWaypointController {
 	})
 	@DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<HttpStatus> deleteWaypoint(@PathVariable Integer id) {
-		mapWaypointService.deleteMapwaypointById(id);
+		mapWaypointService.deleteMapWaypointById(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 

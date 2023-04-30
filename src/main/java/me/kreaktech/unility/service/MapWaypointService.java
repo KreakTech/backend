@@ -8,9 +8,9 @@ public interface MapWaypointService {
 
     MapWaypoint getMapWaypointById(Integer id);
 
-    MapWaypoint saveMapWaypointStop(MapWaypoint mapWaypoint);
+    MapWaypoint saveMapWaypoint(MapWaypoint mapWaypoint);
 
-    void deleteMapwaypointById(Integer id);
+    void deleteMapWaypointById(Integer id);
 
     List<MapWaypoint> getAllMapWaypoints();
 
