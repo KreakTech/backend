@@ -21,6 +21,7 @@ import lombok.Setter;
 @Builder
 @Table(name = "nutrition_content")
 public class NutritionContent {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -38,11 +39,4 @@ public class NutritionContent {
 	@Column(name = "fat_percentage", nullable = true)
 	private int fatPercentage;
 
-	/*
-	 * int fatPercentage
-	 * int proteinPercentage
-	 * int carbohydratePercentage
-	 * int energyCal
-	 * Integer id
-	 */
 }
