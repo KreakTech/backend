@@ -35,16 +35,16 @@ public class CafeteriaMenuRepositoryTest {
         Language lang = Language.EN;
         MealType mealType = MealType.BREAKFAST;
         LocalDateTime activityDateTime = LocalDateTime.now().minusHours(1);
-        
-		University university = University.builder()
-				.name("some university1")
-				.announcementsLastFetchDate(Timestamp.valueOf(activityDateTime))
-				.build();
+
+        University university = University.builder()
+                .name("some university1")
+                .announcementsLastFetchDate(Timestamp.valueOf(activityDateTime))
+                .build();
 
         NutritionContent nutritionContent = NutritionContent.builder()
                 .fatPercentage(10)
                 .build();
-        
+
         String mealContent = "some content";
 
         cafeteriaMenu = CafeteriaMenu.builder()
@@ -87,7 +87,8 @@ public class CafeteriaMenuRepositoryTest {
     @Test
     public void CafeteriaMenuRepository_FindByUniversityId_ReturnCafeteriaMenu() {
         // Act
-        List<CafeteriaMenu> fetchedCafeteriaMenus = cafeteriaMenuRepository.findByUniversityId(savedCafeteriaMenu.getUniversity().getId());
+        List<CafeteriaMenu> fetchedCafeteriaMenus = cafeteriaMenuRepository
+                .findByUniversityId(savedCafeteriaMenu.getUniversity().getId());
 
         // Assert
         Assertions.assertThat(fetchedCafeteriaMenus).isNotNull();
@@ -110,7 +111,8 @@ public class CafeteriaMenuRepositoryTest {
 
         // Assert
         Assertions.assertThat(updatedCafeteriaMenu).isNotNull();
-        Assertions.assertThat(updatedCafeteriaMenu.getMealContent()).isEqualTo(fetchedCafeteriaMenu.getMealContent()).isEqualTo("Some new content");
+        Assertions.assertThat(updatedCafeteriaMenu.getMealContent()).isEqualTo(fetchedCafeteriaMenu.getMealContent())
+                .isEqualTo("Some new content");
         Assertions.assertThat(updatedCafeteriaMenu.getLanguage()).isEqualTo(fetchedCafeteriaMenu.getLanguage());
         Assertions.assertThat(updatedCafeteriaMenu.getMealType()).isEqualTo(fetchedCafeteriaMenu.getMealType());
     }

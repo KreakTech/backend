@@ -12,7 +12,8 @@ import lombok.*;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "activity", uniqueConstraints = @UniqueConstraint(columnNames = { "university_id", "activity_content_id" }))
+@Table(name = "activity", uniqueConstraints = @UniqueConstraint(columnNames = { "university_id",
+		"activity_content_id" }))
 public class Activity {
 
 	@Id

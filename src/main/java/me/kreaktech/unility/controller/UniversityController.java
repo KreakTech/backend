@@ -51,7 +51,7 @@ public class UniversityController {
 			@ApiResponse(responseCode = "404", description = "University not found", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
 	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<University> getUniversity(@RequestParam (value = "name") String name){
+	public ResponseEntity<University> getUniversity(@RequestParam(value = "name") String name) {
 		return new ResponseEntity<>(universityService.getUniversityByName(name), HttpStatus.OK);
 	}
 

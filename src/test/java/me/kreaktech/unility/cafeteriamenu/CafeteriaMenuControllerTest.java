@@ -57,31 +57,31 @@ public class CafeteriaMenuControllerTest {
 
 	@BeforeEach
 	void setUpControllerTest() throws JsonProcessingException, Exception {
-        Language lang = Language.EN;
-        MealType mealType = MealType.BREAKFAST;
-        LocalDateTime activityDateTime = LocalDateTime.now().minusHours(1);
-        
+		Language lang = Language.EN;
+		MealType mealType = MealType.BREAKFAST;
+		LocalDateTime activityDateTime = LocalDateTime.now().minusHours(1);
+
 		University university = University.builder()
 				.name("some university1")
 				.announcementsLastFetchDate(Timestamp.valueOf(activityDateTime))
-                .id(1)
+				.id(1)
 				.build();
 
-        NutritionContent nutritionContent = NutritionContent.builder()
-                .fatPercentage(10)
-                .build();
-        
-        String mealContent = "some content";
+		NutritionContent nutritionContent = NutritionContent.builder()
+				.fatPercentage(10)
+				.build();
 
-        cafeteriaMenu = CafeteriaMenu.builder()
-                .language(lang).mealContent(mealContent)
-                .nutritionContent(nutritionContent)
-                .mealType(mealType)
-                .university(university)
-                .mealContent(mealContent)
-                .dateServed(Timestamp.valueOf(activityDateTime))
-                .id(1)
-                .build();
+		String mealContent = "some content";
+
+		cafeteriaMenu = CafeteriaMenu.builder()
+				.language(lang).mealContent(mealContent)
+				.nutritionContent(nutritionContent)
+				.mealType(mealType)
+				.university(university)
+				.mealContent(mealContent)
+				.dateServed(Timestamp.valueOf(activityDateTime))
+				.id(1)
+				.build();
 	}
 
 	@Test
@@ -98,8 +98,10 @@ public class CafeteriaMenuControllerTest {
 		// Assert
 		response.andExpect(MockMvcResultMatchers.status().isCreated())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.id", CoreMatchers.is(1)))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.mealType").value(String.valueOf(cafeteriaMenu.getMealType())))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.mealContent").value(String.valueOf(cafeteriaMenu.getMealContent())));
+				.andExpect(
+						MockMvcResultMatchers.jsonPath("$.mealType").value(String.valueOf(cafeteriaMenu.getMealType())))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.mealContent")
+						.value(String.valueOf(cafeteriaMenu.getMealContent())));
 	}
 
 	@Test
@@ -115,26 +117,31 @@ public class CafeteriaMenuControllerTest {
 		// Assert
 		response.andExpect(MockMvcResultMatchers.status().isOk())
 				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.[0].mealType").value(String.valueOf(cafeteriaMenu.getMealType())))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.[0].mealContent").value(String.valueOf(cafeteriaMenu.getMealContent())));
+				.andExpect(MockMvcResultMatchers.jsonPath("$.[0].mealType")
+						.value(String.valueOf(cafeteriaMenu.getMealType())))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.[0].mealContent")
+						.value(String.valueOf(cafeteriaMenu.getMealContent())));
 	}
 
-    @Test
-    public void CafeteriaMenuController_GetAllCafeteriaMenusByUniversityId_ReturnCafeteriaMenus() throws Exception {
-        // Arrange
-        List<CafeteriaMenu> cafeteriaMenus = List.of(cafeteriaMenu);
-        when(cafeteriaMenuServiceImpl.getAllCafeteriaMenuByUniversityId(ArgumentMatchers.any())).thenReturn(cafeteriaMenus);
+	@Test
+	public void CafeteriaMenuController_GetAllCafeteriaMenusByUniversityId_ReturnCafeteriaMenus() throws Exception {
+		// Arrange
+		List<CafeteriaMenu> cafeteriaMenus = List.of(cafeteriaMenu);
+		when(cafeteriaMenuServiceImpl.getAllCafeteriaMenuByUniversityId(ArgumentMatchers.any()))
+				.thenReturn(cafeteriaMenus);
 
-        // Act
-        ResultActions response = mockmvc.perform(get("/cafeteriaMenu/all/1")
-                .contentType(MediaType.APPLICATION_JSON));
+		// Act
+		ResultActions response = mockmvc.perform(get("/cafeteriaMenu/all/1")
+				.contentType(MediaType.APPLICATION_JSON));
 
 		// Assert
 		response.andExpect(MockMvcResultMatchers.status().isOk())
 				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.[0].mealType").value(String.valueOf(cafeteriaMenu.getMealType())))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.[0].mealContent").value(String.valueOf(cafeteriaMenu.getMealContent())));
-    }
+				.andExpect(MockMvcResultMatchers.jsonPath("$.[0].mealType")
+						.value(String.valueOf(cafeteriaMenu.getMealType())))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.[0].mealContent")
+						.value(String.valueOf(cafeteriaMenu.getMealContent())));
+	}
 
 	@Test
 	public void CafeteriaMenuController_GetCafeteriaMenuById_ReturnCafeteriaMenu() throws Exception {

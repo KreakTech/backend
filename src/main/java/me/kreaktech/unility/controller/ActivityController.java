@@ -29,7 +29,7 @@ import me.kreaktech.unility.service.ActivityServiceImpl;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/activities")
-//TO DO: UPDATE METHOD IS MISSING SHOULD WE IMPLEMENT IT?
+// TO DO: UPDATE METHOD IS MISSING SHOULD WE IMPLEMENT IT?
 public class ActivityController {
 
 	@Autowired
@@ -69,7 +69,6 @@ public class ActivityController {
 	@Operation(summary = "Gets all activities in a list")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Activities list retrieved successfully"),
-			@ApiResponse(responseCode = "404", description = "Activities list not found", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
 	@GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<Activity>> getAllActivities() {
