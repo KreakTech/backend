@@ -28,50 +28,50 @@ import me.kreaktech.unility.service.MapWaypointServiceImpl;
 @ExtendWith(MockitoExtension.class)
 public class MapWaypointServiceTest {
 
-	@Mock
-	private MapWaypointRepository mapWaypointRepository;
+    @Mock
+    private MapWaypointRepository mapWaypointRepository;
 
-	@InjectMocks
-	private MapWaypointServiceImpl mapWaypointServiceImpl;
+    @InjectMocks
+    private MapWaypointServiceImpl mapWaypointServiceImpl;
 
-	MapWaypoint savedMapWaypoint;
-	MapWaypoint mapWaypoint;
+    MapWaypoint savedMapWaypoint;
+    MapWaypoint mapWaypoint;
 
-	@BeforeEach
-	void setUpService() {
-		LocalDateTime activityDateTime = LocalDateTime.now().minusHours(1);
+    @BeforeEach
+    void setUpService() {
+        LocalDateTime activityDateTime = LocalDateTime.now().minusHours(1);
 
-		University university = University.builder()
-				.name("some university1")
-				.announcementsLastFetchDate(Timestamp.valueOf(activityDateTime))
-				.build();
+        University university = University.builder()
+                .name("some university1")
+                .announcementsLastFetchDate(Timestamp.valueOf(activityDateTime))
+                .build();
 
-		mapWaypoint = MapWaypoint.builder()
-				.name("some name")
-				.coordinates("some coordinate")
-				.type(MapWaypointType.UTILITY)
-				.university(university)
+        mapWaypoint = MapWaypoint.builder()
+                .name("some name")
+                .coordinates("some coordinate")
+                .type(MapWaypointType.UTILITY)
+                .university(university)
                 .id(1)
-				.build();
+                .build();
 
-		// Act
-		when(mapWaypointRepository.save(Mockito.any(MapWaypoint.class))).thenReturn(mapWaypoint);
-		savedMapWaypoint = mapWaypointServiceImpl.saveMapWaypoint(mapWaypoint);
+        // Act
+        when(mapWaypointRepository.save(Mockito.any(MapWaypoint.class))).thenReturn(mapWaypoint);
+        savedMapWaypoint = mapWaypointServiceImpl.saveMapWaypoint(mapWaypoint);
 
-	}
+    }
 
-	@Test
-	public void MapWaypointService_CreateMapWaypoint_ReturnsMapWaypoint() {
-		// Assert
-		Assertions.assertThat(savedMapWaypoint).isNotNull();
-		Assertions.assertThat(savedMapWaypoint.getId()).isGreaterThan(0);
-		Assertions.assertThat(savedMapWaypoint.getName()).isEqualTo(mapWaypoint.getName());
-		Assertions.assertThat(savedMapWaypoint.getType()).isEqualTo(mapWaypoint.getType());
-		Assertions.assertThat(savedMapWaypoint.getUniversity()).isEqualTo(mapWaypoint.getUniversity());
-		Assertions.assertThat(savedMapWaypoint.getCoordinates()).isEqualTo(mapWaypoint.getCoordinates());
-	}
+    @Test
+    public void MapWaypointService_CreateMapWaypoint_ReturnsMapWaypoint() {
+        // Assert
+        Assertions.assertThat(savedMapWaypoint).isNotNull();
+        Assertions.assertThat(savedMapWaypoint.getId()).isGreaterThan(0);
+        Assertions.assertThat(savedMapWaypoint.getName()).isEqualTo(mapWaypoint.getName());
+        Assertions.assertThat(savedMapWaypoint.getType()).isEqualTo(mapWaypoint.getType());
+        Assertions.assertThat(savedMapWaypoint.getUniversity()).isEqualTo(mapWaypoint.getUniversity());
+        Assertions.assertThat(savedMapWaypoint.getCoordinates()).isEqualTo(mapWaypoint.getCoordinates());
+    }
 
-	@Test
+    @Test
 	public void MapWaypointService_GetMapWaypointById_ReturnsMapWaypoint() {
 		// Act
 		when(mapWaypointRepository.findById(1)).thenReturn(Optional.ofNullable(savedMapWaypoint));
@@ -86,7 +86,7 @@ public class MapWaypointServiceTest {
 		Assertions.assertThat(fetchedMapWaypoint.getCoordinates()).isEqualTo(savedMapWaypoint.getCoordinates());
 	}
 
-	@Test
+    @Test
 	public void MapWaypointService_GetAllMapWaypoint_ReturnsMapWaypoints() {
 		// When
 		when(mapWaypointRepository.findAll()).thenReturn(List.of(savedMapWaypoint));
@@ -100,7 +100,7 @@ public class MapWaypointServiceTest {
         Assertions.assertThat(result.get(0).getCoordinates()).isEqualTo(savedMapWaypoint.getCoordinates());
 	}
 
-	@Test
+    @Test
 	public void MapWaypointService_getAllMapWaypointByUniversityId_ReturnsMapWaypoint() {
 		// When
 		when(mapWaypointRepository.findByUniversityId(savedMapWaypoint.getId())).thenReturn(List.of(savedMapWaypoint));
@@ -114,21 +114,21 @@ public class MapWaypointServiceTest {
         Assertions.assertThat(result.get(0).getCoordinates()).isEqualTo(savedMapWaypoint.getCoordinates());
 	}
 
-	@Test
-	public void MapWaypointService_DeleteMapWaypointById_ReturnsVoid() {
-		doAnswer(invocation -> {
-			Object arg0 = invocation.getArgument(0);
-			if (arg0 instanceof Integer) {
-				Integer id = (Integer) arg0;
-				if (id == savedMapWaypoint.getId()) {
-					return null;
-				}
-			}
-			throw new IllegalArgumentException("Invalid argument(s) passed to deleteById method");
-		}).when(mapWaypointRepository).deleteById(savedMapWaypoint.getId());
+    @Test
+    public void MapWaypointService_DeleteMapWaypointById_ReturnsVoid() {
+        doAnswer(invocation -> {
+            Object arg0 = invocation.getArgument(0);
+            if (arg0 instanceof Integer) {
+                Integer id = (Integer) arg0;
+                if (id == savedMapWaypoint.getId()) {
+                    return null;
+                }
+            }
+            throw new IllegalArgumentException("Invalid argument(s) passed to deleteById method");
+        }).when(mapWaypointRepository).deleteById(savedMapWaypoint.getId());
 
-		mapWaypointServiceImpl.deleteMapWaypointById(savedMapWaypoint.getId());
+        mapWaypointServiceImpl.deleteMapWaypointById(savedMapWaypoint.getId());
 
-		verify(mapWaypointRepository, times(1)).deleteById(savedMapWaypoint.getId());
-	}
+        verify(mapWaypointRepository, times(1)).deleteById(savedMapWaypoint.getId());
+    }
 }

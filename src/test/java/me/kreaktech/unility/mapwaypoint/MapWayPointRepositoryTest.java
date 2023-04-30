@@ -30,20 +30,20 @@ public class MapWaypointRepositoryTest {
 
     @BeforeEach
     void setUpRepository() {
-        
-		LocalDateTime activityDateTime = LocalDateTime.now().minusHours(1);
 
-		University university = University.builder()
-				.name("some university1")
-				.announcementsLastFetchDate(Timestamp.valueOf(activityDateTime))
-				.build();
+        LocalDateTime activityDateTime = LocalDateTime.now().minusHours(1);
 
-		mapWaypoint = MapWaypoint.builder()
-				.name("some name")
-				.coordinates("some coordinate")
-				.type(MapWaypointType.UTILITY)
-				.university(university)
-				.build();
+        University university = University.builder()
+                .name("some university1")
+                .announcementsLastFetchDate(Timestamp.valueOf(activityDateTime))
+                .build();
+
+        mapWaypoint = MapWaypoint.builder()
+                .name("some name")
+                .coordinates("some coordinate")
+                .type(MapWaypointType.UTILITY)
+                .university(university)
+                .build();
 
         savedMapWaypoint = mapWaypointRepository.save(mapWaypoint);
     }
