@@ -21,12 +21,12 @@ public class MapWaypointServiceImpl implements MapWaypointService {
 	}
 
 	@Override
-	public MapWaypoint saveMapWaypointStop(MapWaypoint mapWaypoint) {
+	public MapWaypoint saveMapWaypoint(MapWaypoint mapWaypoint) {
 		return mapWaypointRepository.save(mapWaypoint);
 	}
 
 	@Override
-	public void deleteMapwaypointById(Integer id) {
+	public void deleteMapWaypointById(Integer id) {
 		mapWaypointRepository.deleteById(id);
 		return;
 	}

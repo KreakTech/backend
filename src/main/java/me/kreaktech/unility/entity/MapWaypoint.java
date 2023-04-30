@@ -46,7 +46,6 @@ public class MapWaypoint {
 	@Column(name = "coordinates", nullable = false)
 	private String coordinates;
 
-	@NotBlank(message = "Type cannot be blank")
 	@NonNull
 	@Column(name = "type", nullable = false)
 	private MapWaypointType type;
@@ -54,4 +53,5 @@ public class MapWaypoint {
 	@ManyToOne(optional = false, cascade = CascadeType.ALL)
 	@JoinColumn(name = "university_id", referencedColumnName = "id")
 	private University university;
+
 }
