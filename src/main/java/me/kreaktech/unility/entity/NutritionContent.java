@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -38,4 +37,12 @@ public class NutritionContent {
 
 	@Column(name = "fat_percentage", nullable = true)
 	private int fatPercentage;
+
+	/*
+	 * int fatPercentage
+	 * int proteinPercentage
+	 * int carbohydratePercentage
+	 * int energyCal
+	 * Integer id
+	 */
 }

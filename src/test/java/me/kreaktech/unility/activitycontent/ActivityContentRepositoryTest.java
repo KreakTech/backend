@@ -67,7 +67,8 @@ public class ActivityContentRepositoryTest {
     @Test
     public void ActivityContentRepository_FindActivityContentByTitle_ReturnActivityContent() {
         // Act
-        ActivityContent fetchedActivityContent = activityContentRepository.findActivityContentByTitle(savedActivityContent.getTitle())
+        ActivityContent fetchedActivityContent = activityContentRepository
+                .findActivityContentByTitle(savedActivityContent.getTitle())
                 .get();
 
         // Assert

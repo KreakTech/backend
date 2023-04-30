@@ -37,35 +37,35 @@ public class CafeteriaMenuServiceTest {
 	private CafeteriaMenuServiceImpl cafeteriaMenuServiceImpl;
 
 	CafeteriaMenu savedCafeteriaMenu;
-    CafeteriaMenu cafeteriaMenu;
+	CafeteriaMenu cafeteriaMenu;
 
 	@BeforeEach
 	void setUpService() {
 
-        Language lang = Language.EN;
-        MealType mealType = MealType.BREAKFAST;
-        LocalDateTime activityDateTime = LocalDateTime.now().minusHours(1);
-        
+		Language lang = Language.EN;
+		MealType mealType = MealType.BREAKFAST;
+		LocalDateTime activityDateTime = LocalDateTime.now().minusHours(1);
+
 		University university = University.builder()
 				.name("some university")
 				.announcementsLastFetchDate(Timestamp.valueOf(activityDateTime))
 				.build();
 
-        NutritionContent nutritionContent = NutritionContent.builder()
-                .fatPercentage(10)
-                .build();
-        
-        String mealContent = "some content";
+		NutritionContent nutritionContent = NutritionContent.builder()
+				.fatPercentage(10)
+				.build();
 
-        cafeteriaMenu = CafeteriaMenu.builder()
-                .language(lang).mealContent(mealContent)
-                .nutritionContent(nutritionContent)
-                .mealType(mealType)
-                .university(university)
-                .mealContent(mealContent)
-                .dateServed(Timestamp.valueOf(activityDateTime))
-                .id(1)
-                .build();
+		String mealContent = "some content";
+
+		cafeteriaMenu = CafeteriaMenu.builder()
+				.language(lang).mealContent(mealContent)
+				.nutritionContent(nutritionContent)
+				.mealType(mealType)
+				.university(university)
+				.mealContent(mealContent)
+				.dateServed(Timestamp.valueOf(activityDateTime))
+				.id(1)
+				.build();
 
 		// Act
 		when(cafeteriaMenuRepository.save(Mockito.any(CafeteriaMenu.class))).thenReturn(cafeteriaMenu);
@@ -75,13 +75,13 @@ public class CafeteriaMenuServiceTest {
 
 	@Test
 	public void CafeteriaMenuService_CreateCafeteriaMenu_ReturnsCafeteriaMenu() {
-        // Assert
-        Assertions.assertThat(savedCafeteriaMenu).isNotNull();
-        Assertions.assertThat(savedCafeteriaMenu.getId()).isGreaterThan(0);
-        Assertions.assertThat(savedCafeteriaMenu.getMealContent()).isEqualTo(cafeteriaMenu.getMealContent());
-        Assertions.assertThat(savedCafeteriaMenu.getDateServed()).isEqualTo(cafeteriaMenu.getDateServed());
-        Assertions.assertThat(savedCafeteriaMenu.getLanguage()).isEqualTo(cafeteriaMenu.getLanguage());
-        Assertions.assertThat(savedCafeteriaMenu.getMealType()).isEqualTo(cafeteriaMenu.getMealType());
+		// Assert
+		Assertions.assertThat(savedCafeteriaMenu).isNotNull();
+		Assertions.assertThat(savedCafeteriaMenu.getId()).isGreaterThan(0);
+		Assertions.assertThat(savedCafeteriaMenu.getMealContent()).isEqualTo(cafeteriaMenu.getMealContent());
+		Assertions.assertThat(savedCafeteriaMenu.getDateServed()).isEqualTo(cafeteriaMenu.getDateServed());
+		Assertions.assertThat(savedCafeteriaMenu.getLanguage()).isEqualTo(cafeteriaMenu.getLanguage());
+		Assertions.assertThat(savedCafeteriaMenu.getMealType()).isEqualTo(cafeteriaMenu.getMealType());
 	}
 
 	@Test
@@ -98,9 +98,9 @@ public class CafeteriaMenuServiceTest {
         Assertions.assertThat(fetchedCafeteriaMenu.getLanguage()).isEqualTo(savedCafeteriaMenu.getLanguage());
         Assertions.assertThat(fetchedCafeteriaMenu.getMealType()).isEqualTo(savedCafeteriaMenu.getMealType());
 	}
-     
-    //yenilenecek
-    @Test
+
+	// yenilenecek
+	@Test
 	public void CafeteriaMenuService_GetAllCafeteriaMenu_ReturnsCafeteriaMenus() {
 		// When
 		when(cafeteriaMenuRepository.findAll()).thenReturn(List.of(savedCafeteriaMenu));
@@ -114,8 +114,8 @@ public class CafeteriaMenuServiceTest {
         Assertions.assertThat(result.get(0).getMealType()).isEqualTo(savedCafeteriaMenu.getMealType());
 	}
 
-    //yenilenecek
-    @Test
+	// yenilenecek
+	@Test
 	public void CafeteriaMenuService_getAllCafeteriaMenuByUniversityId_ReturnsCafeteriaMenu() {
 		// When
 		when(cafeteriaMenuRepository.findByUniversityId(savedCafeteriaMenu.getId())).thenReturn(List.of(savedCafeteriaMenu));

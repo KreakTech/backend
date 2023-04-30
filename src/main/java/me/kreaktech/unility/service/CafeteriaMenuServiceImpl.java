@@ -16,7 +16,7 @@ public class CafeteriaMenuServiceImpl implements CafeteriaMenuService {
 
 	@Override
 	public CafeteriaMenu getCafeteriaMenuById(Integer id) {
-		return cafeteriaMenuRepository.findById(id).orElse(null); 
+		return cafeteriaMenuRepository.findById(id).orElse(null);
 	}
 
 	@Override
@@ -36,7 +36,7 @@ public class CafeteriaMenuServiceImpl implements CafeteriaMenuService {
 	}
 
 	@Override
-	public List<CafeteriaMenu> getAllCafeteriaMenuByUniversityId(Integer id) {
-		return cafeteriaMenuRepository.findByUniversityId(id);
+	public List<CafeteriaMenu> getAllCafeteriaMenuByUniversityId(Integer universityId) {
+		return cafeteriaMenuRepository.findByUniversityId(universityId);
 	};
 }

@@ -28,7 +28,8 @@ import me.kreaktech.unility.constants.Enum.MapWaypointType;
 @NoArgsConstructor
 @Builder
 @Entity
-@Table(name = "map_waypoint", uniqueConstraints = @UniqueConstraint(columnNames = { "coordinates", "type", "university_id" }))
+@Table(name = "map_waypoint", uniqueConstraints = @UniqueConstraint(columnNames = { "coordinates", "type",
+		"university_id" }))
 public class MapWaypoint {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
