@@ -1,6 +1,5 @@
 package me.kreaktech.unility.universityfetch;
 
-public class UniversityFetchServiceTest{
+public class UniversityFetchServiceTest {
 
-    
 }

@@ -1,5 +1,5 @@
 package me.kreaktech.unility.universityfetch;
 
-public class UniversityFetchRepositoryTest{
-        
+public class UniversityFetchRepositoryTest {
+
 }
