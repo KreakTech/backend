@@ -99,7 +99,6 @@ public class CafeteriaMenuServiceTest {
         Assertions.assertThat(fetchedCafeteriaMenu.getMealType()).isEqualTo(savedCafeteriaMenu.getMealType());
 	}
 
-	// yenilenecek
 	@Test
 	public void CafeteriaMenuService_GetAllCafeteriaMenu_ReturnsCafeteriaMenus() {
 		// When
@@ -114,7 +113,6 @@ public class CafeteriaMenuServiceTest {
         Assertions.assertThat(result.get(0).getMealType()).isEqualTo(savedCafeteriaMenu.getMealType());
 	}
 
-	// yenilenecek
 	@Test
 	public void CafeteriaMenuService_getAllCafeteriaMenuByUniversityId_ReturnsCafeteriaMenu() {
 		// When
