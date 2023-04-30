@@ -27,14 +27,14 @@ public class UniversityFetchController {
 	@Autowired
 	private UniversityFetchServiceImpl universityFetchService;
 
-	@Operation(summary = "Gets a UniversityFetch")
+	@Operation(summary = "Gets a university fetch")
 	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "UniversityFetch retrieved successfully"),
-			@ApiResponse(responseCode = "404", description = "UniversityFetch not found", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+			@ApiResponse(responseCode = "200", description = "University fetch retrieved successfully"),
+			@ApiResponse(responseCode = "404", description = "University fetch not found", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UniversityFetch> getUniversityFetch(@PathVariable Integer id) {
-		return new ResponseEntity<>(universityFetchService.getUniversityFetch(id), HttpStatus.OK);
+		return new ResponseEntity<>(universityFetchService.getUniversityFetchById(id), HttpStatus.OK);
 	}
 
 	@Operation(summary = "Get university fetch data by university name and language")
@@ -43,11 +43,11 @@ public class UniversityFetchController {
 			@ApiResponse(responseCode = "400", description = "University fetch entry failed to be fetched", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
 	@GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<UniversityFetch> getAnnouncementsLastFetchMD5(@RequestParam String name,
+	public ResponseEntity<UniversityFetch> getAnnouncementsLastFetchMD5(@RequestParam String universityName,
 			@RequestParam Enum.Language language) {
-		System.out.println(name);
-		return new ResponseEntity<>(universityFetchService.getUniversityFetchByNameAndLanguage(name, language),
-				HttpStatus.CREATED);
+		System.out.println(universityName);
+		return new ResponseEntity<>(universityFetchService.getUniversityFetchByUniversityNameAndLanguage(universityName, language),
+				HttpStatus.OK);
 	}
 
 	@Operation(summary = "Create a university fetch row")
@@ -58,6 +58,17 @@ public class UniversityFetchController {
 	@PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UniversityFetch> createUniversityFetch(@Valid @RequestBody UniversityFetch universityFetch) {
 		return new ResponseEntity<>(universityFetchService.saveUniversityFetch(universityFetch), HttpStatus.CREATED);
+	}
+
+	@Operation(summary = "Delete a university fetch given its ID")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "204", description = "University fetch deleted successfully"),
+			@ApiResponse(responseCode = "400", description = "University fetch failed to be deleted", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+	})
+	@DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<HttpStatus> deleteUniversityFetch(@PathVariable Integer id) {
+		universityFetchService.deleteUniversityFetchById(id);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
 }

@@ -5,10 +5,11 @@ import me.kreaktech.unility.entity.UniversityFetch;
 
 public interface UniversityFetchService {
 
-	UniversityFetch getUniversityFetch(Integer id);
+	UniversityFetch getUniversityFetchById(Integer id);
 
 	UniversityFetch saveUniversityFetch(UniversityFetch universityFetch);
 
-	UniversityFetch getUniversityFetchByNameAndLanguage(String name, Enum.Language language);
+	UniversityFetch getUniversityFetchByUniversityNameAndLanguage(String universityName, Enum.Language language);
 
+	void deleteUniversityFetchById(Integer id);
 }
