@@ -18,12 +18,11 @@ import org.springframework.web.servlet.mvc.method.annotation.ResponseEntityExcep
 
 import me.kreaktech.unility.exception.EntityNotFoundException;
 import me.kreaktech.unility.exception.ErrorResponse;
-import me.kreaktech.unility.exception.SampleCustomException;
 
 @ControllerAdvice
 public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler {
 
-	@ExceptionHandler({ EntityNotFoundException.class, SampleCustomException.class })
+	@ExceptionHandler(EntityNotFoundException.class)
 	public ResponseEntity<Object> handleResourceNotFoundException(RuntimeException ex) {
 		ErrorResponse error = new ErrorResponse(Arrays.asList(ex.getMessage()));
 		return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
