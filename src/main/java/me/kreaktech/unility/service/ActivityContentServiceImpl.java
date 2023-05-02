@@ -2,12 +2,16 @@ package me.kreaktech.unility.service;
 
 import java.util.Optional;
 
+import lombok.AllArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 
 import me.kreaktech.unility.entity.ActivityContent;
 import me.kreaktech.unility.repository.ActivityContentRepository;
 import me.kreaktech.unility.utils.Utils;
+import org.springframework.stereotype.Service;
 
+@AllArgsConstructor
+@Service
 public class ActivityContentServiceImpl implements ActivityContentService {
 
     @Autowired
