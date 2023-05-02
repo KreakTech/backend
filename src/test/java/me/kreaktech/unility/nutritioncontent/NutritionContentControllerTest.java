@@ -24,7 +24,7 @@ import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-import me.kreaktech.unility.controller.NutritionContentController;
+import me.kreaktech.unility.web.NutritionContentController;
 import me.kreaktech.unility.entity.NutritionContent;
 import me.kreaktech.unility.service.NutritionContentServiceImpl;
 

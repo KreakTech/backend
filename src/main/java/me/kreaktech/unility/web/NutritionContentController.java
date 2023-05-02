@@ -1,4 +1,4 @@
-package me.kreaktech.unility.controller;
+package me.kreaktech.unility.web;
 
 import javax.validation.Valid;
 

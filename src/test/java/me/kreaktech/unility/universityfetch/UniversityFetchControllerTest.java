@@ -31,7 +31,7 @@ import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import me.kreaktech.unility.constants.Enum.Language;
-import me.kreaktech.unility.controller.UniversityFetchController;
+import me.kreaktech.unility.web.UniversityFetchController;
 import me.kreaktech.unility.entity.University;
 import me.kreaktech.unility.entity.UniversityFetch;
 import me.kreaktech.unility.service.UniversityFetchServiceImpl;

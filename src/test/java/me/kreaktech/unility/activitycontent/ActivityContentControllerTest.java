@@ -30,7 +30,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import me.kreaktech.unility.constants.Enum.Language;
 import me.kreaktech.unility.constants.Enum.PhysicalStatus;
-import me.kreaktech.unility.controller.ActivityContentController;
+import me.kreaktech.unility.web.ActivityContentController;
 import me.kreaktech.unility.entity.ActivityContent;
 import me.kreaktech.unility.service.ActivityContentServiceImpl;
 

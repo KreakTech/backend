@@ -9,7 +9,6 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.get;
 import static org.springframework.test.web.servlet.request.MockMvcRequestBuilders.delete;
 
-import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
@@ -28,11 +27,10 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import me.kreaktech.unility.constants.Enum.MapWaypointType;
-import me.kreaktech.unility.controller.MapWaypointController;
+import me.kreaktech.unility.web.MapWaypointController;
 import me.kreaktech.unility.entity.MapWaypoint;
 import me.kreaktech.unility.entity.University;
 import me.kreaktech.unility.service.MapWaypointServiceImpl;

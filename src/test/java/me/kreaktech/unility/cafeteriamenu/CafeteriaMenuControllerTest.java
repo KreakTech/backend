@@ -33,7 +33,7 @@ import com.fasterxml.jackson.databind.ObjectMapper;
 
 import me.kreaktech.unility.constants.Enum.Language;
 import me.kreaktech.unility.constants.Enum.MealType;
-import me.kreaktech.unility.controller.CafeteriaMenuController;
+import me.kreaktech.unility.web.CafeteriaMenuController;
 import me.kreaktech.unility.entity.CafeteriaMenu;
 import me.kreaktech.unility.entity.NutritionContent;
 import me.kreaktech.unility.entity.University;
