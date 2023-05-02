@@ -40,7 +40,7 @@ import me.kreaktech.unility.service.MapWaypointServiceImpl;
 @WebMvcTest(controllers = MapWaypointController.class)
 @AutoConfigureMockMvc(addFilters = false)
 @ExtendWith(MockitoExtension.class)
-public class MapWaypointControllerTest {
+class MapWaypointControllerTest {
 
 	@Autowired
 	private MockMvc mockmvc;
@@ -54,7 +54,7 @@ public class MapWaypointControllerTest {
 	private MapWaypoint mapWaypoint;
 
 	@BeforeEach
-	void setUpControllerTest() throws JsonProcessingException, Exception {
+	void setUpControllerTest() {
 
 		LocalDateTime activityDateTime = LocalDateTime.now().minusHours(1);
 
