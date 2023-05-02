@@ -42,3 +42,7 @@ target/*
 
 #Hide environment variables
 .env
+
+### IntellijiIdea Patch ###
+# Ignore all idea folders
+.idea

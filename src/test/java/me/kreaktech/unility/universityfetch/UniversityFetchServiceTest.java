@@ -43,7 +43,6 @@ public class UniversityFetchServiceTest {
 
         University university = University.builder()
                 .name("some university1")
-                .announcementsLastFetchDate(Timestamp.valueOf(activityDateTime))
                 .build();
 
         universityFetch = UniversityFetch.builder()

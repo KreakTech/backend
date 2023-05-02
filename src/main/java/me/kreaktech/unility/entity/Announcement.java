@@ -7,17 +7,25 @@ import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
 import javax.persistence.GenerationType;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
+import javax.persistence.ManyToOne;
 import javax.persistence.Table;
 import javax.validation.constraints.NotBlank;
 import javax.validation.constraints.Past;
 
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Builder;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
+import lombok.RequiredArgsConstructor;
+import lombok.Setter;
 
 @Getter
 @Setter
 @AllArgsConstructor
 @RequiredArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(force = true)
 @Builder
 @Entity
 @Table(name = "announcement")
@@ -38,8 +46,13 @@ public class Announcement {
 	@Column(name = "date", nullable = false)
 	private Timestamp date;
 
-	@NotBlank(message = "Content cannot be blank")
+	@NotBlank(message = "Link cannot be blank")
 	@NonNull
-	@Column(name = "content", nullable = false)
-	private String content;
+	@Column(name = "link", nullable = false)
+	private String link;
+
+	@ManyToOne(optional = false)
+	@JoinColumn(name = "university_id", referencedColumnName = "id")
+	private University university;
+
 }

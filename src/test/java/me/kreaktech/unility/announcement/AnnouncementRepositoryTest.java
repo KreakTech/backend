@@ -5,6 +5,8 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import me.kreaktech.unility.entity.University;
+import me.kreaktech.unility.repository.UniversityRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -22,23 +24,35 @@ public class AnnouncementRepositoryTest {
 
 	@Autowired
 	private AnnouncementRepository announcementRepository;
+	@Autowired
+	private UniversityRepository universityRepository;
 
 	Announcement announcement;
 	Announcement savedAnnouncement;
+	University university;
 	LocalDateTime announcementDateTime;
 
 	@BeforeEach
 	void setUpRepository() {
 		// Arrange
+
+		university = University.builder()
+				.name("Some University")
+				.build();
+		university = universityRepository.save(university);
+
+
 		announcementDateTime = LocalDateTime.now().minusHours(1);
 
 		announcement = Announcement.builder()
 				.title("Some Title")
-				.content("Some Content")
+				.link("https://someurl.com")
 				.date(Timestamp.valueOf(announcementDateTime))
+				.university(university)
 				.build();
 
 		savedAnnouncement = announcementRepository.save(announcement);
+
 	}
 
 	@Test
@@ -48,7 +62,8 @@ public class AnnouncementRepositoryTest {
 		Assertions.assertThat(savedAnnouncement).isNotNull();
 		Assertions.assertThat(savedAnnouncement.getId()).isGreaterThan(0);
 		Assertions.assertThat(savedAnnouncement.getTitle()).isEqualTo(announcement.getTitle());
-		Assertions.assertThat(savedAnnouncement.getContent()).isEqualTo(announcement.getContent());
+		Assertions.assertThat(savedAnnouncement.getLink()).isEqualTo(announcement.getLink());
+		Assertions.assertThat(savedAnnouncement.getUniversity()).isEqualTo(university);
 	}
 
 	@Test
@@ -60,7 +75,8 @@ public class AnnouncementRepositoryTest {
 		Assertions.assertThat(fetchedAnnouncement).isNotNull();
 		Assertions.assertThat(fetchedAnnouncement.getId()).isEqualTo(savedAnnouncement.getId());
 		Assertions.assertThat(fetchedAnnouncement.getTitle()).isEqualTo(savedAnnouncement.getTitle());
-		Assertions.assertThat(fetchedAnnouncement.getContent()).isEqualTo(savedAnnouncement.getContent());
+		Assertions.assertThat(fetchedAnnouncement.getLink()).isEqualTo(savedAnnouncement.getLink());
+		Assertions.assertThat(savedAnnouncement.getUniversity()).isEqualTo(university);
 	}
 
 	@Test
@@ -71,14 +87,16 @@ public class AnnouncementRepositoryTest {
 
 		Announcement firstAnnouncement = Announcement.builder()
 				.title("Some Title")
-				.content("Some Content")
+				.link("https://someurl.com")
 				.date(Timestamp.valueOf(firstAnnouncementDateTime))
+				.university(university)
 				.build();
 
 		Announcement secondAnnouncement = Announcement.builder()
 				.title("Some Title")
-				.content("Some Content")
+				.link("https://someurl.com")
 				.date(Timestamp.valueOf(secondAnnouncementDateTime))
+				.university(university)
 				.build();
 
 		announcementRepository.save(firstAnnouncement);
@@ -103,7 +121,8 @@ public class AnnouncementRepositoryTest {
 		Assertions.assertThat(fetchedAnnouncement).isNotNull();
 		Assertions.assertThat(fetchedAnnouncement.getId()).isEqualTo(savedAnnouncement.getId());
 		Assertions.assertThat(fetchedAnnouncement.getTitle()).isEqualTo(savedAnnouncement.getTitle());
-		Assertions.assertThat(fetchedAnnouncement.getContent()).isEqualTo(savedAnnouncement.getContent());
+		Assertions.assertThat(fetchedAnnouncement.getLink()).isEqualTo(savedAnnouncement.getLink());
+		Assertions.assertThat(fetchedAnnouncement.getUniversity()).isEqualTo(savedAnnouncement.getUniversity());
 	}
 
 	@Test
@@ -112,7 +131,7 @@ public class AnnouncementRepositoryTest {
 		Announcement fetchedAnnouncement = announcementRepository.findById(announcement.getId()).get();
 
 		fetchedAnnouncement.setTitle("Some New Title");
-		fetchedAnnouncement.setContent("Some New Content");
+		fetchedAnnouncement.setLink("Some New Content");
 
 		Announcement updatedAnnouncement = announcementRepository.save(fetchedAnnouncement);
 
@@ -120,7 +139,8 @@ public class AnnouncementRepositoryTest {
 		Assertions.assertThat(updatedAnnouncement).isNotNull();
 		Assertions.assertThat(updatedAnnouncement.getId()).isEqualTo(fetchedAnnouncement.getId());
 		Assertions.assertThat(updatedAnnouncement.getTitle()).isEqualTo(fetchedAnnouncement.getTitle());
-		Assertions.assertThat(updatedAnnouncement.getContent()).isEqualTo(fetchedAnnouncement.getContent());
+		Assertions.assertThat(updatedAnnouncement.getLink()).isEqualTo(fetchedAnnouncement.getLink());
+		Assertions.assertThat(updatedAnnouncement.getUniversity()).isEqualTo(fetchedAnnouncement.getUniversity());
 	}
 
 	@Test

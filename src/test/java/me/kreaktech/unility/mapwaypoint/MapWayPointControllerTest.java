@@ -60,7 +60,6 @@ class MapWaypointControllerTest {
 
 		University university = University.builder()
 				.name("some university1")
-				.announcementsLastFetchDate(Timestamp.valueOf(activityDateTime))
 				.id(1)
 				.build();
 

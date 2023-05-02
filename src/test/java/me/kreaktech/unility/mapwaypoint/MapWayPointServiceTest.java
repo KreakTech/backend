@@ -43,7 +43,6 @@ class MapWaypointServiceTest {
 
         University university = University.builder()
                 .name("some university1")
-                .announcementsLastFetchDate(Timestamp.valueOf(activityDateTime))
                 .build();
 
         mapWaypoint = MapWaypoint.builder()
