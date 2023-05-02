@@ -11,7 +11,4 @@ import me.kreaktech.unility.entity.events.DefaultUniversity.DefaultAnnouncementD
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
-public abstract class BilkentAnnouncementData extends DefaultAnnouncementData {
-
-	private Language language;
-}
+public abstract class BilkentAnnouncementData extends DefaultAnnouncementData {}
