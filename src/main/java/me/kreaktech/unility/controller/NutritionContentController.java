@@ -1,4 +1,4 @@
-package me.kreaktech.unility.web;
+package me.kreaktech.unility.controller;
 
 import javax.validation.Valid;
 
@@ -39,7 +39,7 @@ public class NutritionContentController {
 	})
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<NutritionContent> getNutritionContent(@PathVariable Integer id) {
-		return new ResponseEntity<>(nutritionContentService.findNutritionContentById(id), HttpStatus.OK);
+		return new ResponseEntity<>(nutritionContentService.getNutritionContentById(id), HttpStatus.OK);
 	}
 
 	@Operation(summary = "Create a nutrition content")

@@ -7,7 +7,6 @@ import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.Table;
 
-
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
@@ -22,6 +21,7 @@ import lombok.Setter;
 @Builder
 @Table(name = "nutrition_content")
 public class NutritionContent {
+
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
 	@Column(name = "id")
@@ -38,4 +38,5 @@ public class NutritionContent {
 
 	@Column(name = "fat_percentage", nullable = true)
 	private int fatPercentage;
+
 }

@@ -1,5 +1,6 @@
 package me.kreaktech.unility.entity;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -27,7 +28,8 @@ import me.kreaktech.unility.constants.Enum.MapWaypointType;
 @NoArgsConstructor(force = true)
 @Builder
 @Entity
-@Table(name = "map_waypoint", uniqueConstraints = @UniqueConstraint(columnNames = { "coordinates", "type", "university_id" }))
+@Table(name = "map_waypoint", uniqueConstraints = @UniqueConstraint(columnNames = { "coordinates", "type",
+		"university_id" }))
 public class MapWaypoint {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -44,12 +46,12 @@ public class MapWaypoint {
 	@Column(name = "coordinates", nullable = false)
 	private String coordinates;
 
-	@NotBlank(message = "Type cannot be blank")
 	@NonNull
 	@Column(name = "type", nullable = false)
 	private MapWaypointType type;
 
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = false, cascade = CascadeType.ALL)
 	@JoinColumn(name = "university_id", referencedColumnName = "id")
 	private University university;
+
 }

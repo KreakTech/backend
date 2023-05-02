@@ -1,4 +1,4 @@
-package me.kreaktech.unility.web;
+package me.kreaktech.unility.controller;
 
 import java.util.List;
 
@@ -28,7 +28,7 @@ import me.kreaktech.unility.service.CafeteriaMenuServiceImpl;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/cafeteriaMenu")
+@RequestMapping("/cafeteriamenu")
 public class CafeteriaMenuController {
 
 	@Autowired
@@ -68,7 +68,6 @@ public class CafeteriaMenuController {
 	@Operation(summary = "Gets all cafeteria menu in a list")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Cafeteria menu list retrieved successfully"),
-			@ApiResponse(responseCode = "404", description = "Cafeteria menu list not found", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
 	@GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<CafeteriaMenu>> getCafeteriaMenu() {
@@ -76,4 +75,13 @@ public class CafeteriaMenuController {
 		return new ResponseEntity<>(cafeteriaMenu, HttpStatus.OK);
 	}
 
+	@Operation(summary = "Gets all cafeteria menu in a list")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Cafeteria menu list retrieved successfully"),
+	})
+	@GetMapping(value = "/all/{universityId}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<CafeteriaMenu>> getCafeteriaMenuByUniversityId(@PathVariable Integer universityId) {
+		List<CafeteriaMenu> cafeteriaMenu = cafeteriaMenuService.getAllCafeteriaMenuByUniversityId(universityId);
+		return new ResponseEntity<>(cafeteriaMenu, HttpStatus.OK);
+	}
 }

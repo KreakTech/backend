@@ -14,7 +14,7 @@ public class NutritionContentServiceImpl implements NutritionContentService {
 	NutritionContentRepository nutritionContentRepository;
 
 	@Override
-	public NutritionContent findNutritionContentById(Integer id) {
+	public NutritionContent getNutritionContentById(Integer id) {
 		return Utils.unwrap(nutritionContentRepository.findById(id), id);
 	}
 

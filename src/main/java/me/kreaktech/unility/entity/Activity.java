@@ -12,7 +12,8 @@ import lombok.*;
 @NoArgsConstructor(force = true)
 @Builder
 @Entity
-@Table(name = "activity", uniqueConstraints = @UniqueConstraint(columnNames = { "university_id", "activity_content_id" }))
+@Table(name = "activity", uniqueConstraints = @UniqueConstraint(columnNames = { "university_id",
+		"activity_content_id" }))
 public class Activity {
 
 	@Id
@@ -20,7 +21,7 @@ public class Activity {
 	@Column(name = "id")
 	private Integer id;
 
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = false, cascade = CascadeType.ALL)
 	@JoinColumn(name = "university_id", referencedColumnName = "id")
 	private University university;
 
@@ -28,7 +29,7 @@ public class Activity {
 	@Column(name = "activity_date", nullable = false)
 	private Timestamp date;
 
-	@OneToOne(optional = false)
+	@OneToOne(optional = false, cascade = CascadeType.ALL)
 	@JoinColumn(name = "activity_content_id", referencedColumnName = "id")
 	private ActivityContent activityContent;
 

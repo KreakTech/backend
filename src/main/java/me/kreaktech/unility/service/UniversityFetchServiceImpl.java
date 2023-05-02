@@ -16,7 +16,7 @@ public class UniversityFetchServiceImpl implements UniversityFetchService {
 	private UniversityFetchRepository universityFetchRepository;
 
 	@Override
-	public UniversityFetch getUniversityFetch(Integer id) {
+	public UniversityFetch getUniversityFetchById(Integer id) {
 		return Utils.unwrap(universityFetchRepository.findById(id), id);
 	}
 
@@ -26,9 +26,15 @@ public class UniversityFetchServiceImpl implements UniversityFetchService {
 	}
 
 	@Override
-	public UniversityFetch findUniversityFetchByNameAndLanguage(String name, Enum.Language language) {
-		Optional<UniversityFetch> optional = universityFetchRepository.findByUniversityNameAndLanguage(name, language);
-		return Utils.unwrap(optional, name + " and language " + language);
+	public UniversityFetch getUniversityFetchByUniversityNameAndLanguage(String universityName, Enum.Language language) {
+		Optional<UniversityFetch> optional = universityFetchRepository.findByUniversityNameAndLanguage(universityName, language);
+		return Utils.unwrap(optional, universityName + " and language " + language);
+	}
+
+	@Override
+	public void deleteUniversityFetchById(Integer id) {
+		universityFetchRepository.deleteById(id);
+		return;
 	}
 
 }

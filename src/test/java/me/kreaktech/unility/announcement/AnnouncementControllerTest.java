@@ -26,11 +26,12 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
+import me.kreaktech.unility.controller.AnnouncementController;
 import me.kreaktech.unility.entity.Announcement;
 import me.kreaktech.unility.service.AnnouncementServiceImpl;
-import me.kreaktech.unility.web.AnnouncementController;
 
 @WebMvcTest(controllers = AnnouncementController.class)
 @AutoConfigureMockMvc(addFilters = false)
@@ -41,7 +42,7 @@ public class AnnouncementControllerTest {
 	private MockMvc mockmvc;
 
 	@MockBean
-	private AnnouncementServiceImpl announcementService;
+	private AnnouncementServiceImpl announcementServiceImpl;
 
 	@Autowired
 	private ObjectMapper objectMapper;
@@ -49,7 +50,7 @@ public class AnnouncementControllerTest {
 	private Announcement announcement;
 
 	@BeforeEach
-	public void init() {
+	void setUpControllerTest() throws JsonProcessingException, Exception {
 		LocalDateTime announcementDateTime = LocalDateTime.now().minusHours(1);
 
 		announcement = Announcement.builder()
@@ -64,7 +65,7 @@ public class AnnouncementControllerTest {
 	@Test
 	public void AnnouncementController_CreateAnnouncement_ReturnCreated() throws Exception {
 		// Arrange
-		given(announcementService.saveAnnouncement(ArgumentMatchers.any()))
+		given(announcementServiceImpl.saveAnnouncement(ArgumentMatchers.any()))
 				.willAnswer((invocation -> invocation.getArgument(0)));
 
 		// Act
@@ -83,7 +84,7 @@ public class AnnouncementControllerTest {
 	public void AnnouncementController_GetAllAnnouncements_ReturnsAnnouncements() throws Exception {
 		// Arrange
 		List<Announcement> announcements = List.of(announcement);
-		when(announcementService.getAllAnnouncements()).thenReturn(announcements);
+		when(announcementServiceImpl.getAllAnnouncements()).thenReturn(announcements);
 
 		// Act
 		ResultActions response = mockmvc.perform(get("/announcements/all")
@@ -99,7 +100,7 @@ public class AnnouncementControllerTest {
 	@Test
 	public void AnnouncementController_GetAnnouncementById_ReturnAnnouncement() throws Exception {
 		// Arrange
-		when(announcementService.getAnnouncementById(ArgumentMatchers.any())).thenReturn(announcement);
+		when(announcementServiceImpl.getAnnouncementById(ArgumentMatchers.any())).thenReturn(announcement);
 
 		// Act
 		ResultActions response = mockmvc.perform(get("/announcements/1")
@@ -116,7 +117,7 @@ public class AnnouncementControllerTest {
 	@Test
 	public void AnnouncementController_DeleteAnnouncement_ReturnsVoid() throws Exception {
 		// Arrange
-		doNothing().when(announcementService).deleteAnnouncementById(ArgumentMatchers.any());
+		doNothing().when(announcementServiceImpl).deleteAnnouncementById(ArgumentMatchers.any());
 
 		// Act
 		ResultActions response = mockmvc.perform(delete("/announcements/1")
@@ -125,4 +126,20 @@ public class AnnouncementControllerTest {
 		// Assert
 		response.andExpect(MockMvcResultMatchers.status().isNoContent());
 	}
+
+	@Test
+    public void AnnouncementController_GetAnnouncementByTitle_ReturnAnnouncement() throws Exception {
+        // Arrange
+        when(announcementServiceImpl.getAnnouncementByTitle(ArgumentMatchers.any())).thenReturn(announcement);
+
+        // Act
+        ResultActions response = mockmvc.perform(get("/announcements?title=Some Title")
+                .contentType(MediaType.APPLICATION_JSON)
+                .content(objectMapper.writeValueAsString(this.announcement)));
+
+        // Assert
+        response.andExpect(MockMvcResultMatchers.status().isOk())
+                .andExpect(MockMvcResultMatchers.jsonPath("$.id", CoreMatchers.is(1)))
+                .andExpect(MockMvcResultMatchers.jsonPath("$.title").value("Some Title"));
+    }
 }

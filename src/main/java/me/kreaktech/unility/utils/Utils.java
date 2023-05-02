@@ -1,6 +1,9 @@
 package me.kreaktech.unility.utils;
 
 import java.util.Optional;
+import java.sql.Timestamp;
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 
 import com.google.gson.Gson;
 import com.google.gson.internal.LinkedTreeMap;
@@ -23,4 +26,10 @@ public class Utils {
 		return objectifiedData;
 	}
 
+	public static Timestamp stringToTimestamp(String str) throws ParseException {
+		SimpleDateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd");
+		java.util.Date parsedDate = dateFormat.parse(str);
+		Timestamp timestamp = new Timestamp(parsedDate.getTime());
+		return timestamp;
+	}
 }

@@ -28,12 +28,12 @@ public class AnnouncementRepositoryTest {
 	private UniversityRepository universityRepository;
 
 	Announcement announcement;
-	LocalDateTime announcementDateTime;
 	Announcement savedAnnouncement;
 	University university;
+	LocalDateTime announcementDateTime;
 
 	@BeforeEach
-	void setUpRepository(){
+	void setUpRepository() {
 		// Arrange
 
 		university = University.builder()
@@ -51,15 +51,14 @@ public class AnnouncementRepositoryTest {
 				.university(university)
 				.build();
 
-		announcementRepository.save(announcement);
 		savedAnnouncement = announcementRepository.save(announcement);
 
 	}
 
 	@Test
-	public void AnnouncementRepository_SaveAll_ReturnSavedAnnouncement() {
+	public void AnnouncementRepository_Save_ReturnSavedAnnouncement() {
 
-		//Assert
+		// Assert
 		Assertions.assertThat(savedAnnouncement).isNotNull();
 		Assertions.assertThat(savedAnnouncement.getId()).isGreaterThan(0);
 		Assertions.assertThat(savedAnnouncement.getTitle()).isEqualTo(announcement.getTitle());
@@ -69,10 +68,10 @@ public class AnnouncementRepositoryTest {
 
 	@Test
 	public void AnnouncementRepository_FindById_ReturnAnnouncement() {
-		//Act
+		// Act
 		Announcement fetchedAnnouncement = announcementRepository.findById(savedAnnouncement.getId()).get();
 
-		//Assert
+		// Assert
 		Assertions.assertThat(fetchedAnnouncement).isNotNull();
 		Assertions.assertThat(fetchedAnnouncement.getId()).isEqualTo(savedAnnouncement.getId());
 		Assertions.assertThat(fetchedAnnouncement.getTitle()).isEqualTo(savedAnnouncement.getTitle());

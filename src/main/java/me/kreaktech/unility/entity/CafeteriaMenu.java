@@ -2,6 +2,7 @@ package me.kreaktech.unility.entity;
 
 import java.sql.Timestamp;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -56,11 +57,11 @@ public class CafeteriaMenu {
 	@Column(name = "menu_type", nullable = false)
 	private MealType mealType;
 
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = false, cascade = CascadeType.ALL)
 	@JoinColumn(name = "university_id", referencedColumnName = "id")
 	private University university;
 
-	@OneToOne(optional = false)
+	@OneToOne(optional = false, cascade = CascadeType.ALL)
 	@JoinColumn(name = "nutrition_content_id", referencedColumnName = "id")
 	private NutritionContent nutritionContent;
 }

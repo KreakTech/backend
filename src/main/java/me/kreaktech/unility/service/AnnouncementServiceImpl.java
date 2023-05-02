@@ -1,5 +1,6 @@
 package me.kreaktech.unility.service;
 
+import java.sql.Timestamp;
 import java.util.List;
 import java.util.Optional;
 import org.springframework.stereotype.Service;
@@ -34,6 +35,17 @@ public class AnnouncementServiceImpl implements AnnouncementService {
 	@Override
 	public List<Announcement> getAllAnnouncements() {
 		return announcementRepository.findAll();
+	}
+
+	@Override
+	public Announcement getAnnouncementByTitle(String title) {
+		Optional<Announcement> announcement = announcementRepository.findByTitle(title);
+		return Utils.unwrap(announcement, title);
+	}
+
+	@Override
+	public List<Announcement> getAnnouncementByDateBetweenAndDateLessThanEqual(Timestamp from, Timestamp to) {
+		return announcementRepository.findByDateBetweenAndDateLessThanEqual(from, to);
 	}
 
 }

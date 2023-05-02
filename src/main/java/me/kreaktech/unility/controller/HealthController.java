@@ -1,4 +1,4 @@
-package me.kreaktech.unility.web;
+package me.kreaktech.unility.controller;
 
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

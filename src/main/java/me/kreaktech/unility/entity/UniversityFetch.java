@@ -4,8 +4,6 @@ import lombok.*;
 import me.kreaktech.unility.constants.Enum;
 
 import javax.persistence.*;
-import javax.validation.constraints.NotBlank;
-import javax.validation.constraints.NotNull;
 import java.sql.Timestamp;
 
 @Getter
@@ -34,7 +32,7 @@ public class UniversityFetch {
 	@Column(name = "language", nullable = false)
 	private Enum.Language language;
 
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = false, cascade = CascadeType.ALL)
 	@JoinColumn(name = "university_id", referencedColumnName = "id")
 	private University university;
 }

@@ -1,4 +1,4 @@
-package me.kreaktech.unility.web;
+package me.kreaktech.unility.controller;
 
 import java.util.List;
 
@@ -14,6 +14,7 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -42,6 +43,16 @@ public class UniversityController {
 	@GetMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<University> getUniversity(@PathVariable Integer id) {
 		return new ResponseEntity<>(universityService.getUniversity(id), HttpStatus.OK);
+	}
+
+	@Operation(summary = "Gets a university by its name")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "University retrieved successfully"),
+			@ApiResponse(responseCode = "404", description = "University not found", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+	})
+	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<University> getUniversity(@RequestParam(value = "name") String name) {
+		return new ResponseEntity<>(universityService.getUniversityByName(name), HttpStatus.OK);
 	}
 
 	@Operation(summary = "Create a university")

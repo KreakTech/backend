@@ -1,4 +1,4 @@
-package me.kreaktech.unility.web;
+package me.kreaktech.unility.controller;
 
 import java.util.List;
 
@@ -46,15 +46,14 @@ public class MapWaypointController {
 
 	@Operation(summary = "Create a waypoint")
 	@ApiResponses(value = {
-		@ApiResponse(responseCode = "201", description = "waypoint created successfully"),
-		@ApiResponse(responseCode = "400", description = "waypoint failed to be created", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+			@ApiResponse(responseCode = "201", description = "waypoint created successfully"),
+			@ApiResponse(responseCode = "400", description = "waypoint failed to be created", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
 	@PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<MapWaypoint> saveMapwaypoint(@Valid @RequestBody MapWaypoint mapWaypoint) {
-		return new ResponseEntity<>(mapWaypointService.saveMapWaypointStop(mapWaypoint), HttpStatus.CREATED);
+		return new ResponseEntity<>(mapWaypointService.saveMapWaypoint(mapWaypoint), HttpStatus.CREATED);
 	}
 
-	
 	@Operation(summary = "Delete a waypoint given its ID")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "204", description = "waypoint deleted successfully"),
@@ -62,14 +61,13 @@ public class MapWaypointController {
 	})
 	@DeleteMapping(value = "/{id}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<HttpStatus> deleteWaypoint(@PathVariable Integer id) {
-		mapWaypointService.deleteMapwaypointById(id);
+		mapWaypointService.deleteMapWaypointById(id);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
 	@Operation(summary = "Gets all waypoint in a list")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "waypoint list retrieved successfully"),
-			@ApiResponse(responseCode = "404", description = "waypoint list not found", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
 	@GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<List<MapWaypoint>> getMapWaypoints() {
@@ -77,4 +75,13 @@ public class MapWaypointController {
 		return new ResponseEntity<>(mapWaypoints, HttpStatus.OK);
 	}
 
+	@Operation(summary = "Gets all waypoint in a list")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "waypoint list retrieved successfully"),
+	})
+	@GetMapping(value = "/all/{universityId}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<MapWaypoint>> getMapWaypointsByUniversityId(@PathVariable Integer universityId) {
+		List<MapWaypoint> mapWaypoints = mapWaypointService.getAllMapWaypointsByUniversityId(universityId);
+		return new ResponseEntity<>(mapWaypoints, HttpStatus.OK);
+	}
 }
