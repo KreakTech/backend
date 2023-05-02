@@ -38,7 +38,6 @@ public class CafeteriaMenuRepositoryTest {
 
         University university = University.builder()
                 .name("some university1")
-                .announcementsLastFetchDate(Timestamp.valueOf(activityDateTime))
                 .build();
 
         NutritionContent nutritionContent = NutritionContent.builder()

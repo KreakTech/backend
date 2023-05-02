@@ -29,7 +29,7 @@ import me.kreaktech.unility.constants.Enum.MealType;
 @Setter
 @AllArgsConstructor
 @RequiredArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(force = true)
 @Entity
 @Builder
 @Table(name = "cafeteria_menu", uniqueConstraints = @UniqueConstraint(columnNames = { "date_served", "menu_type",

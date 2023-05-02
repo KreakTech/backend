@@ -1,6 +1,5 @@
 package me.kreaktech.unility.entity;
 
-import java.sql.Timestamp;
 
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -15,15 +14,12 @@ import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
-import lombok.NonNull;
-import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
 @Getter
 @Setter
 @AllArgsConstructor
-@RequiredArgsConstructor
-@NoArgsConstructor
+@NoArgsConstructor(force = true)
 @Builder
 @Entity
 @Table(name = "university")
@@ -37,8 +33,4 @@ public class University {
 	@NotNull
 	@Column(name = "name", unique = true)
 	private String name;
-
-	@NonNull
-	@Column(name = "announcements_last_fetch_date", nullable = false)
-	private Timestamp announcementsLastFetchDate;
 }

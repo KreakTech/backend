@@ -1,20 +1,21 @@
 package me.kreaktech.unility.service;
 
-import me.kreaktech.unility.entity.University;
-import me.kreaktech.unility.repository.UniversityRepository;
-import me.kreaktech.unility.utils.Utils;
-
 import java.util.List;
 import java.util.Optional;
 
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
+import me.kreaktech.unility.entity.University;
+import me.kreaktech.unility.repository.UniversityRepository;
+import me.kreaktech.unility.utils.Utils;
 
 @AllArgsConstructor
 @Service
 public class UniversityServiceImpl implements UniversityService {
 
+	@Autowired
 	private UniversityRepository universityRepository;
 
 	@Override
@@ -44,4 +45,5 @@ public class UniversityServiceImpl implements UniversityService {
 		Optional<University> university = universityRepository.findByName(name);
 		return Utils.unwrap(university, name);
 	}
+
 }

@@ -11,9 +11,22 @@ services:
     volumes:
       - db:/var/lib/mysql
 
+  rabbitmq:
+    image: rabbitmq:management
+    container_name: rabbitmq
+    restart: always
+    env_file:
+      - ./secrets.env
+    ports:
+      - "5672:5672" # JMS Port
+      - "15672:15672" # Management Port - default user:pass = guest:guest
+    volumes:
+      - rabbitmq_data:/var/lib/rabbitmq
+
   backend:
     depends_on:
       - mariadb
+      - rabbitmq
     image: alhassanraad/unility:latest
     restart: on-failure
     env_file:
@@ -27,3 +40,4 @@ services:
 
 volumes:
   db:
+  rabbitmq_data:

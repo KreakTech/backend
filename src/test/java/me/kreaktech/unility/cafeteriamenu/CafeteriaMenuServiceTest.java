@@ -48,7 +48,6 @@ public class CafeteriaMenuServiceTest {
 
 		University university = University.builder()
 				.name("some university")
-				.announcementsLastFetchDate(Timestamp.valueOf(activityDateTime))
 				.build();
 
 		NutritionContent nutritionContent = NutritionContent.builder()

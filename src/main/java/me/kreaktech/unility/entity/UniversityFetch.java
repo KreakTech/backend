@@ -35,5 +35,4 @@ public class UniversityFetch {
 	@ManyToOne(optional = false, cascade = CascadeType.ALL)
 	@JoinColumn(name = "university_id", referencedColumnName = "id")
 	private University university;
-
 }

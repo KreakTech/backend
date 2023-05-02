@@ -43,7 +43,7 @@ public class AnnouncementServiceTest {
 
 		Announcement announcement = Announcement.builder()
 				.title("Some Title")
-				.content("Some Content")
+				.link("https://somelink.com")
 				.date(Timestamp.valueOf(announcementDateTime))
 				.id(1)
 				.build();
@@ -58,7 +58,7 @@ public class AnnouncementServiceTest {
 		// Assert
 		Assertions.assertThat(savedAnnouncement).isNotNull();
 		Assertions.assertThat(savedAnnouncement.getTitle()).isEqualTo(savedAnnouncement.getTitle());
-		Assertions.assertThat(savedAnnouncement.getContent()).isEqualTo(savedAnnouncement.getContent());
+		Assertions.assertThat(savedAnnouncement.getLink()).isEqualTo(savedAnnouncement.getLink());
 		Assertions.assertThat(savedAnnouncement.getDate()).isEqualTo(savedAnnouncement.getDate());
 	}
 
@@ -95,7 +95,7 @@ public class AnnouncementServiceTest {
 		// Assert
 		Assertions.assertThat(fetchedAnnouncement).isNotNull();
 		Assertions.assertThat(fetchedAnnouncement.getTitle()).isEqualTo(savedAnnouncement.getTitle());
-		Assertions.assertThat(fetchedAnnouncement.getContent()).isEqualTo(savedAnnouncement.getContent());
+		Assertions.assertThat(fetchedAnnouncement.getLink()).isEqualTo(savedAnnouncement.getLink());
 		Assertions.assertThat(fetchedAnnouncement.getDate()).isEqualTo(savedAnnouncement.getDate());
 	}
 
