@@ -36,7 +36,7 @@ public class UniversityFetchController {
 	@GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UniversityFetch> getAnnouncementsLastFetchMD5(@RequestParam String name, @RequestParam Enum.Language language) {
 		System.out.println(name);
-		return new ResponseEntity<>(universityFetchService.findUniversityFetchByNameAndLanguage(name, language), HttpStatus.CREATED);
+		return new ResponseEntity<>(universityFetchService.getUniversityFetchByUniversityNameAndLanguage(name, language), HttpStatus.CREATED);
 	}
 
 	@Operation(summary = "Create a university fetch row")

@@ -44,7 +44,7 @@ public class BilkentUniversityUtils {
 		cafeteriaMenu.setMealType(mealData.getMealType());
 		cafeteriaMenu.setUniversity(university);
 
-		UniversityFetch getUniversityFetch = universityFetchService.getUniversityFetch(university.getId());
+		UniversityFetch getUniversityFetch = universityFetchService.getUniversityFetchById(university.getId());
 		getUniversityFetch.setCafeteriaLastFetchDate(cafeteriaMenu.getDateServed());
 		universityFetchService.saveUniversityFetch(getUniversityFetch);
 
@@ -62,7 +62,7 @@ public class BilkentUniversityUtils {
 		announcement.setUniversity(university);
 
 
-		UniversityFetch getUniversityFetch = universityFetchService.getUniversityFetch(university.getId());
+		UniversityFetch getUniversityFetch = universityFetchService.getUniversityFetchById(university.getId());
 		getUniversityFetch.setAnnouncementsLastFetchMD5(announcementData.getMd5());
 		universityFetchService.saveUniversityFetch(getUniversityFetch);
 

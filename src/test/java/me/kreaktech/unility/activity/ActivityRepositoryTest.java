@@ -37,12 +37,10 @@ public class ActivityRepositoryTest {
 		// Arrange
 		University university1 = University.builder()
 				.name("some university1")
-				.announcementsLastFetchDate(Timestamp.valueOf(activityDateTime))
 				.build();
 
 		University university2 = University.builder()
 				.name("some university2")
-				.announcementsLastFetchDate(Timestamp.valueOf(activityDateTime))
 				.build();
 
 		ActivityContent activityContent1 = ActivityContent.builder()

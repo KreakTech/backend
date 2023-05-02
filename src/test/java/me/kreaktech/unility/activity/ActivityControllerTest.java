@@ -59,7 +59,6 @@ public class ActivityControllerTest {
                 // Arrange
                 University university = University.builder()
                                 .name("some university")
-                                .announcementsLastFetchDate(Timestamp.valueOf(activityDateTime))
                                 .build();
 
                 ActivityContent activityContent = ActivityContent.builder()
