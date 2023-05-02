@@ -20,7 +20,7 @@ import me.kreaktech.unility.repository.MapWaypointRepository;
 
 @DataJpaTest
 @AutoConfigureTestDatabase(connection = EmbeddedDatabaseConnection.H2)
-public class MapWaypointRepositoryTest {
+class MapWaypointRepositoryTest {
 
     @Autowired
     private MapWaypointRepository mapWaypointRepository;

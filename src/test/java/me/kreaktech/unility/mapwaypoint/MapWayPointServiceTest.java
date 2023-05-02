@@ -26,7 +26,7 @@ import me.kreaktech.unility.repository.MapWaypointRepository;
 import me.kreaktech.unility.service.MapWaypointServiceImpl;
 
 @ExtendWith(MockitoExtension.class)
-public class MapWaypointServiceTest {
+class MapWaypointServiceTest {
 
     @Mock
     private MapWaypointRepository mapWaypointRepository;
@@ -118,9 +118,8 @@ public class MapWaypointServiceTest {
     public void MapWaypointService_DeleteMapWaypointById_ReturnsVoid() {
         doAnswer(invocation -> {
             Object arg0 = invocation.getArgument(0);
-            if (arg0 instanceof Integer) {
-                Integer id = (Integer) arg0;
-                if (id == savedMapWaypoint.getId()) {
+            if (arg0 instanceof Integer id) {
+                if (id.equals(savedMapWaypoint.getId())) {
                     return null;
                 }
             }
