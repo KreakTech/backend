@@ -26,9 +26,9 @@ public class UniversityFetchServiceImpl implements UniversityFetchService {
 	}
 
 	@Override
-	public UniversityFetch getUniversityFetchByUniversityNameAndLanguage(String universityName, Enum.Language language) {
-		Optional<UniversityFetch> optional = universityFetchRepository.findByUniversityNameAndLanguage(universityName, language);
-		return Utils.unwrap(optional, universityName + " and language " + language);
+	public UniversityFetch getUniversityFetchByUniversityIdAndLanguage(Integer universityId, Enum.Language language) {
+		Optional<UniversityFetch> optional = universityFetchRepository.findByUniversityIdAndLanguage(universityId, language);
+		return Utils.unwrap(optional, universityId + " and language " + language);
 	}
 
 	@Override

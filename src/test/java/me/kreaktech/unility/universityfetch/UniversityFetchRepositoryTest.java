@@ -76,10 +76,10 @@ public class UniversityFetchRepositoryTest {
         }
 
         @Test
-        public void UniversityFetchRepository_FindByUniversityNameAndLanguage_ReturnUniversityFetch() {
+        public void UniversityFetchRepository_FindByUniversityIdAndLanguage_ReturnUniversityFetch() {
                 // Act
-                UniversityFetch fetchedUniversityFetch = universityFetchRepository.findByUniversityNameAndLanguage(
-                                savedUniversityFetch.getUniversity().getName(), savedUniversityFetch.getLanguage())
+                UniversityFetch fetchedUniversityFetch = universityFetchRepository.findByUniversityIdAndLanguage(
+                                savedUniversityFetch.getUniversity().getId(), savedUniversityFetch.getLanguage())
                                 .get();
 
                 // Assert
