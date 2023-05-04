@@ -42,9 +42,9 @@ public class UniversityFetchController {
 			@ApiResponse(responseCode = "200", description = "Successfully fetched university data"),
 			@ApiResponse(responseCode = "400", description = "University fetch entry failed to be fetched", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
-	@GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<UniversityFetch> getUniversityFetchByUniversityIdAndLanguage(@RequestParam(name = "university_id") Integer universityId,
-																					   @RequestParam() Enum.Language language) {
+	@GetMapping(value = "/{university_id}/{language}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<UniversityFetch> getUniversityFetchByUniversityIdAndLanguage(@PathVariable(name = "university_id") Integer universityId,
+																					   @PathVariable() Enum.Language language) {
 		return new ResponseEntity<>(universityFetchService.getUniversityFetchByUniversityIdAndLanguage(universityId, language),
 				HttpStatus.OK);
 	}

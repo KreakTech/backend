@@ -98,7 +98,7 @@ public class UniversityFetchControllerTest {
 
 
         // Act
-        ResultActions response = mockmvc.perform(get("/university-fetch?universityId=1&language=EN")
+        ResultActions response = mockmvc.perform(get("/university-fetch/1/EN")
                 .contentType(MediaType.APPLICATION_JSON));
 
         // Assert
