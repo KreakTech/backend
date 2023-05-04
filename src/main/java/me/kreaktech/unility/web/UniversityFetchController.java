@@ -43,8 +43,8 @@ public class UniversityFetchController {
 			@ApiResponse(responseCode = "400", description = "University fetch entry failed to be fetched", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
 	@GetMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<UniversityFetch> getAnnouncementsLastFetchMD5(@RequestParam Integer universityId,
-			@RequestParam Enum.Language language) {
+	public ResponseEntity<UniversityFetch> getUniversityFetchByUniversityIdAndLanguage(@RequestParam(name = "university_id") Integer universityId,
+																					   @RequestParam() Enum.Language language) {
 		return new ResponseEntity<>(universityFetchService.getUniversityFetchByUniversityIdAndLanguage(universityId, language),
 				HttpStatus.OK);
 	}
