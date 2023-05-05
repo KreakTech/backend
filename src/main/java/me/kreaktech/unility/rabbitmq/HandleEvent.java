@@ -1,5 +1,7 @@
 package me.kreaktech.unility.rabbitmq;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -9,16 +11,15 @@ import me.kreaktech.unility.entity.events.EventBody;
 import me.kreaktech.unility.service.UniversityServiceImpl;
 import me.kreaktech.unility.utils.BilkentUniversityUtils;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Component
 public class HandleEvent {
-	private final UniversityServiceImpl universityService;
-	private final BilkentUniversityUtils bilkentUniversityUtils;
-
 	@Autowired
-	public HandleEvent(UniversityServiceImpl universityService, BilkentUniversityUtils bilkentUniversityUtils) {
-		this.universityService = universityService;
-		this.bilkentUniversityUtils = bilkentUniversityUtils;
-	}
+	private UniversityServiceImpl universityService;
+	@Autowired
+	private BilkentUniversityUtils bilkentUniversityUtils;
+
 	public void processEvent(EventBody eventBody, String messageString) {
 		String universityName = eventBody.getUniversityName();
 		// Verify validity of universityName
