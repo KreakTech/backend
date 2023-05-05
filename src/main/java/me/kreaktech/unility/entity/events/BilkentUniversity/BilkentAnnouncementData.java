@@ -10,4 +10,4 @@ import me.kreaktech.unility.entity.events.DefaultUniversity.DefaultAnnouncementD
 @Getter
 @Setter
 @NoArgsConstructor
-public abstract class BilkentAnnouncementData extends DefaultAnnouncementData {}
+public class BilkentAnnouncementData extends DefaultAnnouncementData {}

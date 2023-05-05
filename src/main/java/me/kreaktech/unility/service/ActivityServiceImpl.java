@@ -38,4 +38,9 @@ public class ActivityServiceImpl implements ActivityService {
     public List<Activity> getAllActivities() {
         return activityRepository.findAll();
     }
+
+    @Override
+    public List<Activity> getAllActivitiesByUniversityId(Integer universityId) {
+        return activityRepository.findAllActivitiesByUniversityId(universityId);
+    }
 }

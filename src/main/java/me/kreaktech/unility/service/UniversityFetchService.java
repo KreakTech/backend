@@ -9,7 +9,7 @@ public interface UniversityFetchService {
 
 	UniversityFetch saveUniversityFetch(UniversityFetch universityFetch);
 
-	UniversityFetch getUniversityFetchByUniversityNameAndLanguage(String universityName, Enum.Language language);
+	UniversityFetch getUniversityFetchByUniversityIdAndLanguage(Integer universityId, Enum.Language language);
 
 	void deleteUniversityFetchById(Integer id);
 }

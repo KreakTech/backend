@@ -90,15 +90,15 @@ public class UniversityFetchControllerTest {
         }
 
     @Test
-    public void UniversityFetchController_GetUniversityFetchByUniversityNameAndLanguage_ReturnUniversityFetch() throws Exception {
+    public void UniversityFetchController_GetUniversityFetchByUniversityIdAndLanguage_ReturnUniversityFetch() throws Exception {
         // Arrange
-        when(universityFetchServiceImpl.getUniversityFetchByUniversityNameAndLanguage(
-            ArgumentMatchers.anyString(), 
+        when(universityFetchServiceImpl.getUniversityFetchByUniversityIdAndLanguage(
+            ArgumentMatchers.anyInt(),
             ArgumentMatchers.any(Language.class))).thenReturn(universityFetch);
 
 
         // Act
-        ResultActions response = mockmvc.perform(get("/university-fetch?universityName=some university1&language=EN")
+        ResultActions response = mockmvc.perform(get("/university-fetch/1/EN")
                 .contentType(MediaType.APPLICATION_JSON));
 
         // Assert

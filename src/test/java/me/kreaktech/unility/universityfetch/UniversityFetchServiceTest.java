@@ -88,10 +88,10 @@ public class UniversityFetchServiceTest {
 	}
 
     @Test
-    public void UniversityFetchService_GetUniversityFetchByUniversityNameAndLanguage_ReturnsUniversityFetch(){
+    public void UniversityFetchService_GetUniversityFetchByUniversityIdAndLanguage_ReturnsUniversityFetch(){
         // Act
-		when(universityFetchRepository.findByUniversityNameAndLanguage(universityFetch.getUniversity().getName(), universityFetch.getLanguage())).thenReturn(Optional.ofNullable(savedUniversityFetch));
-		UniversityFetch fetchedUniversityFetch = universityFetchServiceImpl.getUniversityFetchByUniversityNameAndLanguage(universityFetch.getUniversity().getName(), universityFetch.getLanguage());
+		when(universityFetchRepository.findByUniversityIdAndLanguage(universityFetch.getUniversity().getId(), universityFetch.getLanguage())).thenReturn(Optional.ofNullable(savedUniversityFetch));
+		UniversityFetch fetchedUniversityFetch = universityFetchServiceImpl.getUniversityFetchByUniversityIdAndLanguage(universityFetch.getUniversity().getId(), universityFetch.getLanguage());
 
         // Assert
         Assertions.assertThat(fetchedUniversityFetch).isNotNull();

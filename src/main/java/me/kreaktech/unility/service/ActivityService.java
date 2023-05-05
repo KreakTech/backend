@@ -11,5 +11,7 @@ public interface ActivityService {
 
     void deleteActivityById(Integer id);
 
-    public List<Activity> getAllActivities();
+    List<Activity> getAllActivities();
+
+    List<Activity> getAllActivitiesByUniversityId(Integer universityId);
 }

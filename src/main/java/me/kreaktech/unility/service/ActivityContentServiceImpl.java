@@ -32,10 +32,4 @@ public class ActivityContentServiceImpl implements ActivityContentService {
     public void deleteActivityContentById(Integer id) {
         activityContentRepository.deleteById(id);
     }
-
-    @Override
-    public ActivityContent getActivityContentByTitle(String title) {
-        Optional<ActivityContent> activityContent = activityContentRepository.findActivityContentByTitle(title);
-        return Utils.unwrap(activityContent, title);
-    }
 }
