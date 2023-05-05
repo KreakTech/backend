@@ -32,7 +32,7 @@ public class UniversityFetch {
 	@Column(name = "language", nullable = false)
 	private Enum.Language language;
 
-	@ManyToOne(optional = false, cascade = CascadeType.ALL)
+	@ManyToOne(optional = false)
 	@JoinColumn(name = "university_id", referencedColumnName = "id")
 	private University university;
 }
