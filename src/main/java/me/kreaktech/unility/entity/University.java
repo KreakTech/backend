@@ -31,6 +31,6 @@ public class University {
 
 	@NotBlank(message = "Name cannot be blank")
 	@NotNull
-	@Column(name = "name", unique = true)
+	@Column(name = "name", unique = true, nullable = false)
 	private String name;
 }
