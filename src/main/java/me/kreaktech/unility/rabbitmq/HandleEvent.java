@@ -39,7 +39,7 @@ public class HandleEvent {
 	public void handleBilkentUniversityEvent(EventBody eventBody, University university) {
 		EventType eventType = eventBody.getType();
 		switch (eventType) {
-			case DAILY_MEAL -> bilkentUniversityUtils.handleWeeklyMealsEvent(eventBody, university);
+			case DAILY_MEAL -> bilkentUniversityUtils.handleDailyMealsEvent(eventBody, university);
 			case ANNOUNCEMENT -> bilkentUniversityUtils.handleAnnouncementEvent(eventBody, university);
 			case STUDENT_ACTIVITIES -> bilkentUniversityUtils.handleStudentActivitiesEvent(eventBody, university);
 			default -> {}

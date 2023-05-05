@@ -39,7 +39,7 @@ public class BilkentUniversityUtils {
     private EntityManager entityManager;
 
     @Transactional
-    public void handleWeeklyMealsEvent(EventBody eventBody, University university) {
+    public void handleDailyMealsEvent(EventBody eventBody, University university) {
         BilkentMealData mealData = Utils.parseObjectToEntity(eventBody.getData(),
                 BilkentMealData.class);
 
