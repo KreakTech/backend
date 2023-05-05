@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 @NoArgsConstructor(force = true)
 @Builder
 @Entity
-@Table(name = "university_fetch")
+@Table(name = "university_fetch", uniqueConstraints = @UniqueConstraint(columnNames = { "university_id", "language" }) )
 public class UniversityFetch {
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
