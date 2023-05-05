@@ -17,22 +17,25 @@ import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
 
-@Component
 @AllArgsConstructor
 @NoArgsConstructor
+@Component
 public class BilkentUniversityUtils {
+
     @Autowired
-    CafeteriaMenuServiceImpl cafeteriaMenuService;
+    private CafeteriaMenuServiceImpl cafeteriaMenuService;
     @Autowired
-    NutritionContentServiceImpl nutritionContentService;
+    private NutritionContentServiceImpl nutritionContentService;
     @Autowired
-    AnnouncementServiceImpl announcementService;
+    private AnnouncementServiceImpl announcementService;
     @Autowired
-    UniversityFetchServiceImpl universityFetchService;
+    private UniversityFetchServiceImpl universityFetchService;
     @Autowired
-    ActivityServiceImpl activityService;
+    private ActivityServiceImpl activityService;
     @Autowired
-    ActivityContentServiceImpl activityContentService;
+    private ActivityContentServiceImpl activityContentService;
+    @PersistenceContext
+    private EntityManager entityManager;
 
     public void handleWeeklyMealsEvent(EventBody eventBody, University university) {
         BilkentMealData mealData = Utils.parseObjectToEntity(eventBody.getData(),
@@ -71,17 +74,12 @@ public class BilkentUniversityUtils {
         announcement.setDate(eventBody.getDate());
         announcement.setUniversity(university);
 
-
-        UniversityFetch getUniversityFetch = universityFetchService.getUniversityFetchById(university.getId());
+        UniversityFetch getUniversityFetch = universityFetchService.getUniversityFetchByUniversityIdAndLanguage(university.getId(), eventBody.getLanguage());
         getUniversityFetch.setAnnouncementsLastFetchMD5(announcementData.getMd5());
         universityFetchService.saveUniversityFetch(getUniversityFetch);
 
         announcementService.saveAnnouncement(announcement);
     }
-
-
-    @PersistenceContext
-    private EntityManager entityManager;
 
     @Transactional
     public void handleStudentActivitiesEvent(EventBody eventBody, University university) {
