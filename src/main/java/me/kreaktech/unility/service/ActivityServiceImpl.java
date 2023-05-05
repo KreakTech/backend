@@ -40,7 +40,7 @@ public class ActivityServiceImpl implements ActivityService {
     }
 
     @Override
-    public void deleteAllActivity() {
-        activityRepository.deleteAll();
+    public List<Activity> getAllActivitiesByUniversityId(Integer universityId) {
+        return activityRepository.findAllActivitiesByUniversityId(universityId);
     }
 }

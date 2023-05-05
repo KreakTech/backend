@@ -8,6 +8,4 @@ public interface ActivityContentService {
     ActivityContent saveActivityContent(ActivityContent activityContent);
 
     void deleteActivityContentById(Integer id);
-
-    void deleteAllActivityContent();
 }

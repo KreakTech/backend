@@ -19,5 +19,5 @@ public abstract class DefaultActivityData {
 	private String time;
 	private Enum.PhysicalStatus physicalStatus;
 	private String languages;
-	private boolean hasRewards;
+	private String hasRewards;
 }

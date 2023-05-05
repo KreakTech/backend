@@ -16,6 +16,7 @@ import org.springframework.stereotype.Component;
 import javax.persistence.EntityManager;
 import javax.persistence.PersistenceContext;
 import javax.transaction.Transactional;
+import java.util.List;
 
 @AllArgsConstructor
 @NoArgsConstructor
@@ -87,8 +88,12 @@ public class BilkentUniversityUtils {
         JsonElement jsonElement = gson.toJsonTree(eventBody.getData());
         BilkentActivityData[] activityData = gson.fromJson(jsonElement, BilkentActivityData[].class);
 
-        activityService.deleteAllActivity();
-        activityContentService.deleteAllActivityContent();
+        List<Activity> activities = activityService.getAllActivitiesByUniversityId(university.getId());
+        activities.forEach(activity -> {
+            activityService.deleteActivityById(activity.getId());
+            activityContentService.deleteActivityContentById(activity.getActivityContent().getId());
+        });
+
         university = entityManager.merge(university);
 
         for (BilkentActivityData activity : activityData) {
@@ -98,7 +103,7 @@ public class BilkentUniversityUtils {
             currActivityContent.setOrganizer(activity.getOrganizers());
             currActivityContent.setPhysicalStatus(activity.getPhysicalStatus());
             currActivityContent.setDetails(activity.getDetails());
-            currActivityContent.setIncentive(activity.isHasRewards());
+            currActivityContent.setIncentive(Boolean.parseBoolean(activity.getHasRewards()));
             currActivityContent.setCanceled(false);
 
             activityContentService.saveActivityContent(currActivityContent);
