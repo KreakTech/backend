@@ -38,9 +38,12 @@ public class BilkentUniversityUtils {
     @PersistenceContext
     private EntityManager entityManager;
 
+    @Transactional
     public void handleWeeklyMealsEvent(EventBody eventBody, University university) {
         BilkentMealData mealData = Utils.parseObjectToEntity(eventBody.getData(),
                 BilkentMealData.class);
+
+        university = entityManager.merge(university);
 
         NutritionContent nutritionContent = new NutritionContent();
         nutritionContent.setEnergyCal(mealData.getEnergy());
@@ -50,6 +53,8 @@ public class BilkentUniversityUtils {
 
         NutritionContent createdNutritionContent = nutritionContentService.saveNutritionContent(nutritionContent);
 
+        entityManager.persist(nutritionContent);
+
         CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
         cafeteriaMenu.setNutritionContent(createdNutritionContent);
         cafeteriaMenu.setDateServed(eventBody.getDate());
@@ -58,13 +63,14 @@ public class BilkentUniversityUtils {
         cafeteriaMenu.setMealType(mealData.getMealType());
         cafeteriaMenu.setUniversity(university);
 
-        UniversityFetch getUniversityFetch = universityFetchService.getUniversityFetchById(university.getId());
+        UniversityFetch getUniversityFetch = universityFetchService.getUniversityFetchByUniversityIdAndLanguage(university.getId(), eventBody.getLanguage());
         getUniversityFetch.setCafeteriaLastFetchDate(cafeteriaMenu.getDateServed());
         universityFetchService.saveUniversityFetch(getUniversityFetch);
 
         cafeteriaMenuService.saveCafeteriaMenu(cafeteriaMenu);
     }
 
+    @Transactional
     public void handleAnnouncementEvent(EventBody eventBody, University university) {
         BilkentAnnouncementData announcementData = Utils.parseObjectToEntity(eventBody.getData(),
                 BilkentAnnouncementData.class);
