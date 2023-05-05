@@ -1,5 +1,7 @@
 package me.kreaktech.unility.rabbitmq;
 
+import lombok.AllArgsConstructor;
+import lombok.NoArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
@@ -9,17 +11,16 @@ import me.kreaktech.unility.entity.events.EventBody;
 import me.kreaktech.unility.service.UniversityServiceImpl;
 import me.kreaktech.unility.utils.BilkentUniversityUtils;
 
+@AllArgsConstructor
+@NoArgsConstructor
 @Component
 public class HandleEvent {
-	private final UniversityServiceImpl universityService;
-	private final BilkentUniversityUtils bilkentUniversityUtils;
-
 	@Autowired
-	public HandleEvent(UniversityServiceImpl universityService, BilkentUniversityUtils bilkentUniversityUtils) {
-		this.universityService = universityService;
-		this.bilkentUniversityUtils = bilkentUniversityUtils;
-	}
-	public void processEvent(EventBody eventBody) {
+	private UniversityServiceImpl universityService;
+	@Autowired
+	private BilkentUniversityUtils bilkentUniversityUtils;
+
+	public void processEvent(EventBody eventBody, String messageString) {
 		String universityName = eventBody.getUniversityName();
 		// Verify validity of universityName
 		University university = universityService.getUniversityByName(universityName);
@@ -40,8 +41,8 @@ public class HandleEvent {
 		switch (eventType) {
 			case DAILY_MEAL -> bilkentUniversityUtils.handleWeeklyMealsEvent(eventBody, university);
 			case ANNOUNCEMENT -> bilkentUniversityUtils.handleAnnouncementEvent(eventBody, university);
-			default -> {
-			}
+			case STUDENT_ACTIVITIES -> bilkentUniversityUtils.handleStudentActivitiesEvent(eventBody, university);
+			default -> {}
 		}
 	}
 }

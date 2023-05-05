@@ -1,7 +1,5 @@
 package me.kreaktech.unility.entity;
 
-import java.sql.Timestamp;
-
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -16,7 +14,6 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
-import me.kreaktech.unility.constants.Enum.Language;
 import me.kreaktech.unility.constants.Enum.PhysicalStatus;
 
 @Getter
@@ -34,24 +31,22 @@ public class ActivityContent {
     private Integer id;
 
     @NonNull
-    @Column(name = "title")
-    private String title;
-
-    @NonNull
     @Column(name = "organizer")
     private String organizer;
 
+    @NonNull
     @Column(name = "incentive")
     private boolean incentive;
 
     @NonNull
     @Column(name = "activity_language")
-    private Language activityLanguage;
+    private String activityLanguages;
 
     @NonNull
     @Column(name = "activity_duration")
-    private Timestamp activityDuration;
+    private String activityDuration;
 
+    @NonNull
     @Column(name = "is_canceled")
     private boolean isCanceled;
 

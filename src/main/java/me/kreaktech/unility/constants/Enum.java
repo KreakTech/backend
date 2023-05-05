@@ -18,7 +18,7 @@ public class Enum {
 	}
 
 	public enum EventType {
-		DAILY_MEAL, ANNOUNCEMENT
+		DAILY_MEAL, ANNOUNCEMENT, STUDENT_ACTIVITIES
 	}
 
 }

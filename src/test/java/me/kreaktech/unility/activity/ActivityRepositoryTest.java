@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+import me.kreaktech.unility.constants.Enum;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -45,19 +46,17 @@ public class ActivityRepositoryTest {
 
 		ActivityContent activityContent1 = ActivityContent.builder()
 				.details("some details1")
-				.title("some title1")
 				.organizer("some organizer1")
-				.activityLanguage(Language.EN)
-				.activityDuration(Timestamp.valueOf(activityDateTime))
+				.activityLanguages(String.valueOf(Language.EN))
+				.activityDuration(String.valueOf(Timestamp.valueOf(activityDateTime)))
 				.physicalStatus(PhysicalStatus.FACETOFACE)
 				.build();
 
 		ActivityContent activityContent2 = ActivityContent.builder()
 				.details("some details2")
-				.title("some title2")
 				.organizer("some organizer21")
-				.activityLanguage(Language.EN)
-				.activityDuration(Timestamp.valueOf(activityDateTime))
+				.activityLanguages(String.valueOf(Language.EN))
+				.activityDuration(String.valueOf(Timestamp.valueOf(activityDateTime)))
 				.physicalStatus(PhysicalStatus.FACETOFACE)
 				.build();
 

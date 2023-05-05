@@ -26,11 +26,12 @@ public class Receiver implements MessageListener {
 	public void onMessage(Message message) {
 		try {
 			String messageString = new String(message.getBody());
-			System.out.println("Received <" + messageString + ">");
 			// Deserialize the JSON message into a Java object
 			EventBody eventBody = gson.fromJson(messageString, EventBody.class);
-			handleEvent.processEvent(eventBody);
-		} catch (Exception ignored) {}
+			handleEvent.processEvent(eventBody, messageString);
+		} catch (Exception ignored) {
+			System.out.println(ignored.getMessage());
+		}
 
 	}
 }

@@ -28,15 +28,15 @@ public class NutritionContent {
 	private Integer id;
 
 	@Column(name = "energy_cal", nullable = true)
-	private int energyCal;
+	private Integer energyCal;
 
 	@Column(name = "carbohydrate_percentage", nullable = true)
-	private int carbohydratePercentage;
+	private Integer carbohydratePercentage;
 
 	@Column(name = "protein_percentage", nullable = true)
-	private int proteinPercentage;
+	private Integer proteinPercentage;
 
-	@Column(name = "fat_percentage", nullable = true)
-	private int fatPercentage;
+	@Column(name = "fat_percentage", nullable = false)
+	private Integer fatPercentage;
 
 }
