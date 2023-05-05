@@ -19,7 +19,7 @@ public class HandleEvent {
 		this.universityService = universityService;
 		this.bilkentUniversityUtils = bilkentUniversityUtils;
 	}
-	public void processEvent(EventBody eventBody) {
+	public void processEvent(EventBody eventBody, String messageString) {
 		String universityName = eventBody.getUniversityName();
 		// Verify validity of universityName
 		University university = universityService.getUniversityByName(universityName);
@@ -40,8 +40,8 @@ public class HandleEvent {
 		switch (eventType) {
 			case DAILY_MEAL -> bilkentUniversityUtils.handleWeeklyMealsEvent(eventBody, university);
 			case ANNOUNCEMENT -> bilkentUniversityUtils.handleAnnouncementEvent(eventBody, university);
-			default -> {
-			}
+			case STUDENT_ACTIVITIES -> bilkentUniversityUtils.handleStudentActivitiesEvent(eventBody, university);
+			default -> {}
 		}
 	}
 }
