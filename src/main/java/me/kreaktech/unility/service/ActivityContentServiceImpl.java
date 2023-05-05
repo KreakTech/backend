@@ -34,8 +34,7 @@ public class ActivityContentServiceImpl implements ActivityContentService {
     }
 
     @Override
-    public ActivityContent getActivityContentByTitle(String title) {
-        Optional<ActivityContent> activityContent = activityContentRepository.findActivityContentByTitle(title);
-        return Utils.unwrap(activityContent, title);
+    public void deleteAllActivityContent() {
+        activityContentRepository.deleteAll();
     }
 }

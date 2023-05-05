@@ -38,4 +38,9 @@ public class ActivityServiceImpl implements ActivityService {
     public List<Activity> getAllActivities() {
         return activityRepository.findAll();
     }
+
+    @Override
+    public void deleteAllActivity() {
+        activityRepository.deleteAll();
+    }
 }

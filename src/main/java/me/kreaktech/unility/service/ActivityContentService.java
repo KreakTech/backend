@@ -9,5 +9,5 @@ public interface ActivityContentService {
 
     void deleteActivityContentById(Integer id);
 
-    ActivityContent getActivityContentByTitle(String title);
+    void deleteAllActivityContent();
 }

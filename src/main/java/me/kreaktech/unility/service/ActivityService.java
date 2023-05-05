@@ -12,4 +12,5 @@ public interface ActivityService {
     void deleteActivityById(Integer id);
 
     public List<Activity> getAllActivities();
+    void deleteAllActivity();
 }

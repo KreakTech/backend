@@ -10,6 +10,7 @@ import static org.springframework.test.web.servlet.request.MockMvcRequestBuilder
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 
+import me.kreaktech.unility.constants.Enum;
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -57,10 +58,9 @@ public class ActivityContentControllerTest {
 
                 activityContent = ActivityContent.builder()
                                 .details("some details")
-                                .title("some title")
                                 .organizer("some organizer")
-                                .activityLanguage(Language.EN)
-                                .activityDuration(Timestamp.valueOf(activityContentDateTime))
+                                .activityLanguages(String.valueOf(Language.EN))
+                                .activityDuration(String.valueOf(Timestamp.valueOf(activityContentDateTime)))
                                 .physicalStatus(PhysicalStatus.FACETOFACE)
                                 .id(1)
                                 .build();
@@ -80,7 +80,6 @@ public class ActivityContentControllerTest {
                 // Assert
                 response.andExpect(MockMvcResultMatchers.status().isCreated())
                                 .andExpect(MockMvcResultMatchers.jsonPath("$.id", CoreMatchers.is(1)))
-                                .andExpect(MockMvcResultMatchers.jsonPath("$.title").value("some title"))
                                 .andExpect(MockMvcResultMatchers.jsonPath("$.organizer").value("some organizer"));
         }
 
@@ -97,26 +96,8 @@ public class ActivityContentControllerTest {
 		// Assert
         response.andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.id", CoreMatchers.is(1)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.title").value("some title"))
                 .andExpect(MockMvcResultMatchers.jsonPath("$.organizer").value("some organizer"));
 		}
-
-    @Test
-    public void ActivityContentController_GetActivityContentByTitle_ReturnActivityContent() throws Exception {
-        // Arrange
-        when(activityContentServiceImpl.getActivityContentByTitle(ArgumentMatchers.any())).thenReturn(activityContent);
-
-        // Act
-        ResultActions response = mockmvc.perform(get("/activity-contents?title=some title")
-                .contentType(MediaType.APPLICATION_JSON)
-                .content(objectMapper.writeValueAsString(this.activityContent)));
-
-        // Assert
-        response.andExpect(MockMvcResultMatchers.status().isOk())
-                .andExpect(MockMvcResultMatchers.jsonPath("$.id", CoreMatchers.is(1)))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.title").value("some title"))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.organizer").value("some organizer"));
-        }
 
         @Test
         public void ActivityContentController_DeleteActivityContent_ReturnsVoid() throws Exception {

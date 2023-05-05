@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+import me.kreaktech.unility.constants.Enum;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -34,10 +35,9 @@ public class ActivityContentRepositoryTest {
 
         activityContent = ActivityContent.builder()
                 .details("some details")
-                .title("some title")
                 .organizer("some organizer")
-                .activityLanguage(Language.EN)
-                .activityDuration(Timestamp.valueOf(activityDateTime))
+                .activityLanguages(String.valueOf(Language.EN))
+                .activityDuration(String.valueOf(Timestamp.valueOf(activityDateTime)))
                 .physicalStatus(PhysicalStatus.FACETOFACE)
                 .build();
 
@@ -60,21 +60,6 @@ public class ActivityContentRepositoryTest {
         // Assert
         Assertions.assertThat(fetchedActivityContent).isNotNull();
         Assertions.assertThat(fetchedActivityContent.getId()).isEqualTo(savedActivityContent.getId());
-        Assertions.assertThat(fetchedActivityContent.getTitle()).isEqualTo(savedActivityContent.getTitle());
-        Assertions.assertThat(fetchedActivityContent.getOrganizer()).isEqualTo(savedActivityContent.getOrganizer());
-    }
-
-    @Test
-    public void ActivityContentRepository_FindActivityContentByTitle_ReturnActivityContent() {
-        // Act
-        ActivityContent fetchedActivityContent = activityContentRepository
-                .findActivityContentByTitle(savedActivityContent.getTitle())
-                .get();
-
-        // Assert
-        Assertions.assertThat(fetchedActivityContent).isNotNull();
-        Assertions.assertThat(fetchedActivityContent.getId()).isEqualTo(savedActivityContent.getId());
-        Assertions.assertThat(fetchedActivityContent.getTitle()).isEqualTo(savedActivityContent.getTitle());
         Assertions.assertThat(fetchedActivityContent.getOrganizer()).isEqualTo(savedActivityContent.getOrganizer());
     }
 
@@ -85,13 +70,11 @@ public class ActivityContentRepositoryTest {
 
         // Modifications
         fetchedActivityContent.setOrganizer("some new organizer");
-        fetchedActivityContent.setTitle("some new title");
 
         ActivityContent updatedActivityContent = activityContentRepository.save(fetchedActivityContent);
 
         // Assert
         Assertions.assertThat(updatedActivityContent).isNotNull();
-        Assertions.assertThat(updatedActivityContent.getTitle()).isEqualTo("some new title");
         Assertions.assertThat(updatedActivityContent.getOrganizer()).isEqualTo("some new organizer");
     }
 

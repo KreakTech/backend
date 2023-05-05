@@ -11,6 +11,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.List;
 
+import me.kreaktech.unility.constants.Enum;
 import org.hamcrest.CoreMatchers;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -63,10 +64,9 @@ public class ActivityControllerTest {
 
                 ActivityContent activityContent = ActivityContent.builder()
                                 .details("some details")
-                                .title("some title")
                                 .organizer("some organizer")
-                                .activityLanguage(Language.EN)
-                                .activityDuration(Timestamp.valueOf(activityDateTime))
+                                .activityLanguages(String.valueOf(Language.EN))
+                                .activityDuration(String.valueOf(Timestamp.valueOf(activityDateTime)))
                                 .physicalStatus(PhysicalStatus.FACETOFACE)
                                 .build();
 

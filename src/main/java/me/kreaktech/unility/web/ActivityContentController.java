@@ -43,16 +43,6 @@ public class ActivityContentController {
 		return new ResponseEntity<>(activityContentServiceImpl.getActivityContentById(id), HttpStatus.OK);
 	}
 
-	@Operation(summary = "Gets an activity content by its title")
-	@ApiResponses(value = {
-			@ApiResponse(responseCode = "200", description = "Activity content retrieved successfully"),
-			@ApiResponse(responseCode = "404", description = "Activity content not found", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
-	})
-	@GetMapping(produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<ActivityContent> getActivityContentByTitle(@RequestParam(value = "title") String title) {
-		return new ResponseEntity<>(activityContentServiceImpl.getActivityContentByTitle(title), HttpStatus.OK);
-	}
-
 	@Operation(summary = "Create an activity content")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "201", description = "Activity content created successfully"),
