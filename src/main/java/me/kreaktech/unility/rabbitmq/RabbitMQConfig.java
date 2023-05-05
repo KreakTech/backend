@@ -66,8 +66,6 @@ public class RabbitMQConfig {
     @Bean
     public Queue queue() {
         return QueueBuilder.durable(QUEUE_NAME)
-                .withArgument("x-dead-letter-exchange", "")
-                .withArgument("x-dead-letter-routing-key", QUEUE_NAME + "-retry")
                 .build();
     }
 
