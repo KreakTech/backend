@@ -22,6 +22,7 @@ import io.swagger.v3.oas.annotations.media.Schema;
 import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.AllArgsConstructor;
+import me.kreaktech.unility.constants.Enum.MapWaypointType;
 import me.kreaktech.unility.entity.MapWaypoint;
 import me.kreaktech.unility.exception.ErrorResponse;
 import me.kreaktech.unility.service.MapWaypointServiceImpl;
@@ -75,7 +76,7 @@ public class MapWaypointController {
 		return new ResponseEntity<>(mapWaypoints, HttpStatus.OK);
 	}
 
-	@Operation(summary = "Gets all waypoint in a list")
+	@Operation(summary = "Gets all waypoint in a list of a specific university")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "waypoint list retrieved successfully"),
 	})
@@ -83,5 +84,15 @@ public class MapWaypointController {
 	public ResponseEntity<List<MapWaypoint>> getMapWaypointsByUniversityId(@PathVariable Integer universityId) {
 		List<MapWaypoint> mapWaypoints = mapWaypointService.getAllMapWaypointsByUniversityId(universityId);
 		return new ResponseEntity<>(mapWaypoints, HttpStatus.OK);
+	}
+
+	@Operation(summary = "Gets all waypoint in a list of a specific university and type")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "waypoint list retrieved successfully"),
+	})
+	@GetMapping(value = "/all/{universityId}/{type}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<MapWaypoint>> getBusMapWaypoints(@PathVariable Integer universityId, @PathVariable MapWaypointType type) {
+		List<MapWaypoint> busMapWaypoints = mapWaypointService.getAllMapWaypointsByUniversityIdAndType(universityId, type);
+		return new ResponseEntity<>(busMapWaypoints, HttpStatus.OK);
 	}
 }

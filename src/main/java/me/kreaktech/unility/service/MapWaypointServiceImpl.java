@@ -5,6 +5,7 @@ import java.util.List;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
+import me.kreaktech.unility.constants.Enum.MapWaypointType;
 import me.kreaktech.unility.entity.MapWaypoint;
 import me.kreaktech.unility.repository.MapWaypointRepository;
 import me.kreaktech.unility.utils.Utils;
@@ -40,4 +41,10 @@ public class MapWaypointServiceImpl implements MapWaypointService {
 	public List<MapWaypoint> getAllMapWaypointsByUniversityId(Integer universityId) {
 		return mapWaypointRepository.findByUniversityId(universityId);
 	}
+
+	@Override
+	public List<MapWaypoint> getAllMapWaypointsByUniversityIdAndType(Integer universityId, MapWaypointType type) {
+		return mapWaypointRepository.findAllMapWaypointsByUniversityIdAndType(universityId, type);
+	}
+
 }
