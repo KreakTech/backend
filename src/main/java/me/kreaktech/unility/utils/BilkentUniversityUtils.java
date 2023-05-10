@@ -79,6 +79,7 @@ public class BilkentUniversityUtils {
         announcement.setTitle(announcementData.getTitle());
         announcement.setLink(announcementData.getLink());
         announcement.setDate(eventBody.getDate());
+        announcement.setLanguage(eventBody.getLanguage());
         announcement.setUniversity(university);
 
         UniversityFetch getUniversityFetch = universityFetchService.getUniversityFetchByUniversityIdAndLanguage(university.getId(), eventBody.getLanguage());

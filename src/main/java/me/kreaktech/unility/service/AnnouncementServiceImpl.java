@@ -44,8 +44,13 @@ public class AnnouncementServiceImpl implements AnnouncementService {
 	}
 
 	@Override
-	public List<Announcement> getAnnouncementByDateBetweenAndDateLessThanEqual(Timestamp from, Timestamp to) {
-		return announcementRepository.findByDateBetweenAndDateLessThanEqual(from, to);
+	public List<Announcement> getAnnouncementsByDateBetweenAndDateLessThanEqualAndUniversityId(Timestamp from, Timestamp to, Integer universityId) {
+		return announcementRepository.findByDateBetweenAndDateLessThanEqualAndUniversityId(from, to, universityId);
+	}
+
+	@Override
+	public List<Announcement> getAnnouncementsByUniversityId(Integer universityId) {
+		return announcementRepository.findByUniversityId(universityId);
 	}
 
 }

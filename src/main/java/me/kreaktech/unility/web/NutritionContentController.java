@@ -26,7 +26,7 @@ import me.kreaktech.unility.service.NutritionContentServiceImpl;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/nutritionContent")
+@RequestMapping("/nutrition-contents")
 public class NutritionContentController {
 
 	@Autowired
@@ -47,7 +47,7 @@ public class NutritionContentController {
 			@ApiResponse(responseCode = "201", description = "Nutrition content created successfully"),
 			@ApiResponse(responseCode = "400", description = "Nutrition content menu failed to be created", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
-	@PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<NutritionContent> saveNutritionContent(
 			@Valid @RequestBody NutritionContent nutritionContent) {
 		return new ResponseEntity<>(nutritionContentService.saveNutritionContent(nutritionContent), HttpStatus.CREATED);

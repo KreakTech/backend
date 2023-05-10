@@ -20,7 +20,7 @@ public class HandleEvent {
 	@Autowired
 	private BilkentUniversityUtils bilkentUniversityUtils;
 
-	public void processEvent(EventBody eventBody, String messageString) {
+	public void processEvent(EventBody eventBody) {
 		String universityName = eventBody.getUniversityName();
 		// Verify validity of universityName
 		University university = universityService.getUniversityByName(universityName);

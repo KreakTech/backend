@@ -62,7 +62,7 @@ public class NutritionContentControllerTest {
                                 .willAnswer((invocation -> invocation.getArgument(0)));
 
                 // Act
-                ResultActions response = mockmvc.perform(post("/nutritionContent")
+                ResultActions response = mockmvc.perform(post("/nutrition-contents")
                                 .contentType(MediaType.APPLICATION_JSON)
                                 .content(objectMapper.writeValueAsString(this.nutritionContent)));
 
@@ -83,7 +83,7 @@ public class NutritionContentControllerTest {
 		when(nutritionContentServiceImpl.getNutritionContentById(ArgumentMatchers.any())).thenReturn(nutritionContent);
 
 		// Act
-		ResultActions response = mockmvc.perform(get("/nutritionContent/1")
+		ResultActions response = mockmvc.perform(get("/nutrition-contents/1")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(this.nutritionContent)));
 
@@ -103,7 +103,7 @@ public class NutritionContentControllerTest {
                 doNothing().when(nutritionContentServiceImpl).deleteNutritionContentById(ArgumentMatchers.any());
 
                 // Act
-                ResultActions response = mockmvc.perform(delete("/nutritionContent/1")
+                ResultActions response = mockmvc.perform(delete("/nutrition-contents/1")
                                 .contentType(MediaType.APPLICATION_JSON));
 
                 // Assert

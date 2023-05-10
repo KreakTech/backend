@@ -28,7 +28,7 @@ import me.kreaktech.unility.service.CafeteriaMenuServiceImpl;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/cafeteriamenu")
+@RequestMapping("/cafeteria-menu")
 public class CafeteriaMenuController {
 
 	@Autowired
@@ -49,7 +49,7 @@ public class CafeteriaMenuController {
 			@ApiResponse(responseCode = "201", description = "Cafeteria menu created successfully"),
 			@ApiResponse(responseCode = "400", description = "Cafeteria menu failed to be created", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
-	@PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<CafeteriaMenu> saveCafeteriaMenu(@Valid @RequestBody CafeteriaMenu cafeteriaMenu) {
 		return new ResponseEntity<>(cafeteriaMenuService.saveCafeteriaMenu(cafeteriaMenu), HttpStatus.CREATED);
 	}

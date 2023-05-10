@@ -16,5 +16,7 @@ public interface AnnouncementService {
 
     Announcement getAnnouncementByTitle(String title);
 
-    List<Announcement> getAnnouncementByDateBetweenAndDateLessThanEqual(Timestamp from, Timestamp to);
+    List<Announcement> getAnnouncementsByDateBetweenAndDateLessThanEqualAndUniversityId(Timestamp from, Timestamp to, Integer universityId);
+
+    List<Announcement> getAnnouncementsByUniversityId(Integer universityId);
 }

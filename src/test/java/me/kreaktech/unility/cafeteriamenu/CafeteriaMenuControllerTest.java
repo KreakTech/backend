@@ -90,7 +90,7 @@ public class CafeteriaMenuControllerTest {
 				.willAnswer((invocation -> invocation.getArgument(0)));
 
 		// Act
-		ResultActions response = mockmvc.perform(post("/cafeteriamenu")
+		ResultActions response = mockmvc.perform(post("/cafeteria-menu")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(this.cafeteriaMenu)));
 
@@ -110,7 +110,7 @@ public class CafeteriaMenuControllerTest {
 		when(cafeteriaMenuServiceImpl.getAllCafeteriaMenu()).thenReturn(cafeteriaMenus);
 
 		// Act
-		ResultActions response = mockmvc.perform(get("/cafeteriamenu/all")
+		ResultActions response = mockmvc.perform(get("/cafeteria-menu/all")
 				.contentType(MediaType.APPLICATION_JSON));
 
 		// Assert
@@ -130,7 +130,7 @@ public class CafeteriaMenuControllerTest {
 				.thenReturn(cafeteriaMenus);
 
 		// Act
-		ResultActions response = mockmvc.perform(get("/cafeteriamenu/all/1")
+		ResultActions response = mockmvc.perform(get("/cafeteria-menu/all/1")
 				.contentType(MediaType.APPLICATION_JSON));
 
 		// Assert
@@ -148,7 +148,7 @@ public class CafeteriaMenuControllerTest {
 		when(cafeteriaMenuServiceImpl.getCafeteriaMenuById(ArgumentMatchers.any())).thenReturn(cafeteriaMenu);
 
 		// Act
-		ResultActions response = mockmvc.perform(get("/cafeteriamenu/1")
+		ResultActions response = mockmvc.perform(get("/cafeteria-menu/1")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(this.cafeteriaMenu)));
 
@@ -164,7 +164,7 @@ public class CafeteriaMenuControllerTest {
 		doNothing().when(cafeteriaMenuServiceImpl).deleteCafeteriaMenuById(ArgumentMatchers.any());
 
 		// Act
-		ResultActions response = mockmvc.perform(delete("/cafeteriamenu/1")
+		ResultActions response = mockmvc.perform(delete("/cafeteria-menu/1")
 				.contentType(MediaType.APPLICATION_JSON));
 
 		// Assert

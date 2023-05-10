@@ -12,7 +12,6 @@ import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.RestController;
 
 import io.swagger.v3.oas.annotations.Operation;
@@ -48,7 +47,7 @@ public class ActivityContentController {
 			@ApiResponse(responseCode = "201", description = "Activity content created successfully"),
 			@ApiResponse(responseCode = "400", description = "Activity content failed to be created", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
-	@PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ActivityContent> saveActivityContent(@Valid @RequestBody ActivityContent activityContent) {
 		return new ResponseEntity<>(activityContentServiceImpl.saveActivityContent(activityContent),
 				HttpStatus.CREATED);

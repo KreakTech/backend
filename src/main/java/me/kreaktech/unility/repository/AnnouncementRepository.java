@@ -11,8 +11,9 @@ import org.springframework.data.repository.query.Param;
 import me.kreaktech.unility.entity.Announcement;
 
 public interface AnnouncementRepository extends JpaRepository<Announcement, Integer> {
-	@Query("SELECT a FROM Announcement a WHERE a.date >= :from AND a.date <= :to")
-	List<Announcement> findByDateBetweenAndDateLessThanEqual(@Param("from") Timestamp from, @Param("to") Timestamp to);
+	@Query("SELECT a FROM Announcement a WHERE a.date >= :from AND a.date <= :to AND a.university.id = :universityId")
+	List<Announcement> findByDateBetweenAndDateLessThanEqualAndUniversityId(@Param("from") Timestamp from, @Param("to") Timestamp to, @Param("universityId") Integer universityId);
 
 	Optional<Announcement> findByTitle(String title);
+	List<Announcement> findByUniversityId(Integer universityId);
 }

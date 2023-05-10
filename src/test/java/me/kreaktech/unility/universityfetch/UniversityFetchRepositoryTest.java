@@ -4,6 +4,7 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
+import me.kreaktech.unility.repository.UniversityRepository;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -23,6 +24,8 @@ public class UniversityFetchRepositoryTest {
 
         @Autowired
         private UniversityFetchRepository universityFetchRepository;
+        @Autowired
+        private UniversityRepository universityRepository;
 
         UniversityFetch savedUniversityFetch;
         UniversityFetch universityFetch;
@@ -30,15 +33,16 @@ public class UniversityFetchRepositoryTest {
         @BeforeEach
         void setUpRepository() {
 
-                LocalDateTime activityDateTime = LocalDateTime.now().minusHours(1);
+                LocalDateTime anHourAgo = LocalDateTime.now().minusHours(1);
 
                 University university = University.builder()
                                 .name("some university1")
                                 .build();
+                universityRepository.save(university);
 
                 universityFetch = UniversityFetch.builder()
                                 .announcementsLastFetchMD5("some announcementsLastFetchMD5")
-                                .cafeteriaLastFetchDate(Timestamp.valueOf(activityDateTime))
+                                .cafeteriaLastFetchDate(Timestamp.valueOf(anHourAgo))
                                 .language(Language.EN)
                                 .university(university)
                                 .build();

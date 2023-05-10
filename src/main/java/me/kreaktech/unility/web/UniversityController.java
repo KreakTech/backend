@@ -29,7 +29,7 @@ import me.kreaktech.unility.service.UniversityServiceImpl;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/university")
+@RequestMapping("/universities")
 public class UniversityController {
 
 	@Autowired
@@ -60,7 +60,7 @@ public class UniversityController {
 			@ApiResponse(responseCode = "201", description = "University created successfully"),
 			@ApiResponse(responseCode = "400", description = "University failed to be created", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
-	@PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<University> createUniversity(@Valid @RequestBody University university) {
 		return new ResponseEntity<>(universityService.createUniversity(university), HttpStatus.CREATED);
 	}

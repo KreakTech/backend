@@ -20,6 +20,7 @@ import lombok.NoArgsConstructor;
 import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
+import me.kreaktech.unility.constants.Enum;
 
 @Getter
 @Setter
@@ -50,6 +51,10 @@ public class Announcement {
 	@NonNull
 	@Column(name = "link", nullable = false)
 	private String link;
+
+	@NonNull
+	@Column(name = "language", nullable = false)
+	private Enum.Language language;
 
 	@ManyToOne(optional = false)
 	@JoinColumn(name = "university_id", referencedColumnName = "id")
