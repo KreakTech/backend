@@ -79,7 +79,7 @@ public class AnnouncementControllerTest {
 		response.andExpect(MockMvcResultMatchers.status().isCreated())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.id", CoreMatchers.is(1)))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.title", CoreMatchers.is(announcement.getTitle())))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.language", CoreMatchers.is(announcement.getLanguage())))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.language", CoreMatchers.is(announcement.getLanguage().toString())))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.link", CoreMatchers.is(announcement.getLink())));
 	}
 
@@ -97,7 +97,7 @@ public class AnnouncementControllerTest {
 		response.andExpect(MockMvcResultMatchers.status().isOk())
 				.andExpect(MockMvcResultMatchers.content().contentType(MediaType.APPLICATION_JSON))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.[0].id").value(announcement.getId()))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.[0].language").value(announcement.getLanguage()))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.[0].language").value(announcement.getLanguage().toString()))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.[0].title").value(announcement.getTitle()));
 	}
 
@@ -115,7 +115,7 @@ public class AnnouncementControllerTest {
 		response.andExpect(MockMvcResultMatchers.status().isOk())
 				.andExpect(MockMvcResultMatchers.jsonPath("$.id", CoreMatchers.is(1)))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.title", CoreMatchers.is(announcement.getTitle())))
-				.andExpect(MockMvcResultMatchers.jsonPath("$.language", CoreMatchers.is(announcement.getLanguage())))
+				.andExpect(MockMvcResultMatchers.jsonPath("$.language", CoreMatchers.is(announcement.getLanguage().toString())))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.link", CoreMatchers.is(announcement.getLink())));
 		}
 
