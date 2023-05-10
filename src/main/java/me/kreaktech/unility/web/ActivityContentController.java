@@ -48,7 +48,7 @@ public class ActivityContentController {
 			@ApiResponse(responseCode = "201", description = "Activity content created successfully"),
 			@ApiResponse(responseCode = "400", description = "Activity content failed to be created", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
-	@PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<ActivityContent> saveActivityContent(@Valid @RequestBody ActivityContent activityContent) {
 		return new ResponseEntity<>(activityContentServiceImpl.saveActivityContent(activityContent),
 				HttpStatus.CREATED);

@@ -42,9 +42,9 @@ public class UniversityFetchController {
 			@ApiResponse(responseCode = "200", description = "Successfully fetched university data"),
 			@ApiResponse(responseCode = "400", description = "University fetch entry failed to be fetched", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
-	@GetMapping(value = "/{university_id}/{language}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<UniversityFetch> getUniversityFetchByUniversityIdAndLanguage(@PathVariable(name = "university_id") Integer universityId,
-																					   @PathVariable() Enum.Language language) {
+	@GetMapping(value = "/{universityId}/{language}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<UniversityFetch> getUniversityFetchByUniversityIdAndLanguage(@PathVariable(name = "universityId") Integer universityId,
+																					   @PathVariable(name = "language") Enum.Language language) {
 		return new ResponseEntity<>(universityFetchService.getUniversityFetchByUniversityIdAndLanguage(universityId, language),
 				HttpStatus.OK);
 	}
@@ -54,7 +54,7 @@ public class UniversityFetchController {
 			@ApiResponse(responseCode = "201", description = "University fetch created successfully"),
 			@ApiResponse(responseCode = "400", description = "University fetch failed to be created", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
-	@PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<UniversityFetch> createUniversityFetch(@Valid @RequestBody UniversityFetch universityFetch) {
 		return new ResponseEntity<>(universityFetchService.saveUniversityFetch(universityFetch), HttpStatus.CREATED);
 	}

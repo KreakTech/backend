@@ -29,7 +29,7 @@ import me.kreaktech.unility.service.MapWaypointServiceImpl;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/mapwaypoint")
+@RequestMapping("/map-waypoints")
 public class MapWaypointController {
 
 	@Autowired
@@ -50,7 +50,7 @@ public class MapWaypointController {
 			@ApiResponse(responseCode = "201", description = "waypoint created successfully"),
 			@ApiResponse(responseCode = "400", description = "waypoint failed to be created", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
-	@PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<MapWaypoint> saveMapwaypoint(@Valid @RequestBody MapWaypoint mapWaypoint) {
 		return new ResponseEntity<>(mapWaypointService.saveMapWaypoint(mapWaypoint), HttpStatus.CREATED);
 	}
@@ -91,7 +91,7 @@ public class MapWaypointController {
 			@ApiResponse(responseCode = "200", description = "waypoint list retrieved successfully"),
 	})
 	@GetMapping(value = "/all/{universityId}/{type}", produces = MediaType.APPLICATION_JSON_VALUE)
-	public ResponseEntity<List<MapWaypoint>> getBusMapWaypoints(@PathVariable Integer universityId, @PathVariable MapWaypointType type) {
+	public ResponseEntity<List<MapWaypoint>> getMapWaypointByUniversityIdAndType(@PathVariable Integer universityId, @PathVariable MapWaypointType type) {
 		List<MapWaypoint> busMapWaypoints = mapWaypointService.getAllMapWaypointsByUniversityIdAndType(universityId, type);
 		return new ResponseEntity<>(busMapWaypoints, HttpStatus.OK);
 	}

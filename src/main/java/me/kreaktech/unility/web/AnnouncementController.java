@@ -48,6 +48,16 @@ public class AnnouncementController {
         return new ResponseEntity<>(announcementService.getAnnouncementByTitle(title), HttpStatus.OK);
     }
 
+    @Operation(summary = "Gets all announcements in a list")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "200", description = "Announcements list retrieved successfully"),
+    })
+    @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Announcement>> getAnnouncements() {
+        List<Announcement> announcements = announcementService.getAllAnnouncements();
+        return new ResponseEntity<>(announcements, HttpStatus.OK);
+    }
+
     @Operation(summary = "Gets announcements by universityId")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Announcements retrieved successfully"),
@@ -62,7 +72,7 @@ public class AnnouncementController {
             @ApiResponse(responseCode = "201", description = "Announcement created successfully"),
             @ApiResponse(responseCode = "400", description = "Announcement failed to be created", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
     })
-    @PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
+    @PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<Announcement> saveAnnouncement(@Valid @RequestBody Announcement announcement) {
         return new ResponseEntity<>(announcementService.saveAnnouncement(announcement), HttpStatus.CREATED);
     }
@@ -78,22 +88,12 @@ public class AnnouncementController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
-    @Operation(summary = "Gets all announcements in a list")
-    @ApiResponses(value = {
-            @ApiResponse(responseCode = "200", description = "Announcements list retrieved successfully"),
-    })
-    @GetMapping(value = "/all", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Announcement>> getAnnouncements() {
-        List<Announcement> announcements = announcementService.getAllAnnouncements();
-        return new ResponseEntity<>(announcements, HttpStatus.OK);
-    }
-
     @Operation(summary = "Gets all announcements in a list by the help of dates")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Announcements list retrieved successfully"),
     })
-    @GetMapping(value = "/all-by-date/{university-id}", produces = MediaType.APPLICATION_JSON_VALUE)
-    public ResponseEntity<List<Announcement>> getAnnouncementsByDateAndUniversityId(@RequestParam(value = "from") String from, @RequestParam(value = "to") String to, @PathVariable(value = "university-id") Integer universityId) throws ParseException {
+    @GetMapping(value = "/all-by-date-between/{universityId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<List<Announcement>> getAnnouncementsByDateAndUniversityId(@RequestParam(value = "from") String from, @RequestParam(value = "to") String to, @PathVariable(value = "universityId") Integer universityId) throws ParseException {
         List<Announcement> announcements = announcementService
                 .getAnnouncementsByDateBetweenAndDateLessThanEqualAndUniversityId(Utils.stringToTimestamp(from),
                         Utils.stringToTimestamp(to), universityId);

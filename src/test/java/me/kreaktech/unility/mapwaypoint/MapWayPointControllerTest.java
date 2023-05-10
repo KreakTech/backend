@@ -77,7 +77,7 @@ class MapWaypointControllerTest {
 				.willAnswer((invocation -> invocation.getArgument(0)));
 
 		// Act
-		ResultActions response = mockmvc.perform(post("/mapwaypoint")
+		ResultActions response = mockmvc.perform(post("/map-waypoints")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(this.mapWaypoint)));
 
@@ -97,7 +97,7 @@ class MapWaypointControllerTest {
 		when(mapWaypointServiceImpl.getAllMapWaypoints()).thenReturn(mapWaypoints);
 
 		// Act
-		ResultActions response = mockmvc.perform(get("/mapwaypoint/all")
+		ResultActions response = mockmvc.perform(get("/map-waypoints/all")
 				.contentType(MediaType.APPLICATION_JSON));
 
 		// Asserts
@@ -117,7 +117,7 @@ class MapWaypointControllerTest {
 				.thenReturn(mapWaypoints);
 
 		// Act
-		ResultActions response = mockmvc.perform(get("/mapwaypoint/all/1")
+		ResultActions response = mockmvc.perform(get("/map-waypoints/all/1")
 				.contentType(MediaType.APPLICATION_JSON));
 
 		// Assert
@@ -135,7 +135,7 @@ class MapWaypointControllerTest {
 		when(mapWaypointServiceImpl.getMapWaypointById(ArgumentMatchers.any())).thenReturn(mapWaypoint);
 
 		// Act
-		ResultActions response = mockmvc.perform(get("/mapwaypoint/1")
+		ResultActions response = mockmvc.perform(get("/map-waypoints/1")
 				.contentType(MediaType.APPLICATION_JSON)
 				.content(objectMapper.writeValueAsString(this.mapWaypoint)));
 
@@ -154,7 +154,7 @@ class MapWaypointControllerTest {
 		doNothing().when(mapWaypointServiceImpl).deleteMapWaypointById(ArgumentMatchers.any());
 
 		// Act
-		ResultActions response = mockmvc.perform(delete("/mapwaypoint/1")
+		ResultActions response = mockmvc.perform(delete("/map-waypoints/1")
 				.contentType(MediaType.APPLICATION_JSON));
 
 		// Assert

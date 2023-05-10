@@ -29,7 +29,6 @@ import me.kreaktech.unility.service.ActivityServiceImpl;
 @RestController
 @AllArgsConstructor
 @RequestMapping("/activities")
-// TO DO: UPDATE METHOD IS MISSING SHOULD WE IMPLEMENT IT?
 public class ActivityController {
 
 	@Autowired
@@ -50,7 +49,7 @@ public class ActivityController {
 			@ApiResponse(responseCode = "201", description = "activity created successfully"),
 			@ApiResponse(responseCode = "400", description = "activity failed to be created", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
 	})
-	@PostMapping(value = "", produces = MediaType.APPLICATION_JSON_VALUE)
+	@PostMapping(produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<Activity> saveActivity(@Valid @RequestBody Activity activity) {
 		return new ResponseEntity<>(activityServiceImpl.saveActivity(activity), HttpStatus.CREATED);
 	}
