@@ -28,7 +28,7 @@ import me.kreaktech.unility.service.CafeteriaMenuServiceImpl;
 
 @AllArgsConstructor
 @RestController
-@RequestMapping("/cafeteriamenu")
+@RequestMapping("/cafeteria-menu")
 public class CafeteriaMenuController {
 
 	@Autowired
