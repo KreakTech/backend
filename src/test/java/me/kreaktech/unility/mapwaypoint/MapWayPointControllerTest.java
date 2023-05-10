@@ -54,8 +54,6 @@ class MapWaypointControllerTest {
 	@BeforeEach
 	void setUpControllerTest() {
 
-		LocalDateTime activityDateTime = LocalDateTime.now().minusHours(1);
-
 		University university = University.builder()
 				.name("some university1")
 				.id(1)

@@ -51,7 +51,7 @@ public class AnnouncementControllerTest {
 	private Announcement announcement;
 
 	@BeforeEach
-	void setUpControllerTest() throws JsonProcessingException, Exception {
+	void setUpControllerTest() {
 		LocalDateTime announcementDateTime = LocalDateTime.now().minusHours(1);
 
 		announcement = Announcement.builder()
