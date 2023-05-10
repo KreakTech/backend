@@ -74,4 +74,14 @@ public class ActivityController {
 		List<Activity> activities = activityServiceImpl.getAllActivities();
 		return new ResponseEntity<>(activities, HttpStatus.OK);
 	}
+
+	@Operation(summary = "Gets all activities in a list by university id")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "200", description = "Activities list retrieved successfully"),
+	})
+	@GetMapping(value = "/all/{universityId}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<List<Activity>> getAllActivitiesByUniversityId(@PathVariable(name = "universityId") Integer universityId) {
+		List<Activity> activities = activityServiceImpl.getAllActivitiesByUniversityId(universityId);
+		return new ResponseEntity<>(activities, HttpStatus.OK);
+	}
 }
