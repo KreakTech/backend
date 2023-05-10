@@ -5,6 +5,7 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
+import me.kreaktech.unility.constants.Enum;
 import me.kreaktech.unility.entity.University;
 import me.kreaktech.unility.repository.UniversityRepository;
 import org.assertj.core.api.Assertions;
@@ -49,6 +50,7 @@ public class AnnouncementRepositoryTest {
 				.link("https://someurl.com")
 				.date(Timestamp.valueOf(announcementDateTime))
 				.university(university)
+				.language(Enum.Language.EN)
 				.build();
 
 		savedAnnouncement = announcementRepository.save(announcement);
@@ -63,6 +65,7 @@ public class AnnouncementRepositoryTest {
 		Assertions.assertThat(savedAnnouncement.getId()).isGreaterThan(0);
 		Assertions.assertThat(savedAnnouncement.getTitle()).isEqualTo(announcement.getTitle());
 		Assertions.assertThat(savedAnnouncement.getLink()).isEqualTo(announcement.getLink());
+		Assertions.assertThat(savedAnnouncement.getLanguage()).isEqualTo(announcement.getLanguage());
 		Assertions.assertThat(savedAnnouncement.getUniversity()).isEqualTo(university);
 	}
 
@@ -76,7 +79,8 @@ public class AnnouncementRepositoryTest {
 		Assertions.assertThat(fetchedAnnouncement.getId()).isEqualTo(savedAnnouncement.getId());
 		Assertions.assertThat(fetchedAnnouncement.getTitle()).isEqualTo(savedAnnouncement.getTitle());
 		Assertions.assertThat(fetchedAnnouncement.getLink()).isEqualTo(savedAnnouncement.getLink());
-		Assertions.assertThat(savedAnnouncement.getUniversity()).isEqualTo(university);
+		Assertions.assertThat(fetchedAnnouncement.getLanguage()).isEqualTo(savedAnnouncement.getLanguage());
+		Assertions.assertThat(fetchedAnnouncement.getUniversity()).isEqualTo(savedAnnouncement.getUniversity());
 	}
 
 	@Test
@@ -90,6 +94,7 @@ public class AnnouncementRepositoryTest {
 				.link("https://someurl.com")
 				.date(Timestamp.valueOf(firstAnnouncementDateTime))
 				.university(university)
+				.language(Enum.Language.EN)
 				.build();
 
 		Announcement secondAnnouncement = Announcement.builder()
@@ -97,6 +102,7 @@ public class AnnouncementRepositoryTest {
 				.link("https://someurl.com")
 				.date(Timestamp.valueOf(secondAnnouncementDateTime))
 				.university(university)
+				.language(Enum.Language.EN)
 				.build();
 
 		announcementRepository.save(firstAnnouncement);
@@ -122,6 +128,7 @@ public class AnnouncementRepositoryTest {
 		Assertions.assertThat(fetchedAnnouncement.getId()).isEqualTo(savedAnnouncement.getId());
 		Assertions.assertThat(fetchedAnnouncement.getTitle()).isEqualTo(savedAnnouncement.getTitle());
 		Assertions.assertThat(fetchedAnnouncement.getLink()).isEqualTo(savedAnnouncement.getLink());
+		Assertions.assertThat(fetchedAnnouncement.getLanguage()).isEqualTo(savedAnnouncement.getLanguage());
 		Assertions.assertThat(fetchedAnnouncement.getUniversity()).isEqualTo(savedAnnouncement.getUniversity());
 	}
 
@@ -140,6 +147,7 @@ public class AnnouncementRepositoryTest {
 		Assertions.assertThat(updatedAnnouncement.getId()).isEqualTo(fetchedAnnouncement.getId());
 		Assertions.assertThat(updatedAnnouncement.getTitle()).isEqualTo(fetchedAnnouncement.getTitle());
 		Assertions.assertThat(updatedAnnouncement.getLink()).isEqualTo(fetchedAnnouncement.getLink());
+		Assertions.assertThat(updatedAnnouncement.getLanguage()).isEqualTo(fetchedAnnouncement.getLanguage());
 		Assertions.assertThat(updatedAnnouncement.getUniversity()).isEqualTo(fetchedAnnouncement.getUniversity());
 	}
 

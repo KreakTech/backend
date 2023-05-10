@@ -11,6 +11,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 
+import me.kreaktech.unility.constants.Enum;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -45,6 +46,7 @@ public class AnnouncementServiceTest {
 				.title("Some Title")
 				.link("https://somelink.com")
 				.date(Timestamp.valueOf(announcementDateTime))
+				.language(Enum.Language.EN)
 				.id(1)
 				.build();
 
@@ -57,9 +59,6 @@ public class AnnouncementServiceTest {
 	public void AnnouncementService_CreateAnnouncement_ReturnsAnnouncement() {
 		// Assert
 		Assertions.assertThat(savedAnnouncement).isNotNull();
-		Assertions.assertThat(savedAnnouncement.getTitle()).isEqualTo(savedAnnouncement.getTitle());
-		Assertions.assertThat(savedAnnouncement.getLink()).isEqualTo(savedAnnouncement.getLink());
-		Assertions.assertThat(savedAnnouncement.getDate()).isEqualTo(savedAnnouncement.getDate());
 	}
 
 	@Test
@@ -69,9 +68,11 @@ public class AnnouncementServiceTest {
 		Announcement announcement1 = new Announcement();
 		announcement1.setId(1);
 		announcement1.setTitle("Announcement 1");
+		announcement1.setLanguage(Enum.Language.EN);
 		Announcement announcement2 = new Announcement();
 		announcement2.setId(2);
 		announcement2.setTitle("Announcement 2");
+		announcement2.setLanguage(Enum.Language.EN);
 		announcements.add(announcement1);
 		announcements.add(announcement2);
 
@@ -96,6 +97,7 @@ public class AnnouncementServiceTest {
 		Assertions.assertThat(fetchedAnnouncement).isNotNull();
 		Assertions.assertThat(fetchedAnnouncement.getTitle()).isEqualTo(savedAnnouncement.getTitle());
 		Assertions.assertThat(fetchedAnnouncement.getLink()).isEqualTo(savedAnnouncement.getLink());
+		Assertions.assertThat(fetchedAnnouncement.getLanguage()).isEqualTo(savedAnnouncement.getLanguage());
 		Assertions.assertThat(fetchedAnnouncement.getDate()).isEqualTo(savedAnnouncement.getDate());
 	}
 
