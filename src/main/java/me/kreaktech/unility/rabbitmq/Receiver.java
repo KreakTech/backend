@@ -28,7 +28,7 @@ public class Receiver implements MessageListener {
 			String messageString = new String(message.getBody());
 			// Deserialize the JSON message into a Java object
 			EventBody eventBody = gson.fromJson(messageString, EventBody.class);
-			handleEvent.processEvent(eventBody, messageString);
+			handleEvent.processEvent(eventBody);
 		} catch (Exception ignored) {
 			System.out.println(ignored.getMessage());
 		}
