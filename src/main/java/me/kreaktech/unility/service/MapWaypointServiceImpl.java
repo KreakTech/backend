@@ -29,8 +29,7 @@ public class MapWaypointServiceImpl implements MapWaypointService {
 	@Override
 	public void deleteMapWaypointById(Integer id) {
 		mapWaypointRepository.deleteById(id);
-		return;
-	}
+    }
 
 	@Override
 	public List<MapWaypoint> getAllMapWaypoints() {

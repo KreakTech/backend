@@ -34,7 +34,6 @@ public class UniversityFetchServiceImpl implements UniversityFetchService {
 	@Override
 	public void deleteUniversityFetchById(Integer id) {
 		universityFetchRepository.deleteById(id);
-		return;
-	}
+    }
 
 }

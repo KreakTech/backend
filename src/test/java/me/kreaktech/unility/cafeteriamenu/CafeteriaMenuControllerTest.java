@@ -56,7 +56,7 @@ public class CafeteriaMenuControllerTest {
 	private CafeteriaMenu cafeteriaMenu;
 
 	@BeforeEach
-	void setUpControllerTest() throws JsonProcessingException, Exception {
+	void setUpControllerTest() {
 		Language lang = Language.EN;
 		MealType mealType = MealType.BREAKFAST;
 		LocalDateTime activityDateTime = LocalDateTime.now().minusHours(1);
@@ -100,7 +100,7 @@ public class CafeteriaMenuControllerTest {
 				.andExpect(
 						MockMvcResultMatchers.jsonPath("$.mealType").value(String.valueOf(cafeteriaMenu.getMealType())))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.mealContent")
-						.value(String.valueOf(cafeteriaMenu.getMealContent())));
+						.value(cafeteriaMenu.getMealContent()));
 	}
 
 	@Test
@@ -119,7 +119,7 @@ public class CafeteriaMenuControllerTest {
 				.andExpect(MockMvcResultMatchers.jsonPath("$.[0].mealType")
 						.value(String.valueOf(cafeteriaMenu.getMealType())))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.[0].mealContent")
-						.value(String.valueOf(cafeteriaMenu.getMealContent())));
+						.value(cafeteriaMenu.getMealContent()));
 	}
 
 	@Test
@@ -139,7 +139,7 @@ public class CafeteriaMenuControllerTest {
 				.andExpect(MockMvcResultMatchers.jsonPath("$.[0].mealType")
 						.value(String.valueOf(cafeteriaMenu.getMealType())))
 				.andExpect(MockMvcResultMatchers.jsonPath("$.[0].mealContent")
-						.value(String.valueOf(cafeteriaMenu.getMealContent())));
+						.value(cafeteriaMenu.getMealContent()));
 	}
 
 	@Test
@@ -155,7 +155,7 @@ public class CafeteriaMenuControllerTest {
 		// Assert
 		response.andExpect(MockMvcResultMatchers.status().isOk())
                 .andExpect(MockMvcResultMatchers.jsonPath("$.mealType").value(String.valueOf(cafeteriaMenu.getMealType())))
-                .andExpect(MockMvcResultMatchers.jsonPath("$.mealContent").value(String.valueOf(cafeteriaMenu.getMealContent())));
+                .andExpect(MockMvcResultMatchers.jsonPath("$.mealContent").value(cafeteriaMenu.getMealContent()));
 		}
 
 	@Test

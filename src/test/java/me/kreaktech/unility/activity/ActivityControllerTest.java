@@ -55,7 +55,7 @@ public class ActivityControllerTest {
         private Activity activity;
 
         @BeforeEach
-        void setUpControllerTest() throws JsonProcessingException, Exception {
+        void setUpControllerTest() {
                 LocalDateTime activityDateTime = LocalDateTime.now().minusHours(1);
                 // Arrange
                 University university = University.builder()

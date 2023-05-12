@@ -107,8 +107,7 @@ public class UniversityFetchServiceTest {
     public void UniversityFetchService_DeleteUniversityFetchById_ReturnsVoid() {
         doAnswer(invocation -> {
             Object arg0 = invocation.getArgument(0);
-            if (arg0 instanceof Integer) {
-                Integer id = (Integer) arg0;
+            if (arg0 instanceof Integer id) {
                 if (id == savedUniversityFetch.getId()) {
                     return null;
                 }

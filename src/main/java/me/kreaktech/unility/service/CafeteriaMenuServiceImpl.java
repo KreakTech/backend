@@ -27,8 +27,7 @@ public class CafeteriaMenuServiceImpl implements CafeteriaMenuService {
 	@Override
 	public void deleteCafeteriaMenuById(Integer id) {
 		cafeteriaMenuRepository.deleteById(id);
-		return;
-	}
+    }
 
 	@Override
 	public List<CafeteriaMenu> getAllCafeteriaMenu() {
@@ -38,5 +37,5 @@ public class CafeteriaMenuServiceImpl implements CafeteriaMenuService {
 	@Override
 	public List<CafeteriaMenu> getAllCafeteriaMenuByUniversityId(Integer universityId) {
 		return cafeteriaMenuRepository.findByUniversityId(universityId);
-	};
+	}
 }

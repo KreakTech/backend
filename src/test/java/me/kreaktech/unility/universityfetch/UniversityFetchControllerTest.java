@@ -53,7 +53,7 @@ public class UniversityFetchControllerTest {
         private UniversityFetch universityFetch;
 
         @BeforeEach
-        void setUpControllerTest() throws JsonProcessingException, Exception {
+        void setUpControllerTest() {
 
                 LocalDateTime activityDateTime = LocalDateTime.now().minusHours(1);
 

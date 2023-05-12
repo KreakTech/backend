@@ -52,7 +52,7 @@ public class ActivityContentControllerTest {
         private ActivityContent activityContent;
 
         @BeforeEach
-        void setUpControllerTest() throws JsonProcessingException, Exception {
+        void setUpControllerTest() {
 
                 LocalDateTime activityContentDateTime = LocalDateTime.now().minusHours(1);
 

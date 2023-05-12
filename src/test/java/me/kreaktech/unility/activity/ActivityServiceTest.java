@@ -136,8 +136,7 @@ public class ActivityServiceTest {
         // When
         doAnswer(invocation -> {
             Object arg0 = invocation.getArgument(0);
-            if (arg0 instanceof Integer) {
-                Integer id = (Integer) arg0;
+            if (arg0 instanceof Integer id) {
                 if (id == savedActivity1.getId()) {
                     return null;
                 }

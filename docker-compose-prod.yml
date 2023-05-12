@@ -29,6 +29,8 @@ services:
       - rabbitmq
     image: alhassanraad/unility:latest
     restart: on-failure
+    environment:
+      - ENV=prod
     env_file:
       - ./secrets.env
     ports:
