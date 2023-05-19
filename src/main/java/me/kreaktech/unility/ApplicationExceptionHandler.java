@@ -1,7 +1,6 @@
 package me.kreaktech.unility;
 
 import lombok.NonNull;
-import me.kreaktech.unility.exception.EntityNotFoundException;
 import me.kreaktech.unility.exception.ErrorResponse;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -10,6 +9,7 @@ import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
 import org.springframework.http.converter.HttpMessageNotReadableException;
+import org.springframework.lang.Nullable;
 import org.springframework.validation.FieldError;
 import org.springframework.web.HttpRequestMethodNotSupportedException;
 import org.springframework.web.bind.MethodArgumentNotValidException;
@@ -31,12 +31,6 @@ import java.util.List;
 
 @ControllerAdvice
 public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler {
-
-    @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity<Object> handleResourceNotFoundException(RuntimeException ex) {
-        ErrorResponse error = new ErrorResponse(Collections.singletonList(ex.getMessage()), HttpStatus.NOT_FOUND);
-        return ResponseEntity.status(HttpStatus.NOT_FOUND).body(error);
-    }
 
     @ExceptionHandler(EmptyResultDataAccessException.class)
     public ResponseEntity<Object> handleDataAccessException() {
@@ -73,8 +67,10 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
         StringBuilder message = new StringBuilder();
         message.append(ex.getMethod());
         message.append(" method is not supported for this request. Supported methods are ");
-        ex.getSupportedHttpMethods().forEach(t -> message.append(t + " "));
-        ErrorResponse error = new ErrorResponse(List.of(message.toString()), HttpStatus.METHOD_NOT_ALLOWED);
+		if (ex.getSupportedHttpMethods() != null) {
+			ex.getSupportedHttpMethods().forEach(t -> message.append(t + " "));
+		}
+	    ErrorResponse error = new ErrorResponse(List.of(message.toString()), HttpStatus.METHOD_NOT_ALLOWED);
         return new ResponseEntity<>(error, HttpStatus.METHOD_NOT_ALLOWED);
     }
 
@@ -85,10 +81,10 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
     }
 
     @Override
-    protected ResponseEntity<Object> handleExceptionInternal(Exception ex, Object body, HttpHeaders headers, HttpStatus status, WebRequest request) {
+    protected ResponseEntity<Object> handleExceptionInternal(Exception ex, @Nullable Object body, HttpHeaders headers, HttpStatus status, WebRequest request) {
         ErrorResponse error = new ErrorResponse(Collections.singletonList(ex.getMessage()), status);
         if (HttpStatus.INTERNAL_SERVER_ERROR.equals(status)) {
-            if (!System.getenv("env").equals("prod")) {
+            if (!System.getenv("ENV").equals("prod")) {
                 StringWriter sw = new StringWriter();
                 PrintWriter pw = new PrintWriter(sw);
                 ex.printStackTrace(pw);
@@ -104,8 +100,8 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
     @ResponseBody
     public ResponseEntity<Object> handleMethodArgumentTypeMismatchException(MethodArgumentTypeMismatchException ex) {
         String fieldName = ex.getName();
-        String requiredType = ex.getRequiredType().getSimpleName();
-        String actualValue = ex.getValue().toString();
+		String requiredType = ex.getRequiredType() != null ? ex.getRequiredType().getSimpleName() : "unknown";
+		String actualValue = ex.getValue() != null ? ex.getValue().toString() : "null";
         String errorMessage = String.format("Invalid value '%s' for parameter '%s': must be of type %s", actualValue, fieldName, requiredType);
 
         ErrorResponse error;
@@ -129,7 +125,7 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
     }
 
     private boolean isProduction() {
-        String env = System.getenv("env");
+        String env = System.getenv("ENV");
         return env != null && env.equals("prod");
     }
 
