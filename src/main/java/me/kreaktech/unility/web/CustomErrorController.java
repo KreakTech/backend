@@ -1,5 +1,7 @@
 package me.kreaktech.unility.web;
 
+import java.util.List;
+
 import javax.servlet.RequestDispatcher;
 import javax.servlet.http.HttpServletRequest;
 
@@ -9,13 +11,18 @@ import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
 
+import me.kreaktech.unility.exception.ErrorResponse;
+
 @RestController
 public class CustomErrorController implements ErrorController {
     private static final String PATH = "/error";
-    
+	
     @RequestMapping(PATH)
-    public ResponseEntity<String> handleError(HttpServletRequest request) {
-        Object status = request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
-        return new ResponseEntity<>("An error occurred: " + status, HttpStatus.BAD_REQUEST);
+    public ResponseEntity<Object> handleError(HttpServletRequest request) {
+        Integer statusCode = (Integer) request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
+        HttpStatus httpStatus = HttpStatus.valueOf(statusCode);
+        ErrorResponse error = new ErrorResponse(List.of("Resource not found"), httpStatus);
+        return new ResponseEntity<>(error, httpStatus);
     }
+
 }
