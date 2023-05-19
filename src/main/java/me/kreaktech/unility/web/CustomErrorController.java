@@ -16,13 +16,25 @@ import me.kreaktech.unility.exception.ErrorResponse;
 @RestController
 public class CustomErrorController implements ErrorController {
     private static final String PATH = "/error";
-	
+
     @RequestMapping(PATH)
     public ResponseEntity<Object> handleError(HttpServletRequest request) {
         Integer statusCode = (Integer) request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
         HttpStatus httpStatus = HttpStatus.valueOf(statusCode);
-        ErrorResponse error = new ErrorResponse(List.of("Resource not found"), httpStatus);
+        ErrorResponse error;
+
+        switch (httpStatus) {
+            case NOT_FOUND:
+                error = new ErrorResponse(List.of("Resource not found"), httpStatus);
+                break;
+            case UNAUTHORIZED:
+                error = new ErrorResponse(List.of("Unauthorized access"), httpStatus);
+                break;
+            default:
+                error = new ErrorResponse(List.of("An error occurred"), httpStatus);
+                break;
+        }
+
         return new ResponseEntity<>(error, httpStatus);
     }
-
 }
