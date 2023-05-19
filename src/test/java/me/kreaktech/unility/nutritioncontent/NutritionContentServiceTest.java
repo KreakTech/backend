@@ -83,8 +83,7 @@ public class NutritionContentServiceTest {
     public void NutritionContentService_DeleteNutritionContentById_ReturnsVoid() {
         doAnswer(invocation -> {
             Object arg0 = invocation.getArgument(0);
-            if (arg0 instanceof Integer) {
-                Integer id = (Integer) arg0;
+            if (arg0 instanceof Integer id) {
                 if (id == savedNutritionContent.getId()) {
                     return null;
                 }

@@ -26,7 +26,6 @@ public class NutritionContentServiceImpl implements NutritionContentService {
 	@Override
 	public void deleteNutritionContentById(Integer id) {
 		nutritionContentRepository.deleteById(id);
-		return;
-	}
+    }
 
 }

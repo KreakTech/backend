@@ -4,32 +4,23 @@ import java.sql.Timestamp;
 import java.util.List;
 
 import com.fasterxml.jackson.annotation.JsonFormat;
+import lombok.Getter;
+import lombok.Setter;
+import org.springframework.http.HttpStatus;
 
+@Getter
+@Setter
 public class ErrorResponse {
 
     @JsonFormat(shape = JsonFormat.Shape.STRING, pattern = "dd-MM-yyyy hh:mm:ss")
     private Timestamp timestamp;
+    private HttpStatus status;
     private List<String> message;
+    private String stackTrace;
 
-    public ErrorResponse(List<String> message) {
+    public ErrorResponse(List<String> message, HttpStatus status) {
         this.timestamp = new Timestamp(System.currentTimeMillis());
         this.message = message;
+        this.status = status;
     }
-
-    public Timestamp getTimestamp() {
-        return this.timestamp;
-    }
-
-    public void setTimestamp(Timestamp timestamp) {
-        this.timestamp = timestamp;
-    }
-
-    public List<String> getMessage() {
-        return this.message;
-    }
-
-    public void setMessage(List<String> message) {
-        this.message = message;
-    }
-
 }

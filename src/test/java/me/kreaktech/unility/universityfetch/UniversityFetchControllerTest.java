@@ -27,7 +27,6 @@ import org.springframework.test.web.servlet.MockMvc;
 import org.springframework.test.web.servlet.ResultActions;
 import org.springframework.test.web.servlet.result.MockMvcResultMatchers;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 import me.kreaktech.unility.constants.Enum.Language;
@@ -53,7 +52,7 @@ public class UniversityFetchControllerTest {
         private UniversityFetch universityFetch;
 
         @BeforeEach
-        void setUpControllerTest() throws JsonProcessingException, Exception {
+        void setUpControllerTest() {
 
                 LocalDateTime activityDateTime = LocalDateTime.now().minusHours(1);
 

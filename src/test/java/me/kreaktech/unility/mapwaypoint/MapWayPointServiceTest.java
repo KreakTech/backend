@@ -5,8 +5,6 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
-import java.sql.Timestamp;
-import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -39,7 +37,6 @@ class MapWaypointServiceTest {
 
     @BeforeEach
     void setUpService() {
-        LocalDateTime activityDateTime = LocalDateTime.now().minusHours(1);
 
         University university = University.builder()
                 .name("some university1")

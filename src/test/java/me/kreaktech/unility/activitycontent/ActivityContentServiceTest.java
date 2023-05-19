@@ -9,7 +9,6 @@ import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.Optional;
 
-import me.kreaktech.unility.constants.Enum;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
@@ -80,8 +79,7 @@ public class ActivityContentServiceTest {
 	public void ActivityContentService_DeleteActivityContentById_ReturnsVoid() {
 		doAnswer(invocation -> {
 			Object arg0 = invocation.getArgument(0);
-			if (arg0 instanceof Integer) {
-				Integer id = (Integer) arg0;
+			if (arg0 instanceof Integer id) {
 				if (id == savedActivityContent.getId()) {
 					return null;
 				}
