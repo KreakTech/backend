@@ -34,7 +34,6 @@ public class ActivityContent {
     @Column(name = "organizer")
     private String organizer;
 
-    @NonNull
     @Column(name = "incentive")
     private boolean incentive;
 
@@ -46,7 +45,6 @@ public class ActivityContent {
     @Column(name = "activity_duration")
     private String activityDuration;
 
-    @NonNull
     @Column(name = "is_canceled")
     private boolean isCanceled;
 
