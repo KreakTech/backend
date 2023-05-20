@@ -2,6 +2,7 @@ package me.kreaktech.unility.service;
 
 import java.util.List;
 
+import me.kreaktech.unility.utils.Utils;
 import org.springframework.stereotype.Service;
 
 import lombok.AllArgsConstructor;
@@ -16,7 +17,7 @@ public class CafeteriaMenuServiceImpl implements CafeteriaMenuService {
 
 	@Override
 	public CafeteriaMenu getCafeteriaMenuById(Integer id) {
-		return cafeteriaMenuRepository.findById(id).orElse(null);
+		return Utils.unwrap(cafeteriaMenuRepository.findById(id), id);
 	}
 
 	@Override
