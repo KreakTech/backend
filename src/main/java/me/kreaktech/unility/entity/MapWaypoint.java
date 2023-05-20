@@ -50,7 +50,7 @@ public class MapWaypoint {
 	@Column(name = "type", nullable = false)
 	private MapWaypointType type;
 
-	@ManyToOne(optional = false, cascade = CascadeType.ALL)
+	@ManyToOne(optional = false, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "university_id", referencedColumnName = "id")
 	private University university;
 

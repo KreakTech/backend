@@ -2,6 +2,7 @@ package me.kreaktech.unility.entity;
 
 import java.sql.Timestamp;
 
+import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
 import javax.persistence.GeneratedValue;
@@ -56,7 +57,7 @@ public class Announcement {
 	@Column(name = "language", nullable = false)
 	private Enum.Language language;
 
-	@ManyToOne(optional = false)
+	@ManyToOne(optional = false, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "university_id", referencedColumnName = "id")
 	private University university;
 

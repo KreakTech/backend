@@ -57,7 +57,7 @@ public class CafeteriaMenu {
 	@Column(name = "menu_type", nullable = false)
 	private MealType mealType;
 
-	@ManyToOne(optional = false, cascade = CascadeType.ALL)
+	@ManyToOne(optional = false, cascade = CascadeType.PERSIST)
 	@JoinColumn(name = "university_id", referencedColumnName = "id")
 	private University university;
 
