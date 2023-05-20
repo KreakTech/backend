@@ -1,6 +1,7 @@
 package me.kreaktech.unility;
 
 import lombok.NonNull;
+import me.kreaktech.unility.exception.EntityNotFoundException;
 import me.kreaktech.unility.exception.ErrorResponse;
 import org.apache.commons.lang3.exception.ExceptionUtils;
 import org.springframework.dao.DataIntegrityViolationException;
@@ -113,6 +114,14 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
 
         return new ResponseEntity<>(error, HttpStatus.BAD_REQUEST);
     }
+
+    @ExceptionHandler(EntityNotFoundException.class)
+    @ResponseStatus(HttpStatus.NOT_FOUND)
+    public ResponseEntity<Object> handleEntityNotFoundException(EntityNotFoundException exception) {
+        ErrorResponse error = new ErrorResponse(Collections.singletonList(exception.getMessage()), HttpStatus.NOT_FOUND);
+        return new ResponseEntity<>(error, HttpStatus.NOT_FOUND);
+    }
+
 
     @ExceptionHandler(Exception.class)
     @ResponseStatus(HttpStatus.INTERNAL_SERVER_ERROR)
