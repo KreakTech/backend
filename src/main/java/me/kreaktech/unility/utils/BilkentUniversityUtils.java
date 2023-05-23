@@ -53,8 +53,6 @@ public class BilkentUniversityUtils {
 
         NutritionContent createdNutritionContent = nutritionContentService.saveNutritionContent(nutritionContent);
 
-        entityManager.persist(nutritionContent);
-
         CafeteriaMenu cafeteriaMenu = new CafeteriaMenu();
         cafeteriaMenu.setNutritionContent(createdNutritionContent);
         cafeteriaMenu.setDateServed(eventBody.getDate());
@@ -74,6 +72,8 @@ public class BilkentUniversityUtils {
     public void handleAnnouncementEvent(EventBody eventBody, University university) {
         BilkentAnnouncementData announcementData = Utils.parseObjectToEntity(eventBody.getData(),
                 BilkentAnnouncementData.class);
+
+        university = entityManager.merge(university);
 
         Announcement announcement = new Announcement();
         announcement.setTitle(announcementData.getTitle());
@@ -95,13 +95,13 @@ public class BilkentUniversityUtils {
         JsonElement jsonElement = gson.toJsonTree(eventBody.getData());
         BilkentActivityData[] activityData = gson.fromJson(jsonElement, BilkentActivityData[].class);
 
+        university = entityManager.merge(university);
+
         List<Activity> activities = activityService.getAllActivitiesByUniversityId(university.getId());
         activities.forEach(activity -> {
             activityService.deleteActivityById(activity.getId());
             activityContentService.deleteActivityContentById(activity.getActivityContent().getId());
         });
-
-        university = entityManager.merge(university);
 
         for (BilkentActivityData activity : activityData) {
             ActivityContent currActivityContent = new ActivityContent();
@@ -124,6 +124,5 @@ public class BilkentUniversityUtils {
 
             activityService.saveActivity(currActivity);
         }
-
     }
 }
