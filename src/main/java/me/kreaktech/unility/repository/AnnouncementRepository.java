@@ -16,4 +16,5 @@ public interface AnnouncementRepository extends JpaRepository<Announcement, Inte
 
 	Optional<Announcement> findByTitle(String title);
 	List<Announcement> findByUniversityId(Integer universityId);
+	void deleteAllByUniversityId(Integer universityId);
 }

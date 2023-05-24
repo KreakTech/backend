@@ -65,6 +65,17 @@ public class CafeteriaMenuController {
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
+	@Operation(summary = "Deletes all cafeteria menus made by a certain university")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "204", description = "Cafeteria menus deleted successfully"),
+			@ApiResponse(responseCode = "400", description = "Cafeteria menus failed to be deleted", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+	})
+	@DeleteMapping(value = "/all/{universityId}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<HttpStatus> deleteAllCafeteriaMenusByUniversityId(@PathVariable Integer universityId) {
+		cafeteriaMenuService.deleteAllCafeteriaMenusByUniversityId(universityId);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
+
 	@Operation(summary = "Gets all cafeteria menu in a list")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Cafeteria menu list retrieved successfully"),

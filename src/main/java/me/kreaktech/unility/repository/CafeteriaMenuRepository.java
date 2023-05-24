@@ -8,4 +8,5 @@ import me.kreaktech.unility.entity.CafeteriaMenu;
 
 public interface CafeteriaMenuRepository extends JpaRepository<CafeteriaMenu, Integer> {
 	List<CafeteriaMenu> findByUniversityId(Integer universityId);
+	void deleteAllByUniversityId(Integer universityId);
 }

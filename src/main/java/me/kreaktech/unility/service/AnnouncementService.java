@@ -11,7 +11,7 @@ public interface AnnouncementService {
     Announcement saveAnnouncement(Announcement announcement);
 
     void deleteAnnouncementById(Integer id);
-
+    void deleteAllAnnouncementsByUniversityId(Integer universityId);
     List<Announcement> getAllAnnouncements();
 
     Announcement getAnnouncementByTitle(String title);
@@ -19,4 +19,5 @@ public interface AnnouncementService {
     List<Announcement> getAnnouncementsByDateBetweenAndDateLessThanEqualAndUniversityId(Timestamp from, Timestamp to, Integer universityId);
 
     List<Announcement> getAnnouncementsByUniversityId(Integer universityId);
+
 }

@@ -14,4 +14,6 @@ public interface CafeteriaMenuService {
     List<CafeteriaMenu> getAllCafeteriaMenu();
 
     List<CafeteriaMenu> getAllCafeteriaMenuByUniversityId(Integer universityId);
+
+    void deleteAllCafeteriaMenusByUniversityId(Integer universityId);
 }

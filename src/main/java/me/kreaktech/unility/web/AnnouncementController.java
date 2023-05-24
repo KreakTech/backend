@@ -88,6 +88,17 @@ public class AnnouncementController {
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
+    @Operation(summary = "Deletes all announcements made by a certain university")
+    @ApiResponses(value = {
+            @ApiResponse(responseCode = "204", description = "Announcements deleted successfully"),
+            @ApiResponse(responseCode = "400", description = "Announcements failed to be deleted", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+    })
+    @DeleteMapping(value = "/all/{universityId}", produces = MediaType.APPLICATION_JSON_VALUE)
+    public ResponseEntity<HttpStatus> deleteAllAnnouncementsByUniversityId(@PathVariable Integer universityId) {
+        announcementService.deleteAllAnnouncementsByUniversityId(universityId);
+        return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+    }
+
     @Operation(summary = "Gets all announcements in a list by the help of dates")
     @ApiResponses(value = {
             @ApiResponse(responseCode = "200", description = "Announcements list retrieved successfully"),

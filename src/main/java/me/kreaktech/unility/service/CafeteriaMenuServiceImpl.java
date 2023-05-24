@@ -39,4 +39,9 @@ public class CafeteriaMenuServiceImpl implements CafeteriaMenuService {
 	public List<CafeteriaMenu> getAllCafeteriaMenuByUniversityId(Integer universityId) {
 		return cafeteriaMenuRepository.findByUniversityId(universityId);
 	}
+
+	@Override
+	public void deleteAllCafeteriaMenusByUniversityId(Integer universityId) {
+		cafeteriaMenuRepository.deleteAllByUniversityId(universityId);
+	}
 }
