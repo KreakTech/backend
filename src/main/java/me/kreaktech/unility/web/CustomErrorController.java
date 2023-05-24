@@ -21,19 +21,11 @@ public class CustomErrorController implements ErrorController {
     public ResponseEntity<Object> handleError(HttpServletRequest request) {
         Integer statusCode = (Integer) request.getAttribute(RequestDispatcher.ERROR_STATUS_CODE);
         HttpStatus httpStatus = HttpStatus.valueOf(statusCode);
-        ErrorResponse error;
-
-        switch (httpStatus) {
-            case NOT_FOUND:
-                error = new ErrorResponse(List.of("Resource not found"), httpStatus);
-                break;
-            case UNAUTHORIZED:
-                error = new ErrorResponse(List.of("Unauthorized access"), httpStatus);
-                break;
-            default:
-                error = new ErrorResponse(List.of("An error occurred"), httpStatus);
-                break;
-        }
+        ErrorResponse error = switch (httpStatus) {
+            case NOT_FOUND -> new ErrorResponse(List.of("Resource not found"), httpStatus);
+            case UNAUTHORIZED -> new ErrorResponse(List.of("Unauthorized access"), httpStatus);
+            default -> new ErrorResponse(List.of("An error occurred"), httpStatus);
+        };
 
         return new ResponseEntity<>(error, httpStatus);
     }
