@@ -85,11 +85,11 @@ public class ApplicationExceptionHandler extends ResponseEntityExceptionHandler 
     protected ResponseEntity<Object> handleExceptionInternal(Exception ex, @Nullable Object body, HttpHeaders headers, HttpStatus status, WebRequest request) {
         ErrorResponse error = new ErrorResponse(Collections.singletonList(ex.getMessage()), status);
         if (HttpStatus.INTERNAL_SERVER_ERROR.equals(status)) {
+            StringWriter sw = new StringWriter();
+            PrintWriter pw = new PrintWriter(sw);
+            ex.printStackTrace(pw);
+            String stackTrace = sw.toString();
             if (!System.getenv("ENV").equals("prod")) {
-                StringWriter sw = new StringWriter();
-                PrintWriter pw = new PrintWriter(sw);
-                ex.printStackTrace(pw);
-                String stackTrace = sw.toString();
                 error = new ErrorResponse(Collections.singletonList(stackTrace), status);
             }
             request.setAttribute(WebUtils.ERROR_EXCEPTION_ATTRIBUTE, ex, WebRequest.SCOPE_REQUEST);
