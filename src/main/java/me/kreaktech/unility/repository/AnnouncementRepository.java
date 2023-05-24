@@ -9,6 +9,7 @@ import org.springframework.data.jpa.repository.Query;
 import org.springframework.data.repository.query.Param;
 
 import me.kreaktech.unility.entity.Announcement;
+import org.springframework.transaction.annotation.Transactional;
 
 public interface AnnouncementRepository extends JpaRepository<Announcement, Integer> {
 	@Query("SELECT a FROM Announcement a WHERE a.date >= :from AND a.date <= :to AND a.university.id = :universityId")
@@ -16,5 +17,6 @@ public interface AnnouncementRepository extends JpaRepository<Announcement, Inte
 
 	Optional<Announcement> findByTitle(String title);
 	List<Announcement> findByUniversityId(Integer universityId);
+	@Transactional
 	void deleteAllByUniversityId(Integer universityId);
 }
