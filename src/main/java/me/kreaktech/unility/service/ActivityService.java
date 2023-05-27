@@ -14,4 +14,6 @@ public interface ActivityService {
     List<Activity> getAllActivities();
 
     List<Activity> getAllActivitiesByUniversityId(Integer universityId);
+
+    void deleteAllActivitiesByUniversityId(Integer universityId);
 }

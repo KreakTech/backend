@@ -8,4 +8,5 @@ import java.util.List;
 
 public interface ActivityRepository extends JpaRepository<Activity, Integer> {
     List<Activity> findAllActivitiesByUniversityId(Integer universityId);
+    void deleteAllByUniversityId(Integer universityId);
 }

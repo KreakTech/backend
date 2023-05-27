@@ -65,6 +65,17 @@ public class ActivityController {
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 
+	@Operation(summary = "Delete all activities given its University Id")
+	@ApiResponses(value = {
+			@ApiResponse(responseCode = "204", description = "Activities deleted successfully"),
+			@ApiResponse(responseCode = "400", description = "Activity failed to be deleted", content = @Content(schema = @Schema(implementation = ErrorResponse.class)))
+	})
+	@DeleteMapping(value = "/all/{universityId}", produces = MediaType.APPLICATION_JSON_VALUE)
+	public ResponseEntity<HttpStatus> deleteActivityByUniversityId(@PathVariable Integer universityId) {
+		activityServiceImpl.deleteAllActivitiesByUniversityId(universityId);
+		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
+	}
+
 	@Operation(summary = "Gets all activities in a list")
 	@ApiResponses(value = {
 			@ApiResponse(responseCode = "200", description = "Activities list retrieved successfully"),
