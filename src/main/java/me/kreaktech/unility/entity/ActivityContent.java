@@ -45,7 +45,6 @@ public class ActivityContent {
 
     @NonNull
     @Column(name = "details")
-    @Lob
     private String details;
 
     @NonNull
