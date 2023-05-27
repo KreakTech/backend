@@ -7,8 +7,10 @@ import io.swagger.v3.oas.annotations.responses.ApiResponse;
 import io.swagger.v3.oas.annotations.responses.ApiResponses;
 import lombok.AllArgsConstructor;
 import me.kreaktech.unility.entity.Announcement;
+import me.kreaktech.unility.entity.UniversityFetch;
 import me.kreaktech.unility.exception.ErrorResponse;
 import me.kreaktech.unility.service.AnnouncementServiceImpl;
+import me.kreaktech.unility.service.UniversityFetchServiceImpl;
 import me.kreaktech.unility.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
@@ -27,6 +29,8 @@ public class AnnouncementController {
 
     @Autowired
     AnnouncementServiceImpl announcementService;
+    @Autowired
+    UniversityFetchServiceImpl universityFetchService;
 
     @Operation(summary = "Gets an announcement by id")
     @ApiResponses(value = {
@@ -96,6 +100,9 @@ public class AnnouncementController {
     @DeleteMapping(value = "/all/{universityId}", produces = MediaType.APPLICATION_JSON_VALUE)
     public ResponseEntity<HttpStatus> deleteAllAnnouncementsByUniversityId(@PathVariable Integer universityId) {
         announcementService.deleteAllAnnouncementsByUniversityId(universityId);
+        UniversityFetch universityFetch = universityFetchService.getUniversityFetchById(universityId);
+        universityFetch.setAnnouncementsLastFetchMD5("");
+        universityFetchService.saveUniversityFetch(universityFetch);
         return new ResponseEntity<>(HttpStatus.NO_CONTENT);
     }
 
