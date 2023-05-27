@@ -36,7 +36,7 @@ public class ActivityContentRepositoryTest {
                 .details("some details")
                 .organizer("some organizer")
                 .activityLanguages(String.valueOf(Language.EN))
-                .activityDuration(String.valueOf(Timestamp.valueOf(activityDateTime)))
+                .date(String.valueOf(Timestamp.valueOf(activityDateTime)))
                 .physicalStatus(PhysicalStatus.FACETOFACE)
                 .build();
 

@@ -107,7 +107,7 @@ public class BilkentUniversityUtils {
 
         for (BilkentActivityData activity : activityData) {
             ActivityContent currActivityContent = new ActivityContent();
-            currActivityContent.setActivityDuration(activity.getTime());
+            currActivityContent.setDate(activity.getDate());
             currActivityContent.setActivityLanguages(activity.getLanguages());
             currActivityContent.setOrganizer(activity.getOrganizers());
             currActivityContent.setPhysicalStatus(activity.getPhysicalStatus());
@@ -120,7 +120,7 @@ public class BilkentUniversityUtils {
             Activity currActivity = new Activity();
             currActivity.setActivityContent(currActivityContent);
             currActivity.setUniversity(university);
-            currActivity.setDate(activity.getDate());
+            currActivity.setDate(eventBody.getDate());
 
             entityManager.persist(currActivity);
 

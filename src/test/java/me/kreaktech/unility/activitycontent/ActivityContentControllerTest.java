@@ -58,7 +58,7 @@ public class ActivityContentControllerTest {
                                 .details("some details")
                                 .organizer("some organizer")
                                 .activityLanguages(String.valueOf(Language.EN))
-                                .activityDuration(String.valueOf(Timestamp.valueOf(activityContentDateTime)))
+                                .date(String.valueOf(Timestamp.valueOf(activityContentDateTime)))
                                 .physicalStatus(PhysicalStatus.FACETOFACE)
                                 .id(1)
                                 .build();

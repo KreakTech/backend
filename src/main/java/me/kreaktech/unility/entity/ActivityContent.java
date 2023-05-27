@@ -42,8 +42,8 @@ public class ActivityContent {
     private String activityLanguages;
 
     @NonNull
-    @Column(name = "activity_duration")
-    private String activityDuration;
+    @Column(name = "date")
+    private String date;
 
     @Column(name = "is_canceled")
     private boolean isCanceled;

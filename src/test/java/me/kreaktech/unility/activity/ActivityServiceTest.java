@@ -5,6 +5,7 @@ import static org.mockito.Mockito.times;
 import static org.mockito.Mockito.verify;
 import static org.mockito.Mockito.when;
 
+import java.sql.Time;
 import java.sql.Timestamp;
 import java.time.LocalDateTime;
 import java.util.ArrayList;
@@ -60,7 +61,7 @@ public class ActivityServiceTest {
                 .details("some details1")
                 .organizer("some organizer1")
                 .activityLanguages(String.valueOf(Language.EN))
-                .activityDuration(String.valueOf(Timestamp.valueOf(activityDateTime)))
+                .date(activityDateTimeString)
                 .physicalStatus(PhysicalStatus.FACETOFACE)
                 .build();
 
@@ -68,21 +69,21 @@ public class ActivityServiceTest {
                 .details("some details2")
                 .organizer("some organizer21")
                 .activityLanguages(String.valueOf(Language.EN))
-                .activityDuration(String.valueOf(Timestamp.valueOf(activityDateTime)))
+                .date(activityDateTimeString)
                 .physicalStatus(PhysicalStatus.FACETOFACE)
                 .build();
 
         Activity activity1 = Activity.builder()
                 .university(university1)
                 .activityContent(activityContent1)
-                .date(activityDateTimeString)
+                .date(Timestamp.valueOf(activityDateTime))
                 .id(1)
                 .build();
 
         Activity activity2 = Activity.builder()
                 .university(university2)
                 .activityContent(activityContent2)
-                .date(activityDateTimeString)
+                .date(Timestamp.valueOf(activityDateTime))
                 .id(1)
                 .build();
 

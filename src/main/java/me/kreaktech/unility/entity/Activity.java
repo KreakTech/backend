@@ -20,6 +20,8 @@ import lombok.NonNull;
 import lombok.RequiredArgsConstructor;
 import lombok.Setter;
 
+import java.sql.Timestamp;
+
 @Getter
 @Setter
 @AllArgsConstructor
@@ -42,7 +44,7 @@ public class Activity {
 
 	@NonNull
 	@Column(name = "activity_date", nullable = false)
-	private String date;
+	private Timestamp date;
 
 	@OneToOne(optional = false, cascade = CascadeType.ALL)
 	@JoinColumn(name = "activity_content_id", referencedColumnName = "id")

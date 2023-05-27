@@ -7,6 +7,7 @@ import java.util.Optional;
 import org.assertj.core.api.Assertions;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.jupiter.api.Test;
+import org.mockito.internal.verification.Times;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.jdbc.EmbeddedDatabaseConnection;
 import org.springframework.boot.test.autoconfigure.jdbc.AutoConfigureTestDatabase;
@@ -48,7 +49,7 @@ public class ActivityRepositoryTest {
 				.details("some details1")
 				.organizer("some organizer1")
 				.activityLanguages(String.valueOf(Language.EN))
-				.activityDuration(String.valueOf(Timestamp.valueOf(activityDateTime)))
+				.date(activityDateTimeString)
 				.physicalStatus(PhysicalStatus.FACETOFACE)
 				.build();
 
@@ -56,20 +57,20 @@ public class ActivityRepositoryTest {
 				.details("some details2")
 				.organizer("some organizer21")
 				.activityLanguages(String.valueOf(Language.EN))
-				.activityDuration(String.valueOf(Timestamp.valueOf(activityDateTime)))
+				.date(activityDateTimeString)
 				.physicalStatus(PhysicalStatus.FACETOFACE)
 				.build();
 
 		activity1 = Activity.builder()
 				.university(university1)
 				.activityContent(activityContent1)
-				.date(activityDateTimeString)
+				.date(Timestamp.valueOf(activityDateTime))
 				.build();
 
 		activity2 = Activity.builder()
 				.university(university2)
 				.activityContent(activityContent2)
-				.date(activityDateTimeString)
+				.date(Timestamp.valueOf(activityDateTime))
 				.build();
 
 		savedActivity1 = activityRepository.save(activity1);
