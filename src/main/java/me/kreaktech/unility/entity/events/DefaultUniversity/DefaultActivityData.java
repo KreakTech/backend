@@ -13,7 +13,7 @@ import java.sql.Timestamp;
 @AllArgsConstructor
 @NoArgsConstructor
 public abstract class DefaultActivityData {
-	private Timestamp date;
+	private String date;
 	private String organizers;
 	private String details;
 	private String time;

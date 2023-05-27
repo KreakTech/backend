@@ -34,6 +34,7 @@ public class ActivityRepositoryTest {
 	@BeforeEach
 	void setUpRepository() {
 		LocalDateTime activityDateTime = LocalDateTime.now().minusHours(1);
+		String activityDateTimeString = LocalDateTime.now().minusHours(1).toString();
 		// Arrange
 		University university1 = University.builder()
 				.name("some university1")
@@ -62,13 +63,13 @@ public class ActivityRepositoryTest {
 		activity1 = Activity.builder()
 				.university(university1)
 				.activityContent(activityContent1)
-				.date(Timestamp.valueOf(activityDateTime))
+				.date(activityDateTimeString)
 				.build();
 
 		activity2 = Activity.builder()
 				.university(university2)
 				.activityContent(activityContent2)
-				.date(Timestamp.valueOf(activityDateTime))
+				.date(activityDateTimeString)
 				.build();
 
 		savedActivity1 = activityRepository.save(activity1);

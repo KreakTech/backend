@@ -55,6 +55,7 @@ public class ActivityControllerTest {
         @BeforeEach
         void setUpControllerTest() {
                 LocalDateTime activityDateTime = LocalDateTime.now().minusHours(1);
+                String activityDateTimeString = LocalDateTime.now().minusHours(1).toString();
                 // Arrange
                 University university = University.builder()
                                 .name("some university")
@@ -71,7 +72,7 @@ public class ActivityControllerTest {
                 activity = Activity.builder()
                                 .university(university)
                                 .activityContent(activityContent)
-                                .date(Timestamp.valueOf(activityDateTime))
+                                .date(activityDateTimeString)
                                 .id(1)
                                 .build();
         }
