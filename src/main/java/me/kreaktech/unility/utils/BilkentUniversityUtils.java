@@ -100,7 +100,9 @@ public class BilkentUniversityUtils {
         List<Activity> activities = activityService.getAllActivitiesByUniversityId(university.getId());
         activities.forEach(activity -> {
             activityService.deleteActivityById(activity.getId());
-            activityContentService.deleteActivityContentById(activity.getActivityContent().getId());
+            if (activity.getActivityContent() != null) {
+                activityContentService.deleteActivityContentById(activity.getActivityContent().getId());
+            }
         });
 
         for (BilkentActivityData activity : activityData) {
