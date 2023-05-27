@@ -44,7 +44,7 @@ public class ActivityContent {
     private boolean isCanceled;
 
     @NonNull
-    @Column(name = "details")
+    @Column(name = "details", length = 2000)
     private String details;
 
     @NonNull
