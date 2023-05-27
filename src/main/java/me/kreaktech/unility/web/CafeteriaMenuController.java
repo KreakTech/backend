@@ -1,12 +1,9 @@
 package me.kreaktech.unility.web;
 
-import java.sql.Timestamp;
 import java.util.List;
 
 import javax.validation.Valid;
 
-import me.kreaktech.unility.entity.UniversityFetch;
-import me.kreaktech.unility.service.UniversityFetchServiceImpl;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
@@ -36,8 +33,6 @@ public class CafeteriaMenuController {
 
 	@Autowired
 	CafeteriaMenuServiceImpl cafeteriaMenuService;
-	@Autowired
-	UniversityFetchServiceImpl universityFetchService;
 
 	@Operation(summary = "Gets a cafeteria menu")
 	@ApiResponses(value = {
@@ -78,9 +73,6 @@ public class CafeteriaMenuController {
 	@DeleteMapping(value = "/all/{universityId}", produces = MediaType.APPLICATION_JSON_VALUE)
 	public ResponseEntity<HttpStatus> deleteAllCafeteriaMenusByUniversityId(@PathVariable Integer universityId) {
 		cafeteriaMenuService.deleteAllCafeteriaMenusByUniversityId(universityId);
-		UniversityFetch universityFetch = universityFetchService.getUniversityFetchById(universityId);
-		universityFetch.setCafeteriaLastFetchDate(new Timestamp(0));
-		universityFetchService.saveUniversityFetch(universityFetch);
 		return new ResponseEntity<>(HttpStatus.NO_CONTENT);
 	}
 

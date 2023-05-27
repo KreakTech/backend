@@ -6,14 +6,12 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import me.kreaktech.unility.constants.Enum;
 
-import java.sql.Timestamp;
-
 @Getter
 @Setter
 @AllArgsConstructor
 @NoArgsConstructor
 public abstract class DefaultActivityData {
-	private Timestamp date;
+	private String date;
 	private String organizers;
 	private String details;
 	private String time;

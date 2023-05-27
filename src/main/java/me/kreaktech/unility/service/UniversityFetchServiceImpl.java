@@ -7,6 +7,7 @@ import me.kreaktech.unility.utils.Utils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.List;
 import java.util.Optional;
 
 @Service
@@ -27,13 +28,19 @@ public class UniversityFetchServiceImpl implements UniversityFetchService {
 
 	@Override
 	public UniversityFetch getUniversityFetchByUniversityIdAndLanguage(Integer universityId, Enum.Language language) {
-		Optional<UniversityFetch> optional = universityFetchRepository.findByUniversityIdAndLanguage(universityId, language);
+		Optional<UniversityFetch> optional = universityFetchRepository.findByUniversityIdAndLanguage(universityId,
+				language);
 		return Utils.unwrap(optional, universityId + " and language " + language);
+	}
+
+	@Override
+	public List<UniversityFetch> findAllByUniversityId(Integer universityId) {
+		return universityFetchRepository.findAllByUniversityId(universityId);
 	}
 
 	@Override
 	public void deleteUniversityFetchById(Integer id) {
 		universityFetchRepository.deleteById(id);
-    }
+	}
 
 }

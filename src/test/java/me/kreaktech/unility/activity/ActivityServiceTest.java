@@ -40,11 +40,13 @@ public class ActivityServiceTest {
     Activity savedActivity1;
     Activity savedActivity2;
     LocalDateTime activityDateTime;
+    String activityDateTimeString;
 
     @BeforeEach
     void setUpService() {
 
         activityDateTime = LocalDateTime.now().minusHours(1);
+        activityDateTimeString = activityDateTime.toString();
         // Arrange
         University university1 = University.builder()
                 .name("some university1")
@@ -73,14 +75,14 @@ public class ActivityServiceTest {
         Activity activity1 = Activity.builder()
                 .university(university1)
                 .activityContent(activityContent1)
-                .date(Timestamp.valueOf(activityDateTime))
+                .date(activityDateTimeString)
                 .id(1)
                 .build();
 
         Activity activity2 = Activity.builder()
                 .university(university2)
                 .activityContent(activityContent2)
-                .date(Timestamp.valueOf(activityDateTime))
+                .date(activityDateTimeString)
                 .id(1)
                 .build();
 

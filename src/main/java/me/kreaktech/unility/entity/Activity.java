@@ -1,6 +1,5 @@
 package me.kreaktech.unility.entity;
 
-import java.sql.Timestamp;
 import javax.persistence.CascadeType;
 import javax.persistence.Column;
 import javax.persistence.Entity;
@@ -43,7 +42,7 @@ public class Activity {
 
 	@NonNull
 	@Column(name = "activity_date", nullable = false)
-	private Timestamp date;
+	private String date;
 
 	@OneToOne(optional = false, cascade = CascadeType.ALL)
 	@JoinColumn(name = "activity_content_id", referencedColumnName = "id")
