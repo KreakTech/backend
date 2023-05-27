@@ -6,8 +6,6 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 import me.kreaktech.unility.constants.Enum;
 
-import java.sql.Timestamp;
-
 @Getter
 @Setter
 @AllArgsConstructor

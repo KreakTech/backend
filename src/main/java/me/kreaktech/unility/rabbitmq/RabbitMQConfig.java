@@ -7,7 +7,6 @@ import org.springframework.amqp.rabbit.connection.CachingConnectionFactory;
 import org.springframework.amqp.rabbit.connection.ConnectionFactory;
 import org.springframework.amqp.rabbit.listener.SimpleMessageListenerContainer;
 import org.springframework.amqp.rabbit.listener.adapter.MessageListenerAdapter;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.context.event.ApplicationReadyEvent;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
@@ -20,7 +19,7 @@ public class RabbitMQConfig {
     private static final String USERNAME = System.getenv("RABBITMQ_DEFAULT_USER");
     private static final String PASSWORD = System.getenv("RABBITMQ_DEFAULT_PASS");
     private final Receiver receiver;
-    @Autowired
+
     public RabbitMQConfig(Receiver receiver) {
         this.receiver = receiver;
     }

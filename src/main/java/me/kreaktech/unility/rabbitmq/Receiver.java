@@ -2,7 +2,6 @@ package me.kreaktech.unility.rabbitmq;
 
 import org.springframework.amqp.core.Message;
 import org.springframework.amqp.core.MessageListener;
-import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
 import com.google.gson.Gson;
@@ -13,10 +12,10 @@ import me.kreaktech.unility.entity.events.EventBody;
 @Component
 @AllArgsConstructor
 public class Receiver implements MessageListener {
+
     private final HandleEvent handleEvent;
 	private final Gson gson;
 
-	@Autowired
 	public Receiver(HandleEvent handleEvent) {
 		this.handleEvent = handleEvent;
 		this.gson = new Gson();
