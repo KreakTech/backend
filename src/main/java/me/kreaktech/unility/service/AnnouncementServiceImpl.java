@@ -2,8 +2,10 @@ package me.kreaktech.unility.service;
 
 import lombok.AllArgsConstructor;
 import me.kreaktech.unility.entity.Announcement;
+import me.kreaktech.unility.entity.UniversityFetch;
 import me.kreaktech.unility.repository.AnnouncementRepository;
 import me.kreaktech.unility.utils.Utils;
+import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.sql.Timestamp;
@@ -14,7 +16,10 @@ import java.util.Optional;
 @Service
 public class AnnouncementServiceImpl implements AnnouncementService {
 
+    @Autowired
     private AnnouncementRepository announcementRepository;
+    @Autowired
+    private UniversityFetchServiceImpl universityFetchService;
 
     @Override
     public Announcement getAnnouncementById(Integer id) {
@@ -35,6 +40,11 @@ public class AnnouncementServiceImpl implements AnnouncementService {
     @Override
     public void deleteAllAnnouncementsByUniversityId(Integer universityId) {
         announcementRepository.deleteAllByUniversityId(universityId);
+        List<UniversityFetch> universityFetch = universityFetchService.findAllByUniversityId(universityId);
+        for (UniversityFetch currUniversityFetch : universityFetch) {
+            currUniversityFetch.setAnnouncementsLastFetchMD5("");
+            universityFetchService.saveUniversityFetch(currUniversityFetch);
+        }
     }
 
     @Override
@@ -49,7 +59,8 @@ public class AnnouncementServiceImpl implements AnnouncementService {
     }
 
     @Override
-    public List<Announcement> getAnnouncementsByDateBetweenAndDateLessThanEqualAndUniversityId(Timestamp from, Timestamp to, Integer universityId) {
+    public List<Announcement> getAnnouncementsByDateBetweenAndDateLessThanEqualAndUniversityId(Timestamp from,
+            Timestamp to, Integer universityId) {
         return announcementRepository.findByDateBetweenAndDateLessThanEqualAndUniversityId(from, to, universityId);
     }
 
