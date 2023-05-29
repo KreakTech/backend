@@ -61,7 +61,6 @@ public class ActivityServiceTest {
                 .details("some details1")
                 .organizer("some organizer1")
                 .activityLanguages(String.valueOf(Language.EN))
-                .date(activityDateTimeString)
                 .physicalStatus(PhysicalStatus.FACETOFACE)
                 .build();
 
@@ -69,21 +68,20 @@ public class ActivityServiceTest {
                 .details("some details2")
                 .organizer("some organizer21")
                 .activityLanguages(String.valueOf(Language.EN))
-                .date(activityDateTimeString)
                 .physicalStatus(PhysicalStatus.FACETOFACE)
                 .build();
 
         Activity activity1 = Activity.builder()
                 .university(university1)
                 .activityContent(activityContent1)
-                .date(Timestamp.valueOf(activityDateTime))
+                .date(activityDateTimeString)
                 .id(1)
                 .build();
 
         Activity activity2 = Activity.builder()
                 .university(university2)
                 .activityContent(activityContent2)
-                .date(Timestamp.valueOf(activityDateTime))
+                .date(activityDateTimeString)
                 .id(1)
                 .build();
 

@@ -43,8 +43,8 @@ public class Activity {
 	private University university;
 
 	@NonNull
-	@Column(name = "activity_date", nullable = false)
-	private Timestamp date;
+	@Column(name = "date", nullable = false)
+	private String date;
 
 	@OneToOne(optional = false, cascade = CascadeType.ALL)
 	@JoinColumn(name = "activity_content_id", referencedColumnName = "id")

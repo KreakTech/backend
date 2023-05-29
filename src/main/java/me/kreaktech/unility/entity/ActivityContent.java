@@ -36,10 +36,6 @@ public class ActivityContent {
     @Column(name = "activity_language")
     private String activityLanguages;
 
-    @NonNull
-    @Column(name = "date")
-    private String date;
-
     @Column(name = "is_canceled")
     private boolean isCanceled;
 

@@ -30,13 +30,11 @@ public class ActivityContentRepositoryTest {
 
     @BeforeEach
     void setUpRepository() {
-        LocalDateTime activityDateTime = LocalDateTime.now().minusHours(1);
 
         activityContent = ActivityContent.builder()
                 .details("some details")
                 .organizer("some organizer")
                 .activityLanguages(String.valueOf(Language.EN))
-                .date(String.valueOf(Timestamp.valueOf(activityDateTime)))
                 .physicalStatus(PhysicalStatus.FACETOFACE)
                 .build();
 

@@ -44,7 +44,6 @@ public class ActivityContentServiceTest {
 				.details("some details")
 				.organizer("some organizer")
 				.activityLanguages(String.valueOf(Language.EN))
-				.date(String.valueOf(Timestamp.valueOf(activityContentDateTime)))
 				.physicalStatus(PhysicalStatus.FACETOFACE)
 				.id(1)
 				.build();

@@ -65,14 +65,13 @@ public class ActivityControllerTest {
                                 .details("some details")
                                 .organizer("some organizer")
                                 .activityLanguages(String.valueOf(Language.EN))
-                                .date(activityDateTimeString)
                                 .physicalStatus(PhysicalStatus.FACETOFACE)
                                 .build();
 
                 activity = Activity.builder()
                                 .university(university)
                                 .activityContent(activityContent)
-                                .date(Timestamp.valueOf(activityDateTime))
+                                .date(activityDateTimeString)
                                 .id(1)
                                 .build();
         }
