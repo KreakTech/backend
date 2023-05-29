@@ -97,13 +97,7 @@ public class BilkentUniversityUtils {
 
         university = entityManager.merge(university);
 
-        List<Activity> activities = activityService.getAllActivitiesByUniversityId(university.getId());
-        activities.forEach(activity -> {
-            activityService.deleteActivityById(activity.getId());
-            if (activity.getActivityContent() != null) {
-                activityContentService.deleteActivityContentById(activity.getActivityContent().getId());
-            }
-        });
+        activityService.deleteAllActivitiesByUniversityId(university.getId());
 
         for (BilkentActivityData activity : activityData) {
             ActivityContent currActivityContent = new ActivityContent();
